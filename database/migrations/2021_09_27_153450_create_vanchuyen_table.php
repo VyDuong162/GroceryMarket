@@ -18,6 +18,7 @@ class CreateVanchuyenTable extends Migration
             $table->unsignedBigInteger('dh_ma')->length(11);
             $table->unsignedTinyInteger('tt_ma')->length(3);
             $table->datetime('vc_ngay')->format('d-m-Y H:i:s');
+            $table->primary(['dh_ma','tt_ma']);
             $table->foreign('dh_ma')->references('dh_ma')->on('donhang')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');
