@@ -21,8 +21,6 @@ class CreateQuanhuyenTable extends Migration
             $table->foreign('ttp_ma')->references('ttp_ma')->on('tinhtp')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');
-            $table->timestamps();
-
         });
     }
 

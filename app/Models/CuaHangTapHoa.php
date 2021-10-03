@@ -14,7 +14,7 @@ class CuaHangTapHoa extends Model
 
     protected $primarykey =['chth_ma'];
 
-    protected $timestamps =false;
+    public $timestamps =false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
 }

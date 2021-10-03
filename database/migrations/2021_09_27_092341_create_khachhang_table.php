@@ -24,6 +24,10 @@ class CreateKhachhangTable extends Migration
             $table->string('kh_taiKhoan',100)->unique();
             $table->string('kh_matKhau',100);
             $table->unsignedTinyInteger('vt_ma')->length(3);
+            $table->unsignedTinyInteger('px_ma')->length(5);
+            $table->foreign('px_ma')->references('px_ma')->on('phuongxa')
+            ->onUpdate('CASCADE')
+            ->onDelete('CASCADE');
             $table->foreign('vt_ma')->references('vt_ma')->on('vaitro')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');

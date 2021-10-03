@@ -21,7 +21,7 @@ class CreatePhuongxaTable extends Migration
             $table->foreign('qh_ma')->references('qh_ma')->on('quanhuyen')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');
-            $table->timestamps();
+            
         });
     }
 

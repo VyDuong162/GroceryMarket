@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use DateTime;
-class DonViTinhTableSeeder extends Seeder
+class VaiTroTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,21 +17,16 @@ class DonViTinhTableSeeder extends Seeder
         $list =[];
         $date = new DateTime();
         $types=[
-            ['gam'],
-            ['lít'],
-            ['hộp'],
-            ['chai'],
-            ['cái'],
-            ['kg'],
-            ['ml'],
-            ['bịch'],
+          ['admin'],
+          ['chucuahang'],
+          ['khachang']
         ];
         for($i=0; $i < count($types);$i++){
             array_push($list,[
-                'dvt_ten' => $types[$i][0],
+                'vt_ten' => $types[$i][0],
                 'created_at' =>$date
             ]);
         }
-        DB::table('donvitinh')->insert($list);
+        DB::table('vaitro')->insert($list);
     }
 }
