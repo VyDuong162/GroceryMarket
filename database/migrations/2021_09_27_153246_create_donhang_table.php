@@ -25,7 +25,6 @@ class CreateDonhangTable extends Migration
             
             $table->string('dh_trangThai')->comment('Trạng thái đơn hàng hiện tại: 1 - chưa hoàn thành, 2-hoàn thành');
             $table->timestamp('dh_taoMoi')->useCurrent();
-            $table->timestamp('dh_CapNhat')->useCurrent()->useCurrentOnUpdate();
             $table->foreign('kh_ma')->references('kh_ma')->on('khachhang')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');

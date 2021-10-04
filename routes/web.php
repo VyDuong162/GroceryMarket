@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Auth;
 /* Route::get('/', function () {
     return view('welcome');
 }); */
-
+Route::get('/test',function(){
+    $date = new DateTime();
+        $today = $date->format('YmdHis');
+    return $today;
+});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

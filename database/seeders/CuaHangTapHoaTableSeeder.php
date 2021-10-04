@@ -43,7 +43,7 @@ class CuaHangTapHoaTableSeeder extends Seeder
                 'chth_soDienThoai'=>$faker->numerify('##########'),
                 'chth_email' => $faker->unique()->safeEmail,
                 'chth_diaChi' =>"$dsSo[$i],$dsPX[$i],$dsQH[$i],$dsTinh[0]",
-                'chth_taiKhoanNganHang' => $faker->numerify('##########'),
+                'chth_taiKhoanNganHang' => $faker->creditCardNumber(),
                 'px_ma'=> PhuongXa::all()->random()->px_ma,
                 'chth_moTa' => $faker->paragraph(2),
                 'created_at'=> $date

@@ -19,6 +19,7 @@ class CreateChitietDonhangTable extends Migration
             $table->unsignedBigInteger('sp_ma')->length(11);
             $table->mediumInteger('ctdh_soLuong')->length(3);
             $table->decimal('ctdh_giaBan',13,2);
+            $table->primary(['dh_ma','sp_ma']);
             $table->foreign('dh_ma')->references('dh_ma')->on('donhang')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');

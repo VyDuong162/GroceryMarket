@@ -13,7 +13,7 @@ class DonGia_MatHang extends Model
     protected $guarded =['chth_ma','sp_ma','dgmh_ngayCapNhat'];
     
     protected $prmarykey=['chth_ma','sp_ma','dgmh_ngayCapNhat'];
-    protected $timestamps = false;
+    public $timestamps = false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
 
