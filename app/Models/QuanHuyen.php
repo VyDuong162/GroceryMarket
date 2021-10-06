@@ -17,4 +17,8 @@ class QuanHuyen extends Model
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
+
+    public function tinhtp(){
+        return $this->belongsTo('App\Model\TinhTp','tp_ma','tp_ma');
+    }
 }

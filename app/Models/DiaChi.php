@@ -16,5 +16,7 @@ class DiaChi extends Model
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
-
+    public function khachhang(){
+        return $this->belongsTo('App\Model\KhachHang','kh_ma','kh_ma');
+    }
 }

@@ -17,4 +17,7 @@ class TrangThai extends Model
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat = 'Y-m-d H:i:s';
+    public function vanchuyen(){
+        return $this->hasMany('App\Model\VanChuyen','tt_ma','tt_ma');
+    }
 }

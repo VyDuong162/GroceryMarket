@@ -17,4 +17,8 @@ class PhuongXa extends Model
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
+
+    public function quanhuyen(){
+        return $this->belongsTo('App\Model\QuanHuyen','qh_ma','qh_ma');
+    }
 }

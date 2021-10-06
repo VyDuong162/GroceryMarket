@@ -17,4 +17,11 @@ class GopY extends Model
     protected $timestamps = false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
+
+    public function khachhang(){
+        return $this->belongsTo('App\Model\KhachHang','kh_ma','kh_ma');
+    }
+    public function CuaHangTapHoa(){
+        return $this->belongsTo('App\Model\CuaHangTapHoa','chth_ma','chth_ma');
+    }
 }

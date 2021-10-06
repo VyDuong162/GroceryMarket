@@ -15,4 +15,8 @@ class HoaDon extends Model
     protected $primarykey=['hd_ma'];
     protected $dates=['dh_ngayLap','created_at','updated_at'];
     protected $dateForm='Y-m-d H:i:s';
+
+    public function donhang(){
+        return $this->belongsTo('App\Model\DonHang','dh_ma','dh_ma');
+    }
 }

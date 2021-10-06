@@ -17,4 +17,8 @@ class HinhAnhSanPham extends Model
    
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
+
+    public function sanpham(){
+        return $this->belongsTo('App\Model\SanPham','sp_ma','sp_ma');
+    }
 }

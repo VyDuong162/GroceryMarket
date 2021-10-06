@@ -17,4 +17,23 @@ class CuaHangTapHoa extends Model
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
+    
+    public function khachhang(){
+        return $this->belongsTo('App\Model\khachhang','kh_ma','kh_ma');
+    }
+    public function phuongxa(){
+        return $this->belongsTo('App\Model\phuongxa','px_ma','px_ma');
+    }
+    public function dongiamathang(){
+        return $this->hasMany('App\Model\DonGia_MatHang','chth_ma','chth_ma');
+    }
+    public function chitietdonhang(){
+        return $this->hasMany('App\Model\DonGia_MatHang','chth_ma','chth_ma');
+    }
+    public function danhgias(){
+        return $this->hasMany('App\Model\DanhGia','chth_ma','chth_ma');
+    }
+    public function yeuthichs(){
+        return $this->hasMany('App\Model\YeuThich','chth_ma','chth_ma');
+    }
 }

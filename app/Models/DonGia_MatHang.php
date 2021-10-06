@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Traits\HasCompositePrimaryKey;
 class DonGia_MatHang extends Model
 {
     use HasFactory;
+    use HasCompositePrimaryKey;
     protected $table ='dongia_mathang';
-    protected $fillable =['chth_ma','sp_ma','dgmh_gia','dgmh_ghiChu','dgmh_ngayCapNhat','created_at','updated_at'];
+    protected $fillable =['dgmh_gia','dgmh_ghiChu','dgmh_ngayCapNhat','created_at','updated_at'];
     protected $guarded =['chth_ma','sp_ma','dgmh_ngayCapNhat'];
     
     protected $prmarykey=['chth_ma','sp_ma','dgmh_ngayCapNhat'];

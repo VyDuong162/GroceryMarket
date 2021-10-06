@@ -4,17 +4,18 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\Traits\HasCompositePrimaryKey;
 class VanChuyen extends Model
 {
     use HasFactory;
+    use HasCompositePrimaryKey;
     protected $table ='vanchuyen';
-    protected $fillable =['dh_ma','tt_ma','vc_ngay','created_at','updated_at'];
+    protected $fillable =['vc_ngay','created_at','updated_at'];
     protected $guarded =['dh_ma','tt_ma'];
 
     protected $primarykey =['dh_ma','tt_ma'];
 
     public $timestamps =false;
-    protected $dates =['created_at','updated_at'];
+    protected $dates =['vc_ngay','created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
 }

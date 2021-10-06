@@ -19,4 +19,19 @@ class DonHang extends Model
 
     protected $dates =['dh_taoMoi','dh_capNhat'];
     protected $dateFormat ='Y-m-d H:i:s';
+    public function khachhang(){
+        return $this->belongsTo('App\Model\KhachHang','kh_ma','kh_ma');
+    }
+    public function cuahangtaphoa(){
+        return $this->belongsTo('App\Model\CuaHangTapHoa','chth_ma','chth_ma');
+    }
+    public function danhgias(){
+        return $this->hasMany('App\Model\DanhGia','dh_ma','dh_ma');
+    }
+    public function hoadon(){
+        return $this->hasOne('App\Model\HoaDon','hd_ma','hd_ma');
+    }
+    public function vanchuyen(){
+        return $this->hasMany('App\Model\VanChuyen','dh_ma','dh_ma');
+    }
 }
