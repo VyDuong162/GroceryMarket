@@ -17,4 +17,7 @@ class NhaSanXuat extends Model
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
+    public function sanphams(){
+        return $this->hasMany('App\Model\SanPham','nsx_ma','nsx_ma');
+    }
 }

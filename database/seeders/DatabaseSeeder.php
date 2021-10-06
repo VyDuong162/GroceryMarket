@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(NhaSanXuatTableSeeder::class);
         $this->call(DonViTinhTableSeeder::class);
         $this->call(SanPhamTableSeeder::class);
-        $this->call(HinhAnhSanPhamTableSeeder::class);
         $this->call(TinhTpTableSeeder::class);
         $this->call(QuanHuyenTableSeeder::class);
         $this->call(PhuongXaTableSeeder::class);
@@ -26,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(KhachHangTableSeeder::class);
         $this->call(DiaChiTableSeeder::class);
         $this->call(CuaHangTapHoaTableSeeder::class);
+        $this->call(HinhAnhSanPhamTableSeeder::class);
         $this->call(PhuongThucThanhToanTableSeeder::class);
         Model::unguard();
         $this->call(DonGia_MatHangTableSeeder::class);

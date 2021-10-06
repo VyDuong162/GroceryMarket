@@ -21,24 +21,24 @@ class SanPham extends Model
     protected $dateFormat ='Y-m-d H:i:s';
 
     public function loaisanpham(){
-        return $this->belongsTo('App\Model\LoaiSanPham','lsp_ma','lsp_ma');
+        return $this->belongsTo('App\Models\LoaiSanPham','lsp_ma','lsp_ma');
     }
     public function nhasanxuat(){
-        return $this->belongsTo('App\Model\NhaSanXuat','nsx_ma','nsx_ma');
+        return $this->belongsTo('App\Models\NhaSanXuat','nsx_ma','nsx_ma');
     }
     public function hinhanhsanpham(){
-        return $this->hasMany('App\Model\HinhAnhSanPham','sp_ma','sp_ma');
+        return $this->hasMany('App\Models\HinhAnhSanPham','sp_ma','sp_ma');
     }
     public function dongiamathang(){
-        return $this->hasMany('App\Model\DonGia_MatHang','sp_ma','sp_ma');
+        return $this->hasMany('App\Models\DonGia_MatHang','sp_ma','sp_ma');
     }
     public function chitietdonhang(){
-        return $this->hasMany('App\Model\ChiTiet_DonHang','sp_ma','sp_ma');
+        return $this->hasMany('App\Models\ChiTiet_DonHang','sp_ma','sp_ma');
     }
     public function danhgias(){
-        return $this->hasMany('App\Model\DanhGia','sp_ma','sp_ma');
+        return $this->hasMany('App\Models\DanhGia','sp_ma','sp_ma');
     }
     public function yeuthichs(){
-        return $this->hasMany('App\Model\YeuThich','sp_ma','sp_ma');
+        return $this->hasMany('App\Models\YeuThich','sp_ma','sp_ma');
     }
 }

@@ -17,4 +17,8 @@ class LoaiSanPham extends Model
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
+    
+    public function sanphams(){
+        return $this->hasMany('App\Models\SanPham','lsp_ma','lsp_ma');
+    }
 }

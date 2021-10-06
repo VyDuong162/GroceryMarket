@@ -27,9 +27,29 @@ class DonGia_MatHangTableSeeder extends Seeder
         $date = new DateTime();
         $types =SanPham::all('sp_ma');
         $arr =[1,4,24,48];
-        for($i=0; $i < count($types); $i++){
+        for($i=0; $i < 10; $i++){
             array_push($list,[
-                'chth_ma' => CuaHangTapHoa::all()->random()->chth_ma,
+                'chth_ma' => 1,
+                'sp_ma' => $types[$i]['sp_ma'],
+                'dgmh_gia' => $faker->numberBetween($min = 20000, $max = 600000),
+                'dgmh_ghiChu' => Arr::random($arr),
+                'dgmh_ngayCapNhat' => $date,
+                'created_at' => $date,
+            ]);
+        }
+        for($i=10; $i < 22; $i++){
+            array_push($list,[
+                'chth_ma' => 2,
+                'sp_ma' => $types[$i]['sp_ma'],
+                'dgmh_gia' => $faker->numberBetween($min = 20000, $max = 600000),
+                'dgmh_ghiChu' => Arr::random($arr),
+                'dgmh_ngayCapNhat' => $date,
+                'created_at' => $date,
+            ]);
+        }
+        for($i=22; $i < 33; $i++){
+            array_push($list,[
+                'chth_ma' => 3,
                 'sp_ma' => $types[$i]['sp_ma'],
                 'dgmh_gia' => $faker->numberBetween($min = 20000, $max = 600000),
                 'dgmh_ghiChu' => Arr::random($arr),

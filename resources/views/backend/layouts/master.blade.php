@@ -10,11 +10,12 @@
     <link href="{{ asset('coreui/vendor/css/coreui.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('coreui/vendor/css/coreui-chartjs.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('coreui/vendor/css/style.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('coreui/vendor/css//coreui-chartjs.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('coreui/vendor/css/coreui-chartjs.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('vendors/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <!-- Bootstrap CSS  -->
-    <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/bootstrap/css/bootstrap.min.css') }}">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{ asset('css/dashboards.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin-style.css') }}">
     <!-- Styles custom-->
     @yield('custom-css')
 
@@ -57,13 +58,13 @@
     <script src="{{ asset('coreui/vendor/js/coreui-chartjs.bundle.js') }}"></script>
     <script src="{{ asset('coreui/vendor/js/coreui-utils.js') }}"></script>
     <!-- Optional JavaScript -->
-    <script src="{{ asset('vendor/jquery/jquery.min.js')}}"></script>
-    <script src="{{ asset('vendor/popperjs/popper.min.js')}}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('vendors/jquery/jquery.min.js')}}"></script>
+    <script src="{{ asset('vendors/popperjs/popper.min.js')}}"></script>
+    <script src="{{ asset('vendors/bootstrap/js/bootstrap.min.js')}}"></script>
 
     <!--thông báo Lỗi  -->
-    <script src="{{ asset('vendor/jquery-validation/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('vendor/jquery-validation/localization/messages_vi.min.js') }}"></script>
+    <script src="{{ asset('vendors/jquery-validation/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('vendors/jquery-validation/localization/messages_vi.min.js') }}"></script>
     @yield('custom-scripts')
 </body>
 

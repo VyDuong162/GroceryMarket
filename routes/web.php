@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\SanPhamController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -33,3 +34,4 @@ Route::get('/frontend', function(){
 Route::get('/index1', function(){
     return view('frontend.index1');
 });
+Route::resource('admin/sanpham',SanPhamController::class,['as'=>'admin']);
