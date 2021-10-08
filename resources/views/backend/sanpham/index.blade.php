@@ -1,12 +1,17 @@
 @extends('backend.layouts.master')
 
 @section('title')
-Dashboard
+Sản phẩm
 @endsection
 
 @section('custom-css')
 <style>
-    tbody,td,tfoot,th,thead,tr {
+    tbody,
+    td,
+    tfoot,
+    th,
+    thead,
+    tr {
         border-style: none !important;
     }
 
@@ -25,7 +30,7 @@ Dashboard
     </ol>
     <div class="row justify-content-between">
         <div class="col-lg-12">
-            <a href="add_product.html" class="add-btn hover-btn">Thêm mới</a>
+            <a href="{{ route('admin.sanpham.create') }}" class="add-btn hover-btn">Thêm mới</a>
         </div>
         <div class="col-lg-3 col-md-4">
             <div class="bulk-section mt-30">
@@ -103,29 +108,23 @@ Dashboard
                                         @endif
                                     </td>
                                     <td class="action-btns">
-                                        <a href="product_view.html" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
-                                        <a href="#" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('admin.view.show',['id'=>$sp->sp_ma]) }}" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('admin.view.edit',['id'=>$sp->sp_ma]) }}" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item"><a class="page-link" href="#">Prev</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
+                        <div class="d-flex justify-content-center">
+                            {{ $dsSanPham->links('vendor.pagination.bootstrap-4') }}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('custom-scripts')

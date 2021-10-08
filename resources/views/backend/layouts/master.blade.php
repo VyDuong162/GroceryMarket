@@ -32,7 +32,7 @@
             <!-- End Navbar -->
             <!-- Content -->
             <div class="c-body">
-                <main role='main' class="c-main">
+                <main role='main'> <!-- class="c-main" -->
                     <div class="container-fluid">
                         <div class="fade-in">
                             <div class="row">
