@@ -17,16 +17,17 @@ class HinhAnhSanPhamTableSeeder extends Seeder
         $list =[];
         $date =new DateTime();
         $dsHinhAnhSP=[
-            ['thung-mi-hao-hao-tom-chua-cay-75g-1.jpg',28],
-            ['thung-mi-hao-hao-tom-chua-cay-75g-2.jpg',28],
-            ['thung-mi-hao-hao-tom-chua-cay-75g-3.jpg',28],
-            ['thung-mi-hao-hao-tom-chua-cay-75g-2.jpg',29],
-            ['thung-mi-hao-hao-tom-chua-cay-75g-3.jpg',29],
+            [1,28,'thung-mi-hao-hao-tom-chua-cay-75g-1.jpg'],
+            [2,28,'thung-mi-hao-hao-tom-chua-cay-75g-2.jpg'],
+            [3,28,'thung-mi-hao-hao-tom-chua-cay-75g-3.jpg'],
+            [1,29,'thung-mi-hao-hao-tom-chua-cay-75g-2.jpg'],
+            [2,29,'thung-mi-hao-hao-tom-chua-cay-75g-3.jpg'],
         ];
         for($i=0 ;$i < count($dsHinhAnhSP);$i++){
             array_push($list,[
-                'hasp_hinhAnh'=> $dsHinhAnhSP[$i][0],
+                'hasp_ma' =>  $dsHinhAnhSP[$i][0],
                 'sp_ma' =>  $dsHinhAnhSP[$i][1],
+                'hasp_hinhAnh'=> $dsHinhAnhSP[$i][2],
                 'created_at' => $date
                 
             ]);

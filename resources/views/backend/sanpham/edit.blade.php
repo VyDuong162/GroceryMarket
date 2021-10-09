@@ -13,7 +13,8 @@ Dashboard
     .is-invalid {
         color: red !important;
     }
-    .product-imgs img{
+
+    .product-imgs img {
         height: 100px;
     }
 </style>
@@ -23,23 +24,24 @@ Dashboard
 <h2 class="mt-30 page-title">Sản phẩm</h2>
 <ol class="breadcrumb mb-30">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="products.html">Sản phẩm</a></li>
-    <li class="breadcrumb-item active">Thêm mới sản phẩm</li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.sanpham.index') }}">Sản phẩm</a></li>
+    <li class="breadcrumb-item active">Chỉnh sửa sản phẩm</li>
 </ol>
 
 <div class="row">
     <div class="col-lg-12 col-md-12">
         <div class="card card-static-2 mb-30">
             <div class="card-title-2">
-                <h4>Thêm mới sản phẩm</h4>
+                <h4>Chỉnh sửa sản phẩm</h4>
             </div>
             <div class="card-body-table">
                 <div class="news-content-right pd-20">
-                    <form name="frmEdit" id="frmEdit" method="post" action="{{ route('admin.sanpham.update',['id'=>$sp->sp_ma]) }}" enctype="multipart/form-data">
+                    <form name="frmEdit" id="frmEdit" method="post" action="{{ route('admin.sanpham.update',$sp->sp_ma) }}" enctype="multipart/form-data">
+                        <input type="hidden" name="_method" value="PUT" />
                         @csrf
                         <div class="form-group">
                             <label class="form-label">Tên sản phẩm</label>
-                            <input type="text" name="sp_ten" id="sp_ten" class="form-control" placeholder="ví dụ:Cà phê sữa VinaCafé Gold Original 800g">
+                            <input type="text" name="sp_ten" id="sp_ten" class="form-control" value="{{ old('sp_ten',$sp->sp_ten) }}" placeholder="ví dụ:Cà phê sữa VinaCafé Gold Original 800g">
                         </div>
                         <div class="col-lg-12 col-md-12 p-0">
                             <div class="col-md-6 col-xs-12 p-0">
@@ -47,7 +49,11 @@ Dashboard
                                     <label class="form-label">Loại sản phẩm</label>
                                     <select id="lsp_ma" name="lsp_ma" class="form-control">
                                         @foreach($dsLoaiSanPham as $lsp)
-                                        <option value="{{ $lsp->lsp_ma }}">{{ $lsp->lsp_ten }}</option>
+                                        @if($lsp->lsp_ma == $sp->lsp_ma)
+                                        <option value="{{ $lsp->lsp_ma }}" selected>{{ $lsp->lsp_ten }}</option>
+                                        @else
+                                        <option value="{{ $lsp->lsp_ma }}"> {{ $lsp->lsp_ten }}</option>
+                                        @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -57,7 +63,11 @@ Dashboard
                                     <label class="form-label">Nhà sản xuất</label>
                                     <select id="nsx_ma" name="nsx_ma" class="form-control">
                                         @foreach($dsNhaSanXuat as $nsx)
+                                        @if($nsx->nsx_ma == $sp->nsx_ma)
+                                        <option value="{{ $nsx->nsx_ma }}" selected>{{ $nsx->nsx_ten }}</option>
+                                        @else
                                         <option value="{{ $nsx->nsx_ma }}">{{ $nsx->nsx_ten }}</option>
+                                        @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -65,31 +75,33 @@ Dashboard
                         </div>
                         <div class="form-group">
                             <label class="form-label">Thành phần</label>
-                            <input type="text" name="sp_thanhPhan" id="sp_thanhPhan" class="form-control" placeholder="$0">
+                            <textarea class="form-control" name="sp_thanhPhan" id="sp_thanhPhan" cols="20" rows="10">
+                            {{ old('sp_thanhPhan',$sp->sp_thanhPhan) }}
+                            </textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Cách dùng</label>
-                            <input type="text" name="sp_cachDung" id="sp_cachDung" class="form-control" placeholder="Nhập cách dùng sản phẩm">
+                            <input type="text" name="sp_cachDung" id="sp_cachDung" class="form-control"  placeholder="Nhập cách dùng sản phẩm" value="{{ old('sp_cachDung',$sp->sp_cachDung) }}">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Khối lượng</label>
-                            <input type="text" name="sp_khoiLuong" id="sp_khoiLuong" class="form-control" placeholder="Nhập khối lượng sản phẩm">
+                            <input type="text" name="sp_khoiLuong" id="sp_khoiLuong" class="form-control" placeholder="Nhập khối lượng sản phẩm" value="{{ old('sp_khoiLuong',$sp->sp_khoiLuong) }}">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Bảo quản</label>
-                            <input type="text" name="sp_baoQuan" id="sp_baoQuan" class="form-control" placeholder="Nhập cách bảo quản sản phẩm">
+                            <input type="text" name="sp_baoQuan" id="sp_baoQuan" class="form-control" placeholder="Nhập cách bảo quản sản phẩm" value="{{ old('sp_baoQuan',$sp->sp_baoQuan) }}">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Hạn dùng</label>
-                            <input type="text" name="sp_hanDung" id="sp_hanDung" class="form-control" placeholder="Nhập hạn dùng sản phẩm: ví dụ 6 tháng...">
+                            <input type="text" name="sp_hanDung" id="sp_hanDung" class="form-control" placeholder="Nhập hạn dùng sản phẩm: ví dụ 6 tháng..." value="{{ old('sp_hanDung',$sp->sp_hanDung) }}">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Đối tượng dùng</label>
-                            <input type="text" name="sp_doiTuongDung" id="sp_doiTuongDung" class="form-control" placeholder="ví dụ dành cho trẻ trên 5 tuổi">
+                            <input type="text" name="sp_doiTuongDung" id="sp_doiTuongDung" class="form-control" placeholder="ví dụ dành cho trẻ trên 5 tuổi" value="{{ old('sp_doiTuongDung',$sp->sp_doiTuongDung) }}">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Ghi Chú</label>
-                            <input type="text" name="sp_ghiChu" id="sp_ghiChu" class="form-control" placeholder="Nhập lưu ý (nếu có)">
+                            <input type="text" name="sp_ghiChu" id="sp_ghiChu" class="form-control" placeholder="Nhập lưu ý (nếu có)" value="{{ old('sp_ghiChu',$sp->sp_ghiChu) }}">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Trạng thái </label>
@@ -100,7 +112,9 @@ Dashboard
                         </div>
                         <div class="form-group">
                             <label class="form-label">Mô tả ngắn</label>
-                            <input type="text" name="sp_moTaNgan" class="form-control" placeholder="Nhập Mô tả chung">
+                            <textarea class="form-control" name="sp_moTaNgan" id="sp_moTaNgan" cols="20" rows="10">
+                            {{ old('sp_moTaNgan',$sp->sp_moTaNgan) }}
+                            </textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Hình ảnh đại diện</label>
@@ -111,6 +125,10 @@ Dashboard
                                 </div>
                             </div>
                             <div class="product-img p-0 m-0">
+                                    @if(file_exists('storage/products/' . $sp->sp_anhDaiDien))
+                                        <img id="preview-img-sp_anhDaiDien" src="{{ asset('storage/products/' . $sp->sp_anhDaiDien) }}" alt="" height="100px">
+                                    @endif
+                                <br>
                                 <img id="preview-img-sp_anhDaiDien" src="#" alt="" height="100px">
                             </div>
                         </div>
@@ -122,7 +140,13 @@ Dashboard
                                     <label class="custom-file-label" for="hasp_hinhAnh">Choose Image</label>
                                 </div>
                             </div>
-                            <div class="product-imgs"></div>
+                            <div class="product-imgs">
+                                @foreach($sp->hinhanhsanpham()->get() as $hasp)
+                                    @if(file_exists('storage/products/' . $hasp->hasp_hinhAnh))
+                                        <img src="{{ asset('storage/products/' . $hasp->hasp_hinhAnh) }}" alt="" height="100px">
+                                    @endif
+                                @endforeach <br>
+                            </div>
                         </div>
                         <button class="save-btn hover-btn" type="submit">Lưu dữ liệu</button>
                     </form>
@@ -169,7 +193,7 @@ Dashboard
     });
     CKEDITOR.replace('sp_moTaNgan');
     CKEDITOR.replace('sp_thanhPhan');
-    $("#frmCreate").validate({
+    $("#frmEdit").validate({
         rules: {
             sp_ten: {
                 required: true,

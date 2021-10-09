@@ -15,9 +15,10 @@ class CreateHinhanhsanphamTable extends Migration
     {
         Schema::create('hinhanhsanpham', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->unsignedBigInteger('hasp_ma')->length(11)->autoIncrement();
-            $table->string('hasp_hinhAnh',200);
+            $table->unsignedBigInteger('hasp_ma')->length(11);
             $table->unsignedBigInteger('sp_ma')->length(11);
+            $table->string('hasp_hinhAnh',200);
+            $table->primary(['sp_ma','hasp_ma']);
             $table->foreign('sp_ma')->references('sp_ma')->on('sanpham')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');

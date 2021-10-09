@@ -13,7 +13,7 @@ class SanPham extends Model
     'sp_thanhPhan','sp_cachDung','sp_khoiLuong','sp_baoQuan','sp_doiTuongDung','sp_ghiChu','sp_moTaNgan','created_at','updated_at'];
     protected $guarded=['sp_ma'];
     
-    protected $primarykey ='sp_ma';
+    protected $primaryKey ='sp_ma';
     
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];

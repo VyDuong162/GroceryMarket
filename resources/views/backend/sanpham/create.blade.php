@@ -23,7 +23,7 @@ Thêm mới sản phẩm
 <h2 class="mt-30 page-title">Sản phẩm</h2>
 <ol class="breadcrumb mb-30">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="products.html">Sản phẩm</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.sanpham.index') }}">Sản phẩm</a></li>
     <li class="breadcrumb-item active">Thêm mới sản phẩm</li>
 </ol>
 <div class="row">
@@ -64,31 +64,33 @@ Thêm mới sản phẩm
                         </div>
                         <div class="form-group">
                             <label class="form-label">Thành phần</label>
-                            <input type="text" name="sp_thanhPhan" id="sp_thanhPhan" class="form-control" value="{{ old('sp_thanhPhan) }}">
+                            <textarea class="form-control" name="sp_thanhPhan" id="sp_thanhPhan" cols="20" rows="10">
+                            {{ old('sp_thanhPhan') }}
+                            </textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Cách dùng</label>
-                            <input type="text" name="sp_cachDung" id="sp_cachDung" class="form-control" value="{{ old('sp_cachDung) }}" placeholder="Nhập cách dùng sản phẩm">
+                            <input type="text" name="sp_cachDung" id="sp_cachDung" class="form-control" value="{{ old('sp_cachDung') }}" placeholder="Nhập cách dùng sản phẩm">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Khối lượng</label>
-                            <input type="text" name="sp_khoiLuong" id="sp_khoiLuong" class="form-control" value="{{ old('sp_khoiLuong) }}" placeholder="Nhập khối lượng sản phẩm">
+                            <input type="text" name="sp_khoiLuong" id="sp_khoiLuong" class="form-control" value="{{ old('sp_khoiLuong') }}" placeholder="Nhập khối lượng sản phẩm">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Bảo quản</label>
-                            <input type="text" name="sp_baoQuan" id="sp_baoQuan" class="form-control" value="{{ old('sp_baoQuan) }}" placeholder="Nhập cách bảo quản sản phẩm">
+                            <input type="text" name="sp_baoQuan" id="sp_baoQuan" class="form-control" value="{{ old('sp_baoQuan') }}" placeholder="Nhập cách bảo quản sản phẩm">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Hạn dùng</label>
-                            <input type="text" name="sp_hanDung" id="sp_hanDung" class="form-control" value="{{ old('sp_hanDung) }}" placeholder="Nhập hạn dùng sản phẩm: ví dụ 6 tháng...">
+                            <input type="text" name="sp_hanDung" id="sp_hanDung" class="form-control" value="{{ old('sp_hanDung') }}" placeholder="Nhập hạn dùng sản phẩm: ví dụ 6 tháng...">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Đối tượng dùng</label>
-                            <input type="text" name="sp_doiTuongDung" id="sp_doiTuongDung" class="form-control" value="{{ old('sp_doiTuongDung) }}" placeholder="ví dụ dành cho trẻ trên 5 tuổi">
+                            <input type="text" name="sp_doiTuongDung" id="sp_doiTuongDung" class="form-control" value="{{ old('sp_doiTuongDung') }}" placeholder="ví dụ dành cho trẻ trên 5 tuổi">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Ghi Chú</label>
-                            <input type="text" name="sp_ghiChu" id="sp_ghiChu" class="form-control" value="{{ old('sp_ghiChu) }}" placeholder="Nhập lưu ý (nếu có)">
+                            <input type="text" name="sp_ghiChu" id="sp_ghiChu" class="form-control" value="{{ old('sp_ghiChu') }}" placeholder="Nhập lưu ý (nếu có)">
                         </div>
                         <div class="form-group">
                             <label class="form-label">Trạng thái </label>
@@ -99,7 +101,9 @@ Thêm mới sản phẩm
                         </div>
                         <div class="form-group">
                             <label class="form-label">Mô tả ngắn</label>
-                            <input type="text" name="sp_moTaNgan" class="form-control" value="{{ old('sp_moTaNgan) }}" placeholder="Nhập Mô tả chung">
+                            <textarea class="form-control" name="sp_moTaNgan" id="sp_moTaNgan" cols="20" rows="10">
+                            {{ old('sp_moTaNgan') }}
+                            </textarea>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Hình ảnh đại diện</label>

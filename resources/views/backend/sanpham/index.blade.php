@@ -108,8 +108,8 @@ Sản phẩm
                                         @endif
                                     </td>
                                     <td class="action-btns">
-                                        <a href="{{ route('admin.view.show',['id'=>$sp->sp_ma]) }}" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
-                                        <a href="{{ route('admin.view.edit',['id'=>$sp->sp_ma]) }}" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
+                                        <a href="{{ route('admin.sanpham.show',$sp->sp_ma) }}" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
+                                        <a href="{{ route('admin.sanpham.edit',$sp->sp_ma) }}" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

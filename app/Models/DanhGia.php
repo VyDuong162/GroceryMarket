@@ -12,7 +12,7 @@ class DanhGia extends Model
     protected $fillable =['sp_ma','chth_ma','dg_soDiem','dg_noiDung','dg_thoiGian','dg_trangThai'];
     protected $guarded =['dg_ma'];
 
-    protected $primarykey =['dg_ma'];
+    protected $primaryKey =['dg_ma'];
     public $timestamps = false;
     protected $dates =['dg_thoiGian'];
     protected $dateFormat ='d-m-Y H:i:s';
