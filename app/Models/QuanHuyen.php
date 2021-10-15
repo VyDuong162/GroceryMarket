@@ -12,7 +12,7 @@ class QuanHuyen extends Model
     protected $fillable =['qh_ten','ttp_ma','created_at','updated_at'];
     protected $guarded = ['qh_ma'];
 
-    protected $primarykey=['qh_ma'];
+    protected $primaryKey='qh_ma';
 
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];
@@ -21,4 +21,5 @@ class QuanHuyen extends Model
     public function tinhtp(){
         return $this->belongsTo('App\Model\TinhTp','tp_ma','tp_ma');
     }
+   
 }

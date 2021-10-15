@@ -12,7 +12,7 @@ class PhuongXa extends Model
     protected $fillable =['px_ten','qh_ma','created_at','updated_at'];
     protected $guarded = ['px_ma'];
 
-    protected $primarykey=['px_ma'];
+    protected $primaryKey='px_ma';
 
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];

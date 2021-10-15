@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-
+Sản phẩm
 @endsection
 
 @section('custom-css')
@@ -21,7 +21,7 @@
 <ol class="breadcrumb mb-30">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="shops.html">Shops</a></li>
-    <li class="breadcrumb-item active">Shop view</li>
+    <li class="breadcrumb-item active">Xem thông tin sản phẩm</li>
 </ol>
 <div class="row">
     <div class="col-lg-5 col-md-6">
@@ -59,7 +59,7 @@
                             <span class="left-dt">Giá</span>
                             <span class="right-dt">
                                 @if(!empty($gia->dgmh_gia))
-                                {{ number_format($gia->dgmh_gia, 2, ',', '.') }} <small>VND</small>
+                                {{ number_format($gia->dgmh_gia, 0, ',', '.') }} <small>VND</small>
                                 @endif
                             </span>
                         </div>

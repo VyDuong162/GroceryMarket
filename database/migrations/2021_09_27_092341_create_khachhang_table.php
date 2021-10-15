@@ -25,6 +25,8 @@ class CreateKhachhangTable extends Migration
             $table->string('kh_matKhau',100);
             $table->unsignedTinyInteger('vt_ma')->length(3);
             $table->unsignedTinyInteger('px_ma')->length(5);
+            $table->tinyInteger('kh_trangThai')->length(2)->comment('trạng thái: 1- hoạt động , 2- không hoạt động');
+            
             $table->foreign('px_ma')->references('px_ma')->on('phuongxa')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');

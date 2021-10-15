@@ -13,7 +13,7 @@ class ChiTiet_DonHang extends Model
     protected $fillable =['ctdh_soLuong','ctdh_giaBan','created_at','updated_at'];
     protected $guarded =['dh_ma','sp_ma'];
     
-    protected $primarykey=['dh_ma','sp_ma'];
+    protected $primaryKey=['dh_ma','sp_ma'];
     public $timestamps = false;
     public    $incrementing = false;
     protected $dates =['created_at','updated_at'];

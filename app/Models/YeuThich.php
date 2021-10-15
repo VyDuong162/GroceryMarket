@@ -12,6 +12,6 @@ class YeuThich extends Model
     protected $fillable =['sp_ma','chth_ma','kh_ma'];
     protected $guarded =['ty_ma'];
 
-    protected $primarykey =['ty_ma'];
+    protected $primaryKey =['ty_ma'];
     
 }

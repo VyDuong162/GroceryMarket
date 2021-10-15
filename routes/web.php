@@ -1,6 +1,10 @@
 <?php
 
 use App\Http\Controllers\Backend\SanPhamController;
+use App\Http\Controllers\Backend\KhachHangController;
+use App\Http\Controllers\Backend\CuaHangTapHoaController;
+use App\Models\SanPham;
+use App\Models\KhachHang;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -34,4 +38,15 @@ Route::get('/frontend', function(){
 Route::get('/index1', function(){
     return view('frontend.index1');
 });
+// sản phẩm
 Route::resource('admin/sanpham',SanPhamController::class,['as'=>'admin']);
+Route::delete('/sanpham/bulkaction',[SanPhamController::class,'BulkAction']);
+Route::get('/backend/sanpham/search',[SanPhamController::class,'Search']);
+// khách hàng
+Route::resource('admin/khachhang',KhachHangController::class,['as'=>'admin']);
+Route::delete('/khachhang/bulkaction',[KhachHangController::class,'BulkAction'])->name('khachhang.bulkaction');
+// lấy thông tin địa chỉ
+Route::get('khachhang/getquanhuyen', [KhachHangController::class,'getQuanHuyen'])->name('khachhang.getquanhuyen');
+// cửa hàng tập hóa
+Route::resource('admin/cuahangtaphoa',CuaHangTapHoaController::class,['as'=>'admin']);
+Route::delete('/cuahangtaphoa/bulkaction',[CuaHangTapHoaController::class,'BulkAction'])->name('cuahangtaphoa.bulkaction');

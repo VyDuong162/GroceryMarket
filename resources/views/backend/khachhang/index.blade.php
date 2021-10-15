@@ -37,35 +37,17 @@ Sản phẩm
 
 @section('content')
 <div class="container-fluid">
-    <h2 class="mt-30 page-title">Sản phẩm</h2>
+    <h2 class="mt-30 page-title">Khách hàng</h2>
     <ol class="breadcrumb mb-30">
         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-        <li class="breadcrumb-item active">Sản Phẩm</li>
+        <li class="breadcrumb-item active">Khách hàng</li>
     </ol>
 
     <div class="row justify-content-between">
         <div class="col-lg-12 px-4">
-            <a href="{{ route('admin.sanpham.create') }}" class="add-btn hover-btn">Thêm mới</a>
+            <a href="{{ route('admin.khachhang.create') }}" class="add-btn hover-btn">Thêm mới</a>
         </div>
-        <div class="col-lg-12 col-md-12 px-4">
-            <form name="frmSearch" name="frmSearch" method="GET" action="/backend/sanpham/search">
-                <div class="bulk-section mt-30 row">
-                        <div class="search-by-name-input col-md-8 px-3 mr-0">
-                            <input type="text" class="form-control" name="search" class="search">
-                        </div>
-                        <div class="input-group col-md-4 px-0 mr-0">
-                            <select id="status" name="status" class="form-control">
-                                <option selected value="1">Hoạt động</option>
-                                <option value="2">Không hoạt động</option>
-                            </select>
-                            <div class="input-group-append">
-                                <button class="status-btn hover-btn" type="submit">Tìm kiếm</button>
-                            </div>
-                        </div>
-                </div>
-            </form>
-        </div>
-        <form name="frmBulkActions" id="frmBulkActions" class="frmBulkActions" data-url="{{ url('sanpham/bulkaction') }}" method="post">
+        <form name="frmBulkActions" id="frmBulkActions" class="frmBulkActions" data-url="{{ url('khachhang/bulkaction') }}" method="post">
             <div class="col-lg-3 col-md-4">
                 <div class="bulk-section mt-30">
                     <div class="input-group">
@@ -78,7 +60,7 @@ Sản phẩm
                             <option value="3">Xóa</option>
                         </select>
                         <div class="input-group-append">
-                            <button class="status-btn hover-btn" formaction="/sanpham/bulkaction" id="btn_apply" type="submit">Apply</button>
+                            <button class="status-btn hover-btn" formaction="/khachhang/bulkaction"  id="btn_apply" type="submit">Apply</button>
                         </div>
 
                     </div>
@@ -89,56 +71,52 @@ Sản phẩm
             <div class="col-lg-12 col-md-12" >
                 <div class="card card-static-2 mt-30 mb-30">
                     <div class="card-title-2">
-                        <h4>Tất cả sản phẩm</h4>
+                        <h4>Tất cả khách hàng</h4>
                     </div>
                     <div class="card-body-table">
                         <div class="table-responsive">
-                            <table id="sanphamTable" class="table ucp-table table-hover" >
+                            <table id="khachhangTable" class="table ucp-table table-hover" >
                                 <thead>
                                     <tr>
                                         <th style="width:10px" class="px-md-2"><input type="checkbox" class="check-all"></th>
                                         <th style="width:30px">ID</th>
-                                        <th style="width:100px">Ảnh</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Loại sản phẩm</th>
-                                        <th>Nhà sản xuất</th>
-                                        <th>Ngày tạo</th>
-                                        <th>Trạng thái</th>
+                                        <th>Họ tên</th>
+                                        <th>Giới tính</th>
+                                        <th>Ngày sinh</th>
+                                        <th>Số điện thoại</th>
+                                        <th style="width:100px">Email</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Vai trò</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($dsSanPham as $sp)
+
+                                    @foreach($dsKhachHang as $kh)
                                     <tr>
-                                        <td><input type="checkbox" class="check-item" name="ids[]" value="{{$sp->sp_ma}}"></td>
-                                        <td>{{ $sp->sp_ma }}</td>
-                                        <td>
-                                            @if(!file_exists('storage/products/'.$sp->sp_anhDaiDien))
-                                            <div class="cate-img-5">
-                                                <img src="{{ asset('themes/gambo/images/product/big-1.jpg') }}" height="100px" alt="hinhdaidien">
-                                            </div>
+                                        <td><input type="checkbox" class="check-item" name="ids[]" value="{{$kh->kh_ma}}"></td>
+                                        <td>{{ $kh->kh_ma }}</td>
+                                        <td>{{ $kh->kh_hoTen }}</td>
+                                       
+                                            @if( $kh->kh_gioiTinh ==1 )
+                                            <td>  Nữ </td>
                                             @else
-                                            <div class="cate-img-5">
-                                                <img src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" width="100px" alt="hinhdaidien" class="list-img">
-                                            </div>
+                                            <td>  Nam </td>
                                             @endif
-                                        </td>
-                                        <td>{{ $sp->sp_ten}}</td>
                                         
-                                        <td>{{$sp->loaisanpham->lsp_ten}}</td>
-                                        <td>{{$sp->nhasanxuat->nsx_ten}}</td>
-                                        <td>{{$sp->created_at}}</td>
-                                        <td>
-                                            @if($sp->sp_trangThai == 1)
-                                            <span class="badge-item badge-status"> hoạt động</span>
-                                            @elseif($sp->sp_trangThai == 2)
-                                            <span class="badge-item badge-status"> Không hoạt động</span>
-                                            @endif
-                                        </td>
+                                        <td>{{ $kh->kh_ngaySinh->format('d/m/Y') }}</td>
+                                        <td>{{ $kh->phoneNumber($kh->kh_soDienThoai) }}</td>
+                                        <td>{{ $kh->kh_email }}</td>
+                                       
+                                        @foreach($kh->laydiachi($kh->px_ma) as $dc)
+                                        
+                                         <td>{{ $dc->diachi }}</td>
+                                        @endforeach
+                                        <td>{{ $kh->vaitro->vt_ten }}</td>
                                         <td class="action-btns">
-                                            <a href="{{ route('admin.sanpham.show',$sp->sp_ma) }}" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
-                                            <a href="{{ route('admin.sanpham.edit',$sp->sp_ma) }}" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
-                                            <form name="frmDelete" id="frmDelete" class="frmDelete" action="{{ route('admin.sanpham.destroy',$sp->sp_ma) }}" method="post" data-id="{{$sp->sp_ma}}" data-name="{{$sp->sp_ten}}">
+                                            <a href="{{ route('admin.khachhang.show',$kh->kh_ma) }}" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ route('admin.khachhang.edit',$kh->kh_ma) }}" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
+                                            <form name="frmDelete" id="frmDelete" class="frmDelete" action="{{ route('admin.khachhang.destroy',$kh->kh_ma) }}" method="post" data-id="{{$kh->kh_ma}}" data-name="{{$kh->kh_hoTen}}">
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="edit-btn btn-delete" title="Delete"><i class="fas fa-trash-alt"></i></button>
@@ -166,7 +144,7 @@ Sản phẩm
 
 <script>
   $(document).ready(function() {
-        var table = $('#sanphamTable').DataTable({
+        var table = $('#khachhangTable').DataTable({
             dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
             buttons: [
                 'copy', 'excel', 'pdf'
@@ -236,7 +214,7 @@ Sản phẩm
                             timer: 1000
 
                         }).then(function() {
-                            location.href = "{{ route('admin.sanpham.index') }}"
+                            location.href = "{{ route('admin.khachhang.index') }}"
                         })
                     }
 
@@ -261,7 +239,7 @@ Sản phẩm
             var name = "Không hoạt động";
         }else{
             var name = "Xóa";
-            var namehtml ="Dữ liệu sản phẩm sẽ không thể phục hồi lại được";
+            var namehtml ="Dữ liệu khách hàng sẽ không thể phục hồi lại được";
         }
         if (giatri != 0) {
             var arr = [];
@@ -299,7 +277,7 @@ Sản phẩm
                                 timer: 1000
 
                             }).then(function() {
-                                location.href = "{{ route('admin.sanpham.index') }}"
+                                location.href = "{{ route('admin.khachhang.index') }}"
                             })
                         }
 

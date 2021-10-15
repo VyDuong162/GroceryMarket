@@ -37,7 +37,7 @@ class DonHangTableSeeder extends Seeder
         
         array_push($list,[
             'kh_ma' => $kh1->kh_ma,
-            'chth_ma' => CuaHangTapHoa::all()->random()->chth_ma,
+            'chth_ma' => 1,
             'dh_diaChi' => $dsDiaChi[0][0],
             'dh_giaTri' => $faker->numberBetween(200000,1000000),
             'dh_soDienThoai' =>  $kh1->kh_soDienThoai,
@@ -47,7 +47,7 @@ class DonHangTableSeeder extends Seeder
         ]);
         array_push($list,[
             'kh_ma' => $kh2->kh_ma,
-            'chth_ma' => CuaHangTapHoa::all()->random()->chth_ma,
+            'chth_ma' => 2,
             'dh_diaChi' => $dsDiaChi[1][0],
             'dh_giaTri' => $faker->numberBetween(200000,1000000),
             'dh_soDienThoai' =>  $kh2->kh_soDienThoai,

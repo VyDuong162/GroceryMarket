@@ -11,7 +11,7 @@ class DonViTinh extends Model
     protected $table ='donvitinh';
     protected $fillable =['dvt_ten','created_at','updated_at'];
     protected $guarded = ['dvt_ma'];
-    protected $primarykey ='dvt_ma';
+    protected $primaryKey ='dvt_ma';
 
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];

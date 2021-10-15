@@ -12,8 +12,8 @@ class TinhTp extends Model
     protected $fillable =['ttp_ten','created_at','updated_at'];
     protected $guarded = ['ttp_ma'];
 
-    protected $primarykey=['ttp_ma'];
-
+    protected $primaryKey='ttp_ma';
+   
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';

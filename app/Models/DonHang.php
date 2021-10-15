@@ -15,23 +15,24 @@ class DonHang extends Model
     
     protected $guarded = ['dh_ma'];
 
-    protected $primarykey=['dh_ma'];
-
+    protected $primaryKey='dh_ma';
+    public    $incrementing = false;
+    public $timestamps =false;
     protected $dates =['dh_taoMoi','dh_capNhat'];
     protected $dateFormat ='Y-m-d H:i:s';
     public function khachhang(){
-        return $this->belongsTo('App\Model\KhachHang','kh_ma','kh_ma');
+        return $this->belongsTo('App\Models\KhachHang','kh_ma','kh_ma');
     }
     public function cuahangtaphoa(){
-        return $this->belongsTo('App\Model\CuaHangTapHoa','chth_ma','chth_ma');
+        return $this->belongsTo('App\Models\CuaHangTapHoa','chth_ma','chth_ma');
     }
     public function danhgias(){
-        return $this->hasMany('App\Model\DanhGia','dh_ma','dh_ma');
+        return $this->hasMany('App\Models\DanhGia','dh_ma','dh_ma');
     }
     public function hoadon(){
-        return $this->hasOne('App\Model\HoaDon','hd_ma','hd_ma');
+        return $this->hasOne('App\Models\HoaDon','dh_ma','dh_ma');
     }
     public function vanchuyen(){
-        return $this->hasMany('App\Model\VanChuyen','dh_ma','dh_ma');
+        return $this->hasMany('App\Models\VanChuyen','dh_ma','dh_ma');
     }
 }

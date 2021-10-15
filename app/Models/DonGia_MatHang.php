@@ -13,8 +13,9 @@ class DonGia_MatHang extends Model
     protected $fillable =['dgmh_gia','dgmh_ghiChu','dgmh_ngayCapNhat','created_at','updated_at'];
     protected $guarded =['chth_ma','sp_ma','dgmh_ngayCapNhat'];
     
-    protected $prmarykey=['chth_ma','sp_ma','dgmh_ngayCapNhat'];
+    protected $primaryKey=['chth_ma','sp_ma','dgmh_ngayCapNhat'];
     public $timestamps = false;
+    public    $incrementing = false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
 

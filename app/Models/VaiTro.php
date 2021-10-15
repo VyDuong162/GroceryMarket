@@ -12,7 +12,7 @@ class VaiTro extends Model
     protected $fillable =['vt_ten','created_at','updated_at'];
     protected $guarded = ['vt_ma'];
 
-    protected $primarykey=['vt_ma'];
+    protected $primaryKey='vt_ma';
 
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];

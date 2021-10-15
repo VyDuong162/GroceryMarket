@@ -46,7 +46,7 @@ Thêm mới sản phẩm
                                     <label class="form-label">Loại sản phẩm</label>
                                     <select id="lsp_ma" name="lsp_ma" class="form-control">
                                         @foreach($dsLoaiSanPham as $lsp)
-                                        <option value="{{ $lsp->lsp_ma }}" {{old('$lsp->lsp_ma')==$lsp->lsp_ma ? 'selected':'' }}>{{ $lsp->lsp_ten }}</option>
+                                        <option value="{{ $lsp->lsp_ma }}" {{old('$lsp->lsp_ma') }}>{{ $lsp->lsp_ten }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -56,7 +56,7 @@ Thêm mới sản phẩm
                                     <label class="form-label">Nhà sản xuất</label>
                                     <select id="nsx_ma" name="nsx_ma" class="form-control">
                                         @foreach($dsNhaSanXuat as $nsx)
-                                        <option value="{{ $nsx->nsx_ma }}" {{ old('$nsx->nsx_ma')==$nsx->nsx_ma ? 'selected':'' }}>{{ $nsx->nsx_ten }}</option>
+                                        <option value="{{ $nsx->nsx_ma }}" {{ old('$nsx->nsx_ma')}}>{{ $nsx->nsx_ten }}</option>
                                         @endforeach
                                     </select>
                                 </div>

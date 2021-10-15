@@ -1,4 +1,4 @@
-<div class="flash-message mt-0">
+<div class="flash-message mt-3">
     @foreach(['danger', 'warning', 'success', 'info'] as $msg)
     @if(Session::has('alert-'.$msg))
     <p class="alert alert-{{ $msg }}">{{ Session::get('alert-'.$msg) }}

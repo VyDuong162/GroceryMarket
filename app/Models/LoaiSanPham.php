@@ -12,7 +12,7 @@ class LoaiSanPham extends Model
     protected $fillable =['lsp_ten','created_at','updated_at'];
     protected $guarded = ['lsp_ma'];
 
-    protected $primarykey=['lsp_ma'];
+    protected $primaryKey='lsp_ma';
 
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];

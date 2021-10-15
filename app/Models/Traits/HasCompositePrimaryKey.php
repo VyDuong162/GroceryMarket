@@ -6,11 +6,7 @@ use Exception;
 use \Illuminate\Database\Eloquent\Builder;
 
 trait HasCompositePrimaryKey {
-  
-    public function getIncrementing()
-    {
-        return false;
-    }
+
     /**
      * Set the keys for a save update query.
      *

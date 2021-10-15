@@ -13,7 +13,7 @@ class VanChuyen extends Model
     protected $fillable =['vc_ngay','created_at','updated_at'];
     protected $guarded =['dh_ma','tt_ma'];
 
-    protected $primarykey =['dh_ma','tt_ma'];
+    protected $primaryKey =['dh_ma','tt_ma'];
 
     public $timestamps =false;
     protected $dates =['vc_ngay','created_at','updated_at'];

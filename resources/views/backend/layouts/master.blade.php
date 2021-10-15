@@ -17,11 +17,13 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('css/admin-style.css') }}">
     <!-- Styles custom-->
+  
+    
     @yield('custom-css')
 
 </head>
 
-<body>
+<body >
     <!-- Sidebar -->
     @include('backend.layouts.partials.sidebar')
     <!-- End Sidebar -->
@@ -47,8 +49,8 @@
             </div>
               <!-- End Content -->
         </div>
-      
-   
+       <!-- Include script angularJS --> 
+ 
     <!-- coreui -->
     <script src="{{ asset('coreui/js/main.js') }}"></script>
 

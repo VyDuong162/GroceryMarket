@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Exists;
 use Session;
-
+use Illuminate\Support\Facades\DB;
 class SanPhamController extends Controller
 {
     /**
@@ -23,7 +23,7 @@ class SanPhamController extends Controller
      */
     public function index()
     {
-        $dsSanPham = SanPham::paginate(10);
+        $dsSanPham = SanPham::Where('sp_trangThai','<','3')->orderby('created_at')->get();
         return view('backend.sanpham.index')
             ->with('dsSanPham', $dsSanPham);
     }
@@ -120,7 +120,12 @@ class SanPhamController extends Controller
         $sp = SanPham::find($id);
         $dh = $sp->chitietdonhang()->get();
         $shop = $sp->dongiamathang()->first();
-        $gia = $sp->dongiamathang()->first();
+        $row=$sp->dongiamathang()->get();
+        if(count($row) > 1){
+        $gia = $sp->dongiamathang()->last();
+        }else{
+            $gia = $sp->dongiamathang()->first();
+        }
         $dsNhaSanXuat = NhaSanXuat::all();
         $dsLoaiSanPham = LoaiSanPham::all();
         return view('backend.sanpham.show')
@@ -229,6 +234,48 @@ class SanPhamController extends Controller
      */
     public function destroy($id)
     {
-        //
+           $row = DB::table("sanpham")->where('sp_ma', $id)->update(['sp_trangThai' => '3']);
+           
+            //return redirect(route('admin.sanpham.index'))->with('alert-info','Xóa thành công sản phẩm với ID_SP:'.$id);
+       
     }
+    public function Search( Request $request){
+        $status = $request->get('status');
+        $search = $request->get('search');
+        $dulieu = SanPham::leftjoin('loaisanpham', 'sanpham.lsp_ma', '=', 'loaisanpham.lsp_ma')
+                                    ->leftjoin('nhasanxuat', 'sanpham.nsx_ma', '=', 'nhasanxuat.nsx_ma')
+                                    ->where('sp_trangThai','=',$status)
+                                    ->where(
+                                        function($query) use ($search){
+                                            return $query->where('sp_ten','like','%'.$search.'%')
+                                                ->orWhere('nsx_ten','like','%'.$search.'%')
+                                                ->orWhere('lsp_ten','like','%'.$search.'%')
+                                                ;
+                                        }
+                                    )
+                                    ->orderBy('sp_ma', 'asc')->get();
+      
+        //$dssanpham = DB::table("sanpham")->whereIn('sp_ma',$dulieu)->get();
+        return  view('backend.sanpham.index')->with('dsSanPham',$dulieu)
+        ->with('status',$status)
+        ->with('search',$search);
+    }
+    public function BulkAction(Request $request)
+     {
+        $action=$request->action;
+        $ids = $request->get('ids'); 
+        if($action != 0){
+            if($action == 1){
+                $setupdate = DB::table("sanpham")->whereIn('sp_ma',$ids)->update(['sp_trangThai' => '1']);
+            }elseif($action == 2){
+                $setupdate = DB::table("sanpham")->whereIn('sp_ma',$ids)->update(['sp_trangThai' => '2']);
+            }elseif($action == 3){
+                $setupdate = DB::table("sanpham")->whereIn('sp_ma',$ids)->update(['sp_trangThai' => '3']);
+            }    
+            return redirect(route('admin.sanpham.index'));
+        }
+        //return redirect(route('admin.sanpham.index'))->with('alert-info','Xóa thành công sản phẩm với ID_SP:'.$ids);
+
+     }
+    
 }

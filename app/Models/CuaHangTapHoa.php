@@ -12,12 +12,14 @@ class CuaHangTapHoa extends Model
     protected $fillable =['chth_ten','kh_ma','chth_anhDaiDien','chth_email','chth_diachi','chth_taiKhoanNganHang','px_ma','chth_moTa','created_at','updated_at'];
     protected $guarded =['chth_ma'];
 
-    protected $primarykey =['chth_ma'];
+    protected $primaryKey =['chth_ma'];
 
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
-    
+    public function gettencuahang(){
+        return  $this->attributes['chth_ten'];
+    }
     public function khachhang(){
         return $this->belongsTo('App\Model\khachhang','kh_ma','kh_ma');
     }

@@ -18,8 +18,8 @@ class VaiTroTableSeeder extends Seeder
         $date = new DateTime();
         $types=[
           ['admin'],
-          ['chucuahang'],
-          ['khachang']
+          ['chủ cửa hàng'],
+          ['khách hàng']
         ];
         for($i=0; $i < count($types);$i++){
             array_push($list,[
