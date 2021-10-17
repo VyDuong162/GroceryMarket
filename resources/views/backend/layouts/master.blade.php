@@ -23,7 +23,7 @@
 
 </head>
 
-<body >
+<body>
     <!-- Sidebar -->
     @include('backend.layouts.partials.sidebar')
     <!-- End Sidebar -->
@@ -50,7 +50,7 @@
               <!-- End Content -->
         </div>
        <!-- Include script angularJS --> 
- 
+   
     <!-- coreui -->
     <script src="{{ asset('coreui/js/main.js') }}"></script>
 

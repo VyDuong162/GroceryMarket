@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\SanPhamController;
 use App\Http\Controllers\Backend\KhachHangController;
 use App\Http\Controllers\Backend\CuaHangTapHoaController;
+use App\Models\CuaHangTapHoa;
 use App\Models\SanPham;
 use App\Models\KhachHang;
 use Illuminate\Support\Facades\Route;
@@ -50,3 +51,6 @@ Route::get('khachhang/getquanhuyen', [KhachHangController::class,'getQuanHuyen']
 // cửa hàng tập hóa
 Route::resource('admin/cuahangtaphoa',CuaHangTapHoaController::class,['as'=>'admin']);
 Route::delete('/cuahangtaphoa/bulkaction',[CuaHangTapHoaController::class,'BulkAction'])->name('cuahangtaphoa.bulkaction');
+Route::get('/sanpham/cuahangtaphoa/{id}',[CuaHangTapHoaController::class,'SanPhamCuaHang'])->name('sanpham.cuahangtaphoa');
+Route::post('/sanpham/gia',[CuaHangTapHoaController::class,'UpdatePrice'])->name('sanpham.gia');
+Route::get('/backend/sanpham/cuahangtaphoa/search',[CuaHangTapHoaController::class,'Search']);

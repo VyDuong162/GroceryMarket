@@ -17,8 +17,8 @@ class CreateDongiaMathangTable extends Migration
             $table ->engine ='InnoDB';
             $table ->unsignedBigInteger('chth_ma')->length(11);
             $table ->unsignedBigInteger('sp_ma')->length(11);
-            $table ->unsignedDecimal('dgmh_gia',13,2);
-            $table ->mediumText('dgmh_ghiChu');
+            $table ->unsignedDecimal('dgmh_gia',13,2)->nullable();
+            $table ->mediumText('dgmh_ghiChu')->nullable();
             $table ->date('dgmh_ngayCapNhat');
             $table->primary(['chth_ma','sp_ma','dgmh_ngayCapNhat']);
             $table->foreign('chth_ma')

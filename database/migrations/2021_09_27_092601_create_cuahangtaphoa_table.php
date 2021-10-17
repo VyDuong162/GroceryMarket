@@ -18,13 +18,14 @@ class CreateCuahangtaphoaTable extends Migration
            $table ->unsignedBigInteger('chth_ma')->length(11)->autoIncrement();
            $table->unsignedBigInteger('kh_ma')->length(11);
            $table ->string('chth_ten',200);
-           $table ->string('chth_anhDaiDien',200);
+           $table ->string('chth_anhDaiDien',200)->nullable();
            $table ->string('chth_soDienThoai',10);
            $table ->string('chth_email',200);
            $table ->string('chth_diaChi',200);
            $table ->string('chth_taiKhoanNganHang',200);
            $table->unsignedTinyInteger('px_ma')->length(5);
            $table ->text('chth_moTa');
+           $table->unsignedTinyInteger('chth_trangThai')->length(2)->default(1);
            $table->foreign('kh_ma')->references('kh_ma')->on('khachhang')
            ->onUpdate('CASCADE')
            ->onDelete('CASCADE');

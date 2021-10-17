@@ -34,25 +34,9 @@ class CuaHangTapHoaTableSeeder extends Seeder
         $dsTinh =['Cần Thơ'];
         $dsQH =['Huyện Cờ Đỏ','Quận Thốt Nốt','Quận Ninh Kiều'];
         $dsPX =['Xã Trung Thạnh','Phường Thuận An','Phường An Hòa'];
-        for ($i = 0; $i < $limit; $i++) {
-            array_push($list,[
-                'chth_ma' => $i+2,
-                'kh_ma' => KhachHang::all()->random()->kh_ma,
-                'chth_ten' => $dsCHTH[$i],
-                'chth_anhDaiDien'=>$i."chth.jpg",
-                'chth_soDienThoai'=>$faker->numerify('##########'),
-                'chth_email' => $faker->unique()->safeEmail,
-                'chth_diaChi' =>"$dsSo[$i],$dsPX[$i],$dsQH[$i],$dsTinh[0]",
-                'chth_taiKhoanNganHang' => $faker->creditCardNumber(),
-                'px_ma'=> PhuongXa::all()->random()->px_ma,
-                'chth_moTa' => $faker->paragraph(2),
-                'created_at'=> $date
-            ]);   
-        }
         array_push($list,[
-            'chth_ma' => 1,
-            'kh_ma' => KhachHang::all()->random()->kh_ma,
-            'chth_ten' => $dsCHTH[$i],
+            'kh_ma' => KhachHang::where('vt_ma','=','2')->get()->random()->kh_ma,
+            'chth_ten' => $dsCHTH[0],
             'chth_anhDaiDien'=>"chth5.jpg",
             'chth_soDienThoai'=>$faker->numerify('##########'),
             'chth_email' => "chth5@gmail.com",
@@ -62,6 +46,22 @@ class CuaHangTapHoaTableSeeder extends Seeder
             'chth_moTa' => $faker->paragraph(2),
             'created_at'=> $date
         ]);   
+        for ($i = 0; $i < $limit; $i++) {
+            
+            array_push($list,[
+                'kh_ma' => KhachHang::where('vt_ma','=','2')->get()->random()->kh_ma,
+                'chth_ten' => $dsCHTH[$i+1],
+                'chth_anhDaiDien'=>$i."chth.jpg",
+                'chth_soDienThoai'=>$faker->numerify('##########'),
+                'chth_email' => $faker->unique()->safeEmail,
+                'chth_diaChi' =>"$dsSo[$i],$dsPX[$i],$dsQH[$i],$dsTinh[0]",
+                'chth_taiKhoanNganHang' => $faker->numerify('##########'),
+                'px_ma'=> PhuongXa::all()->random()->px_ma,
+                'chth_moTa' => $faker->paragraph(2),
+                'created_at'=> $date
+            ]);  
+        }
+       
         DB::table('cuahangtaphoa')->insert($list);
     }
 }

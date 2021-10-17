@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-Khách hàng
+Cửa hàng
 @endsection
 @section('custom-css')
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -13,64 +13,57 @@ Khách hàng
         color: red !important;
     }
 </style>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('content')
 <div class="container-fluid">
-    <h2 class="mt-30 page-title">Khách hàng</h2>
+    <h2 class="mt-30 page-title">Cửa hàng</h2>
     <ol class="breadcrumb mb-30">
         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('admin.khachhang.index') }}">Khách hàng</a></li>
-        <li class="breadcrumb-item active">Chỉnh sửa khách hàng</li>
+        <li class="breadcrumb-item"><a href="{{ route('admin.cuahangtaphoa.index') }}">Cửa hàng</a></li>
+        <li class="breadcrumb-item active">Chỉnh sửa Cửa hàng</li>
     </ol>
-    <form name="frmEdit" id="frmEdit" action="{{route('admin.khachhang.update',$kh->kh_ma)}}" method="post">
+    <form name="frmEdit" id="frmEdit" action="{{route('admin.cuahangtaphoa.update',$chth->chth_ma)}}" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="_method" value="PUT">
         <div class="row">
             <div class="col-lg-6 col-md-6">
                 <div class="card card-static-2 mb-30">
                     <div class="card-title-2">
-                        <h4>Chỉnh sửa khách hàng</h4>
+                        <h4>Chỉnh sửa Cửa hàng</h4>
                     </div>
                     <div class="card-body-table">
                         <div class="news-content-right pd-20">
                             <div class="form-group">
-                                <label class="form-label">Họ tên </label>
-                                <input type="text" class="form-control" name="kh_hoTen" id="kh_hoTen" value="{{ old('kh_hoTen',$kh->kh_hoTen) }}" placeholder="Nhập họ tên đầy đủ">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Ngày sinh</label>
-                                <input type="text" class="form-control" name="kh_ngaySinh" id="kh_ngaySinh" value="{{ old('kh_ngaySinh',$kh->kh_ngaySinh->format('d/m/Y ')) }}" required placeholder="d/m/Y: 20/01/2000">
-                            </div><label class="form-label">Giới tính</label>
-                            <div class="form-group">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="kh_gioiTinh" id="kh_gioitinh1" value="0" {{old('kh_gioitinh')==0 ? 'checked':'' }}>
-                                    <label class="form-check-label" for="kh_gioitinh1">
-                                        Nam
-                                    </label>
+                                    <label class="form-label">Chủ của hàng</label>
+                                    <select name="kh_ma" id="kh_ma" class="form-control">
+                                            @foreach($dsKhachHang as $kh)
+                                                @if($chth->kh_ma == $kh->kh_ma)
+                                                <option value="{{ $kh->kh_ma }}" selected>{{ $kh->kh_hoTen }}</option>
+                                                @else
+                                                <option value="{{ $kh->kh_ma }}">{{ $kh->kh_hoTen }}</option>
+                                                @endif
+                                            @endforeach
+                                    </select>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="kh_gioiTinh" id="kh_gioitinh2" value="1" {{old('kh_gioitinh')==1 ? 'checked':'' }}>
-                                    <label class="form-check-label" for="kh_gioitinh2">
-                                        Nữ
-                                    </label>
-
+                                <div class="form-group">
+                                    <label class="form-label">Tên cửa hàng</label>
+                                    <input type="text" class="form-control" name="chth_ten" id="chth_ten" value="{{ old('chth_ten',$chth->chth_ten) }}" placeholder="Nhập tên của hàng đầy đủ">
                                 </div>
-
-                            </div>
                             <div class="form-group">
                                 <label class="form-label">Số điện thoại</label>
-                                <input type="text" class="form-control" name="kh_soDienThoai" id="kh_soDienThoai" pattern="[0-9]{1}[0-9]{9}" value="{{ old('kh_soDienThoai',$kh->kh_soDienThoai) }}" placeholder="Nhập số điện thoại">
+                                <input type="text" class="form-control" name="kh_soDienThoai" id="kh_soDienThoai" pattern="[0-9]{1}[0-9]{9}" value="{{ old('chth_soDienThoai',$chth->chth_soDienThoai) }}" placeholder="Nhập số điện thoại">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control" name="kh_email" id="kh_email" value="{{ old('kh_email',$kh->kh_email) }}" placeholder="Nhập email">
+                                <input type="email" class="form-control" name="chth_email" id="chth_email" value="{{ old('chth_email',$chth->chth_email) }}" placeholder="Nhập email">
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Địa chỉ cụ thể</label>
-                                @if($diachi!= null)
-                                <input type="text" class="form-control" name="dc_ten" id="dc_ten" value="{{ old('dc_ten',$diachi->dc_ten) }}" placeholder="nhập địa chỉ cụ thể">
+                                @if($chth->chth_diaChi!= null)
+                                <input type="text" class="form-control" name="chth_diaChi" id="chth_diaChi" value="{{ old('chth_diaChi',$chth->chth_diaChi) }}" placeholder="nhập địa chỉ cụ thể">
                                 @else
-                                <input type="text" class="form-control" name="dc_ten" id="dc_ten"  placeholder="nhập địa chỉ cụ thể">
+                                <input type="text" class="form-control" name="chth_diaChi" id="chth_diaChi"  placeholder="nhập địa chỉ cụ thể">
                                 @endif
                             </div>
                             <div class="form-group">
@@ -105,42 +98,58 @@ Khách hàng
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Vai trò</label>
-                                <select name="vt_ma" id="vt_ma" class="form-control">
-                                    @foreach($dsVaiTro as $vt)
-                                    @if($vt->ma == $kh->vt_ma)
-                                    <option value="{{ $vt->vt_ma }}" selected>{{$vt->vt_ten}}</option>
+                                <label class="form-label">Trạng thái</label>
+                                <select name="chth_trangThai" id="chth_trangThai" class="form-control">
+                                    @if($chth->chth_trangThai == 1)
+                                    <option value="1" selected>Hoạt động</option>
                                     @else
-                                    <option value="{{ $vt->vt_ma }}">{{$vt->vt_ten}}</option>
+                                    <option value="2">Không hoạt động</option>
                                     @endif
 
-                                    @endforeach
                                 </select>
                             </div>
 
-                            <button class="save-btn hover-btn" type="submit">Lưu dữ liệu</button>
+                           
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
-                <div class="card card-static-2 mb-30">
+            <div class="card card-static-2 mb-30">
                     <div class="card-title-2">
-                        <h4>Tạo tài khoản</h4>
+                        <h4>Mô tả ngắn</h4>
                     </div>
                     <div class="card-body-table">
                         <div class="news-content-right pd-20">
-                            <div class="form-group ">
-                                <label class="form-label">Tài khoản</label>
-                                <input type="text" class="form-control " disabled name="kh_taiKhoan" id="kh_taiKhoan" value="{{ old('kh_taiKhoan',$kh->kh_taiKhoan) }}" placeholder="Nhập tên đăng nhập">
+                            <div class="form-group">
+                                <label class="form-label">Hình ảnh đại diện</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="chth_anhDaiDien" id="chth_anhDaiDien" value="{{old('chth_anhDaiDien',$chth->chth_anhDaiDien) }}"aria-describedby="chth_anhDaiDien">
+                                        <label class="custom-file-label" for="chth_anhDaiDien">Choose Image</label>
+                                    </div>
+                                </div>
+                                <div class="product-img p-0 m-0">
+                                    <img id="preview-img-chth_anhDaiDien" src="#" alt="" height="100px">
+                                </div>
+                                <div class="product-img p-0 m-0">
+                                    @if(file_exists('storage/avatarshop/'.$chth->chth_anhDaiDien))
+                                        <img id="preview-img-chth_anhDaiDien" src="{{ asset('storage/avatarshop/'.$chth->chth_anhDaiDien) }}" alt="" height="100px">
+                                    @endif
+                                <br>
+                                <img id="preview-img-chth_anhDaiDien" src="#" alt="" height="100px">
+                            </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Mật khẩu</label>
-                                <input type="password" class="form-control" name="kh_matKhau" id="kh_matKhau" placeholder="Nhập mật khẩu">
+                                <label class="form-label">Mô tả cửa hàng</label>
+                                <textarea class="form-control" name="chth_moTa" id="chth_moTa" cols="30" rows="10">  {!! old('chth_moTa',$chth->chth_moTa) !!}</textarea>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-lg-6 col-md-6 ml-4">
+                <button class="save-btn hover-btn" type="submit">Lưu dữ liệu</button>
             </div>
         </div>
     </form>
@@ -150,21 +159,23 @@ Khách hàng
 @section('custom-scripts')
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{ asset('vendors/ckeditor/ckeditor.js') }}"></script>
 <script>
-    $(function() {
-   /*  $('input[name="kh_ngaySinh"]').daterangepicker({
-        singleDatePicker: true,
-        showDropdowns: true,
-        format:"d/m/Y",
-        minYear: 1901,
-        maxYear: parseInt(moment().format('YYYY'),10)
-    }); */
-    });
+    const reader = new FileReader();
+    const fileInput = document.getElementById("chth_anhDaiDien");
+    const img = document.getElementById("preview-img-chth_anhDaiDien");
+    reader.onload = e => {
+        img.src = e.target.result;
+    }
+    fileInput.addEventListener('change', e => {
+        const f = e.target.files[0];
+        reader.readAsDataURL(f);
+    })
+   CKEDITOR.replace('chth_moTa');
     var url = "{{ url('/khachhang/getquanhuyen') }}"
     $(document).ready(function() {
         $('#ttp_ma').on('change', function() {
-
             var ttp_ma = $(this).val();
             if (ttp_ma) {
                 $.ajax({
@@ -221,68 +232,45 @@ Khách hàng
     });
     $("#frmEdit").validate({
         rules: {
-            kh_hoTen: {
+            kh_ma: "required",
+            chth_ten: {
                 required: true,
                 maxlength: 100
             },
-            kh_ngaySinh: {
-                required: true,
-                minlength: 11,
-                maxlength: 11
-            },
-
-            kh_gioiTinh: "required",
-            kh_soDienThoai: {
+            chth_soDienThoai: {
                 required: true,
                 maxlength: 10
             },
-            kh_email: {
+            chth_email: {
                 required: true,
                 email: true
             },
-            dc_ten: {
+            chth_diaChi: {
                 required: true,
                 maxlength: 100
             },
-            vt_ma: "required",
-            kh_taiKhoan: {
-                required: true,
-                maxlength: 100
-            },
-            kh_matKhau: {
-                maxlength: 100
-            },
+            chth_taiKhoanNganHang:"required",
+            px_ma:"required",
+            chth_moTa:"maxlength:1000"
         },
         messages: {
-            kh_hoTen: {
-                required: "Vui lòng nhập họ tên khách hàng",
-                maxlength: "Họ tên khách hàng nhập tối đa 100 ký tự"
+            kh_ma: "Vui lòng chọn chủ cửa hàng",
+            chth_ten: {
+                required: "Vui lòng nhập tên cửa hàng",
+                maxlength: "Tên cửa hàng nhập tối đa 100 ký tự"
             },
-            kh_ngaySinh: "Vui lòng nhập ngày sinh khách hàng",
-            kh_gioiTinh: {
-                 required: "Vui lòng chọn giới tinh khách hàng",
-                 minlength:" Nhập không đúng định dạng",
-                 maxlength:" Nhập không đúng định dạng"
+            chth_soDienThoai: {
+                required: "Vui lòng nhập số điện thoại cửa hàng",
+                maxlength: "Số điện thoại cửa hàng nhập tối đa 10 ký tự"
             },
-            kh_soDienThoai: {
-                required: "Vui lòng nhập số điện thoại khách hàng",
-                maxlength: "Số điện thoại khách hàng nhập tối đa 10 ký tự"
-            },
-            dc_ten: {
-                required: "Vui lòng nhập địa chỉ đây đủ khách hàng",
+            chth_diaChi: {
+                required: "Vui lòng nhập địa chỉ đầy đủ cửa hàng",
                 maxlength: 100
             },
-            vt_ma: "Vui lòng chọn vai trò khách hàng",
-            kh_email: {
-                required: "Vui lòng nhập email khách hàng",
-                email: "email khách hàng phải chứa kí tự đuôi @xxx.xxx"
-            },
-            kh_taiKhoan: {
-                required: "Vui lòng nhập tài khoản khách hàng",
-                maxlength: "Tài khoản khách hàng nhập tối đa 100 ký tự"
-            },
-            kh_matKhau: {
-                maxlength: "Mật khẩu khách hàng nhập tối đa 100 ký tự"
+            chth_taiKhoanNganHang:"Vui lòng chọn nhập số tài khoản",
+            px_ma:"Vui lòng chọn phường xã",
+            chth_moTa: {
+                maxlength: "Mật khẩu cửa hàng nhập tối đa 1000 ký tự"
             }
         },
         errorElement: "em",

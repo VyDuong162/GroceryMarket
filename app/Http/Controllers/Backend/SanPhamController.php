@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\DonGia_MatHang;
 use App\Models\HinhAnhSanPham;
 use App\Models\SanPham;
 use App\Models\LoaiSanPham;
 use App\Models\NhaSanXuat;
+use App\Models\CuaHangTapHoa;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
@@ -24,6 +26,7 @@ class SanPhamController extends Controller
     public function index()
     {
         $dsSanPham = SanPham::Where('sp_trangThai','<','3')->orderby('created_at')->get();
+        
         return view('backend.sanpham.index')
             ->with('dsSanPham', $dsSanPham);
     }
@@ -35,10 +38,12 @@ class SanPhamController extends Controller
      */
     public function create()
     {
+        $dsCuaHang = CuaHangTapHoa::Where('chth_trangThai','<','3')->get();
         $dsLoaiSanPham = LoaiSanPham::all();
         $dsNhaSanXuat = NhaSanXuat::all();
         return view('backend.sanpham.create')
             ->with('dsLoaiSanPham', $dsLoaiSanPham)
+            ->with('dsCuaHang', $dsCuaHang)
             ->with('dsNhaSanXuat', $dsNhaSanXuat);
     }
 
@@ -103,7 +108,13 @@ class SanPhamController extends Controller
                     $ha->save();
                 }
             }
-
+            $dgmh = new DonGia_MatHang();
+            $dgmh->chth_ma = $request->chth_ma;
+            $dgmh->dgmh_gia = $request->dgmh_gia ? $request->dgmh_gia:'';
+            $dgmh->sp_ma = $sp->sp_ma;
+            $dgmh->dgmh_ngayCapNhat = Carbon::now();
+            $dgmh->created_at = Carbon::now();
+            $dgmh->save();
             return redirect(route('admin.sanpham.create'))
                 ->with('alert-info', 'Sản phẩm được tạo thành công với ID: ' . $sp->sp_ma);
         }
@@ -126,6 +137,7 @@ class SanPhamController extends Controller
         }else{
             $gia = $sp->dongiamathang()->first();
         }
+        $dsCuaHang = CuaHangTapHoa::Where('chth_trangThai','<','3')->get();
         $dsNhaSanXuat = NhaSanXuat::all();
         $dsLoaiSanPham = LoaiSanPham::all();
         return view('backend.sanpham.show')
@@ -134,7 +146,8 @@ class SanPhamController extends Controller
         ->with('dh',$dh)
         ->with('shop',$shop)
         ->with('gia',$gia)
-        ->with('dsLoaiSanPham',$dsLoaiSanPham);
+        ->with('dsLoaiSanPham',$dsLoaiSanPham)
+        ->with('dsCuaHang', $dsCuaHang);
     }
 
     /**
@@ -146,13 +159,16 @@ class SanPhamController extends Controller
     public function edit($id)
     {
         $sp = SanPham::where('sp_ma', $id)->first();
-
+        $dsCuaHang = CuaHangTapHoa::Where('chth_trangThai','<','3')->get();
+        $dgmh = DonGia_MatHang::where('sp_ma', $id)->first();
         $dsLoaiSanPham = LoaiSanPham::all();
         $dsNhaSanXuat = NhaSanXuat::all();
         return view('backend.sanpham.edit')
             ->with('sp', $sp)
+            ->with('dgmh',$dgmh)
             ->with('dsLoaiSanPham', $dsLoaiSanPham)
-            ->with('dsNhaSanXuat', $dsNhaSanXuat);
+            ->with('dsNhaSanXuat', $dsNhaSanXuat)
+            ->with('dsCuaHang', $dsCuaHang);
     }
 
     /**
@@ -220,6 +236,12 @@ class SanPhamController extends Controller
                     $ha->save();
                 }
             }
+            $dgmh = DonGia_MatHang::where('sp_ma',$id)->first();
+            $dgmh->chth_ma = $request->chth_ma?$request->chth_ma: $dgmh->chth_ma;
+            $dgmh->dgmh_gia = $request->dgmh_gia ? $request->dgmh_gia:$dgmh->dgmh_gia;
+            $dgmh->sp_ma = $sp->sp_ma;
+            $dgmh->updated_at = Carbon::now();
+            $dgmh->save();
             $sp->save();
             return redirect(route('admin.sanpham.edit', $sp->sp_ma))
                 ->with('alert-info', 'Sản phẩm cập nhật thành công với ID: ' . $sp->sp_ma);
