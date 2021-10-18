@@ -28,30 +28,48 @@ class DonGia_MatHangTableSeeder extends Seeder
         $types =SanPham::all('sp_ma');
         $arr =[1,4,24,48];
         for($i=0; $i < 10; $i++){
+            $gia =0;
+            if($i%2==0){
+                $gia = 10000;
+            }else{
+                $gia = 15000;
+            }
             array_push($list,[
                 'chth_ma' => 1,
                 'sp_ma' => $types[$i]['sp_ma'],
-                'dgmh_gia' => $faker->numberBetween($min = 20000, $max = 600000),
+                'dgmh_gia' => $gia,
                 'dgmh_ghiChu' => Arr::random($arr),
                 'dgmh_ngayCapNhat' => $date,
                 'created_at' => $date,
             ]);
         }
         for($i=10; $i < 22; $i++){
+            $gia =0;
+            if($i%2==0){
+                $gia = 10000;
+            }else{
+                $gia = 15000;
+            }
             array_push($list,[
                 'chth_ma' => 2,
                 'sp_ma' => $types[$i]['sp_ma'],
-                'dgmh_gia' => $faker->numberBetween($min = 20000, $max = 600000),
+                'dgmh_gia' => $gia,
                 'dgmh_ghiChu' => Arr::random($arr),
                 'dgmh_ngayCapNhat' => $date,
                 'created_at' => $date,
             ]);
         }
         for($i=22; $i < 33; $i++){
+            $gia =0;
+            if($i%2==0){
+                $gia = 10000;
+            }else{
+                $gia = 15000;
+            }
             array_push($list,[
                 'chth_ma' => 3,
                 'sp_ma' => $types[$i]['sp_ma'],
-                'dgmh_gia' => $faker->numberBetween($min = 20000, $max = 600000),
+                'dgmh_gia' => $gia,
                 'dgmh_ghiChu' => Arr::random($arr),
                 'dgmh_ngayCapNhat' => $date,
                 'created_at' => $date,

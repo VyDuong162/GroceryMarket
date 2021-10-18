@@ -23,6 +23,9 @@ class DonHang extends Model
     public function khachhang(){
         return $this->belongsTo('App\Models\KhachHang','kh_ma','kh_ma');
     }
+    public function phoneNumber($number) {
+        return "".substr($number, 0, 3)." ".substr($number, 3, 3)." ".substr($number,6);
+    }
     public function cuahangtaphoa(){
         return $this->belongsTo('App\Models\CuaHangTapHoa','chth_ma','chth_ma');
     }

@@ -18,4 +18,10 @@ class ChiTiet_DonHang extends Model
     public    $incrementing = false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
+    public function sanpham(){
+        return $this->belongsTo('App\Models\sanpham','sp_ma','sp_ma');
+    }
+    public function cuahangtaphoa(){
+        return $this->belongsTo('App\Models\cuahangtaphoa','chth_ma','chth_ma');
+    }
 }

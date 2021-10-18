@@ -288,13 +288,13 @@ class SanPhamController extends Controller
         $ids = $request->get('ids'); 
         if($action != 0){
             if($action == 1){
-                $setupdate = DB::table("sanpham")->whereIn('sp_ma',$ids)->update(['sp_trangThai' => '1']);
+                $setupdate = SanPham::whereIn('sp_ma',$ids)->update(['sp_trangThai' => '1']);
             }elseif($action == 2){
-                $setupdate = DB::table("sanpham")->whereIn('sp_ma',$ids)->update(['sp_trangThai' => '2']);
+                $setupdate = SanPham::whereIn('sp_ma',$ids)->update(['sp_trangThai' => '2']);
             }elseif($action == 3){
-                $setupdate = DB::table("sanpham")->whereIn('sp_ma',$ids)->update(['sp_trangThai' => '3']);
+                $setupdate = SanPham::whereIn('sp_ma',$ids)->update(['sp_trangThai' => '3']);
             }    
-            return redirect(route('admin.sanpham.index'));
+           // return redirect(route('admin.sanpham.index'));
         }
         //return redirect(route('admin.sanpham.index'))->with('alert-info','Xóa thành công sản phẩm với ID_SP:'.$ids);
 

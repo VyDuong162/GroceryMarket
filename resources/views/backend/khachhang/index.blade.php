@@ -67,7 +67,7 @@ Sản phẩm
 
                 </div>
             </div>
-
+        </form>
             <div class="col-lg-12 col-md-12" >
                 <div class="card card-static-2 mt-30 mb-30">
                     <div class="card-title-2">
@@ -130,8 +130,7 @@ Sản phẩm
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </div>     
     </div>
 </div>
 

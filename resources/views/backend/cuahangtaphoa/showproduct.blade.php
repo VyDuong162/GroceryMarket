@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-Cửa hàng
+Cửa hàng - Sản phẩm
 @endsection
 @section('custom-css')
 <!-- Datatables CSS CDN -->
@@ -129,6 +129,7 @@ Cửa hàng
                             </div>
                         </div>
                     </div>
+        </form>
                     <div class="col-lg-12 col-md-12">
                         <div class="card card-static-2 mb-30">
                             <div class="card-title-2">
@@ -172,7 +173,7 @@ Cửa hàng
                     </div>
                 </div>
             </div>
-        </form>
+      
     </div>
 </div>
 @endsection

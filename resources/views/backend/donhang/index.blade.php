@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-Sản phẩm
+Đơn hàng
 @endsection
 
 @section('custom-css')
@@ -37,18 +37,18 @@ Sản phẩm
 
 @section('content')
 <div class="container-fluid">
-    <h2 class="mt-30 page-title">Sản phẩm</h2>
+    <h2 class="mt-30 page-title">Đơn hàng</h2>
     <ol class="breadcrumb mb-30">
         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-        <li class="breadcrumb-item active">Sản Phẩm</li>
+        <li class="breadcrumb-item active">Đơn hàng</li>
     </ol>
 
     <div class="row justify-content-between">
         <div class="col-lg-12 px-4">
-            <a href="{{ route('admin.sanpham.create') }}" class="add-btn hover-btn">Thêm mới</a>
+            <a href="{{ route('admin.donhang.create') }}" class="add-btn hover-btn">Thêm mới</a>
         </div>
         <div class="col-lg-12 col-md-12 px-4">
-            <form name="frmSearch" name="frmSearch" method="GET" action="/backend/sanpham/search">
+            <form name="frmSearch" name="frmSearch" method="GET" action="/backend/donhang/search">
                 <div class="bulk-section mt-30 row">
                         <div class="search-by-name-input col-md-8 px-3 mr-0">
                             <input type="text" class="form-control" name="search" class="search">
@@ -65,12 +65,12 @@ Sản phẩm
                 </div>
             </form>
         </div>
-        <form name="frmBulkActions" id="frmBulkActions" class="frmBulkActions" data-url="{{ url('sanpham/bulkaction') }}" method="post">
+        <form name="frmBulkActions" id="frmBulkActions" class="frmBulkActions" data-url="{{ url('donhang/bulkaction') }}" method="post">
             <div class="col-lg-3 col-md-4">
                 <div class="bulk-section mt-30">
                     <div class="input-group">
                         {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="DELETE" />
+                        <input type="hidden" name="_method" value="DELETE">
                         <select id="action" name="action" class="form-control">
                             <option selected value="0">Bulk Actions</option>
                             <option value="1">Hoạt động </option>
@@ -78,67 +78,82 @@ Sản phẩm
                             <option value="3">Xóa</option>
                         </select>
                         <div class="input-group-append">
-                            <button class="status-btn hover-btn" formaction="/sanpham/bulkaction" id="btn_apply" type="submit">Apply</button>
+                            <button class="status-btn hover-btn" id="btn_apply" type="submit">Apply</button>
                         </div>
 
                     </div>
 
                 </div>
             </div>
-
+        </form>
             <div class="col-lg-12 col-md-12" >
                 <div class="card card-static-2 mt-30 mb-30">
                     <div class="card-title-2">
-                        <h4>Tất cả sản phẩm</h4>
+                        <h4>Tất cả đơn hàng</h4>
                     </div>
                     <div class="card-body-table">
                         <div class="table-responsive">
-                            <table id="sanphamTable" class="table ucp-table table-hover" >
+                            <table id="donhangTable" class="table ucp-table table-hover" >
                                 <thead>
                                     <tr>
                                         <th style="width:10px" class="px-md-2"><input type="checkbox" class="check-all"></th>
                                         <th style="width:30px">ID</th>
-                                        <th style="width:100px">Ảnh</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Loại sản phẩm</th>
-                                        <th>Nhà sản xuất</th>
-                                        <th>Ngày tạo</th>
+                                        <th style="width:30px">Mã ĐH</th>
+                                        <th style="width:100px">Khách hàng</th>
+                                        <th>Cửa hàng</th>
+                                        <th>Ngày đặt</th>
+                                        <th>Giá trị</th>
+                                        <th>Địa chỉ</th>
+                                        <th>Số điện thoại</th>
+                                        <th>Email</th>
                                         <th>Trạng thái</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($dsSanPham as $sp)
+                                    <?php $i=1?>
+                                    @foreach($dsDonHang as $dh)
                                     <tr>
-                                        <td><input type="checkbox" class="check-item" name="ids[]" value="{{$sp->sp_ma}}"></td>
-                                        <td>{{ $sp->sp_ma }}</td>
-                                        <td>
-                                            @if(!file_exists('storage/products/'.$sp->sp_anhDaiDien))
-                                            <div class="cate-img-5">
-                                                <img src="{{ asset('themes/gambo/images/product/big-1.jpg') }}" height="100px" alt="hinhdaidien">
-                                            </div>
-                                            @else
-                                            <div class="cate-img-5">
-                                                <img src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" width="100px" alt="hinhdaidien" class="list-img">
-                                            </div>
-                                            @endif
-                                        </td>
-                                        <td>{{ $sp->sp_ten}}</td>
+                                        <td><input type="checkbox"  class="check-item" name="ids[]" value="{{$dh->dh_ma}}"></td>
+                                        <td>{{ $i++ }}</td>
+                                        @if($dh->dh_ma < 10)
+                                        <?php $dh_ma='000'.$dh->dh_ma?>
+                                        @elseif($dh->dh_ma > 10 && $dh->dh_ma < 100)
+                                        <?php $dh_ma='00'.$dh->dh_ma?>
+                                        @endif
+                                        <td>DH{{ $dh_ma }}</td>
+                                       
+                                        <td>{{ $dh->khachhang->kh_hoTen }}</td>
                                         
-                                        <td>{{$sp->loaisanpham->lsp_ten}}</td>
-                                        <td>{{$sp->nhasanxuat->nsx_ten}}</td>
-                                        <td>{{$sp->created_at}}</td>
+                                    
+                                        <td>{{ $dh->cuahangtaphoa->chth_ten }}</td>
+                                        <td>{{ $dh->dh_taoMoi }}</td>
+                                        <td>{{ number_format($dh->dh_giaTri,'0',',','.') }} <small>đ</small></td>
+                                        <td>{{ $dh->dh_diaChi }}</td>
+                                        <td>{{ $dh->phoneNumber($dh->dh_soDienThoai) }}</td>
+                                        <td>{{ $dh->dh_email }}</td>
                                         <td>
-                                            @if($sp->sp_trangThai == 1)
-                                            <span class="badge-item badge-status"> hoạt động</span>
-                                            @elseif($sp->sp_trangThai == 2)
-                                            <span class="badge-item badge-status"> Không hoạt động</span>
+                                            @if($dh->dh_trangThai == 0)
+                                            <span class="badge-item badge-status">Chờ xác nhận</span>
+                                            @elseif($dh->dh_trangThai == 1)
+                                            <span class="badge-item badge-danger">Đã hủy</span>
+                                            @elseif($dh->dh_trangThai == 2)
+                                            <span class="badge-item badge-warning">Đang Xử lý</span>
+                                            @elseif($dh->dh_trangThai == 3)
+                                            <span class="badge-item badge-status">Giao</span>
+                                            @elseif($dh->dh_trangThai == 4)
+                                            <span class="badge-item badge-success">Hoàn thành</span>
                                             @endif
                                         </td>
                                         <td class="action-btns">
-                                            <a href="{{ route('admin.sanpham.show',$sp->sp_ma) }}" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
-                                            <a href="{{ route('admin.sanpham.edit',$sp->sp_ma) }}" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
-                                            <form name="frmDelete" id="frmDelete" class="frmDelete" action="{{ route('admin.sanpham.destroy',$sp->sp_ma) }}" method="post" data-id="{{$sp->sp_ma}}" data-name="{{$sp->sp_ten}}">
+                                            
+                                            <a href="{{ route('admin.donhang.show',$dh->dh_ma) }}" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
+                                            <a href="{{ route('admin.donhang.edit',$dh->dh_ma) }}" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
+                                          
+                                            @if($dh->dh_trangThai == 4)
+                                                <a href="#"  style="float: left;" title="Print"><i class="fas fa-print"></i></a>
+                                            @endif
+                                            <form name="frmDelete" id="frmDelete" class="frmDelete" action="{{ route('admin.donhang.destroy',$dh->dh_ma) }}" method="post" data-id="{{$dh->dh_ma}}" data-name="{{$dh->khachhang->kh_hoTen}}">
                                                 {{ csrf_field() }}
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <button type="submit" class="edit-btn btn-delete" title="Delete"><i class="fas fa-trash-alt"></i></button>
@@ -147,13 +162,12 @@ Sản phẩm
                                     </tr>
                                     @endforeach
                                 </tbody>
-                            </table>
-                          
+                            </table>     
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+       
     </div>
 </div>
 
@@ -166,7 +180,7 @@ Sản phẩm
 
 <script>
   $(document).ready(function() {
-        var table = $('#sanphamTable').DataTable({
+        var table = $('#donhangTable').DataTable({
             dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
             buttons: [
                 'copy', 'excel', 'pdf'
@@ -208,7 +222,7 @@ Sản phẩm
         var id = $(this).data('id');
         Swal.fire({
             title: 'Bạn chắc chắn muốn xóa?',
-            html: 'Dữ liệu sản phẩm mã số: <strong>' + id + ' - ' + $(this).data('name') + '</strong> sẽ không thể phục hồi lại được',
+            html: 'Dữ liệu đơn hàng mã số: <strong>' + id + ' - ' + $(this).data('name') + '</strong> sẽ không thể phục hồi lại được',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -222,7 +236,7 @@ Sản phẩm
                 $.ajax({
                     type: $(this).attr('method'),
                     url: $(this).attr('action'),
-                    // dataType: "json",
+                     //dataType: "json",
                     data: {
                         id: id,
                         _token: '{{ csrf_token() }}',
@@ -236,7 +250,7 @@ Sản phẩm
                             timer: 1000
 
                         }).then(function() {
-                            location.href = "{{ route('admin.sanpham.index') }}"
+                            location.href = "{{ route('admin.donhang.index') }}"
                         })
                     }
 
@@ -261,13 +275,14 @@ Sản phẩm
             var name = "Không hoạt động";
         }else{
             var name = "Xóa";
-            var namehtml ="Dữ liệu sản phẩm sẽ không thể phục hồi lại được";
+            var namehtml ="Dữ liệu đơn hàng sẽ không thể phục hồi lại được";
         }
         if (giatri != 0) {
             var arr = [];
             $(".check-item:checked").each(function() {
                 arr.push($(this).attr('value'));
             });
+            alert(arr +' '+$('.frmBulkActions').attr('method')+''+$('.frmBulkActions').data('url'));
             Swal.fire({
                 title: 'Bạn chắc chắn muốn '+name+'?',
                 html: namehtml ? namehtml :'',
@@ -280,14 +295,12 @@ Sản phẩm
 
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var sendData = [];
-                    sendData = arr;
                     $.ajax({
                         type: $(this).attr('method'),
                         url: $(this).data('url'),
                         data: {
                             action: giatri,
-                            ids: sendData,
+                            ids: arr,
                             _token: '{{ csrf_token() }}',
                             _method: $(this).find('[name="_method"]').val()
                         },
@@ -299,10 +312,9 @@ Sản phẩm
                                 timer: 1000
 
                             }).then(function() {
-                                location.href = "{{ route('admin.sanpham.index') }}"
+                                location.href = "{{ route('admin.donhang.index') }}"
                             })
-                        }
-
+                        },
                     });
 
                 } else {

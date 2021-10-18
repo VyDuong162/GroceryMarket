@@ -3,9 +3,8 @@
 use App\Http\Controllers\Backend\SanPhamController;
 use App\Http\Controllers\Backend\KhachHangController;
 use App\Http\Controllers\Backend\CuaHangTapHoaController;
-use App\Models\CuaHangTapHoa;
-use App\Models\SanPham;
-use App\Models\KhachHang;
+use App\Http\Controllers\Backend\DonHangController;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -54,3 +53,5 @@ Route::delete('/cuahangtaphoa/bulkaction',[CuaHangTapHoaController::class,'BulkA
 Route::get('/sanpham/cuahangtaphoa/{id}',[CuaHangTapHoaController::class,'SanPhamCuaHang'])->name('sanpham.cuahangtaphoa');
 Route::post('/sanpham/gia',[CuaHangTapHoaController::class,'UpdatePrice'])->name('sanpham.gia');
 Route::get('/backend/sanpham/cuahangtaphoa/search',[CuaHangTapHoaController::class,'Search']);
+// đơn hàng
+Route::resource('admin/donhang',DonHangController::class,['as'=>'admin']);

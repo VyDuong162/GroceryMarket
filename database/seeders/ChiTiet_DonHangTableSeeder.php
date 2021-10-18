@@ -35,7 +35,7 @@ class ChiTiet_DonHangTableSeeder extends Seeder
                     'dh_ma' => $dsDH->first()->dh_ma,
                     'sp_ma' => DonGia_MatHang::all()->random()->sp_ma,
                     'ctdh_soLuong' =>1,
-                    'ctdh_giaBan' => DonGia_MatHang::all()->random()->dgmh_gia,
+                    'ctdh_giaBan' => 15000,
                     'created_at' => $date
                 ]);
            
@@ -45,7 +45,7 @@ class ChiTiet_DonHangTableSeeder extends Seeder
                 'dh_ma' =>  $dsDH->last()->dh_ma,
                 'sp_ma' => DonGia_MatHang::all()->random()->sp_ma,
                 'ctdh_soLuong' =>1,
-                'ctdh_giaBan' => DonGia_MatHang::all()->random()->dgmh_gia,
+                'ctdh_giaBan' =>15000,
                 'created_at' => $date
             ]);
        

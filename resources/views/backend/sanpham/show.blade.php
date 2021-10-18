@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-Sản phẩm
+Sản phẩm - Xem chi tiết
 @endsection
 
 @section('custom-css')

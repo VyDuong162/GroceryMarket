@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\ChiTiet_DonHang;
+use App\Models\CuaHangTapHoa;
+use App\Models\DonHang;
 use Illuminate\Http\Request;
 
 class DonHangController extends Controller
@@ -14,7 +17,9 @@ class DonHangController extends Controller
      */
     public function index()
     {
-        //
+        $dsDonHang = DonHang::all();
+        return view('backend.donhang.index')
+        ->with('dsDonHang',$dsDonHang);
     }
 
     /**
@@ -46,7 +51,14 @@ class DonHangController extends Controller
      */
     public function show($id)
     {
-        //
+        $dh =DonHang::find($id);
+        $chth = $dh->chth_ma;
+        $cuahang = CuaHangTapHoa::where('chth_ma', $chth)->first();
+        $ctdh = ChiTiet_DonHang::where('dh_ma',$id)->get();
+        return view('backend.donhang.show')
+        ->with('dh',$dh)
+        ->with('cuahang',$cuahang)
+        ->with('ctdh',$ctdh);
     }
 
     /**

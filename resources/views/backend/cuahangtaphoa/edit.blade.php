@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-Cửa hàng
+Cửa hàng - Chỉnh sửa
 @endsection
 @section('custom-css')
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />

@@ -1,6 +1,6 @@
 @extends('backend.layouts.master')
 @section('title')
-Cửa hàng
+Cửa hàng - Thêm mới
 @endsection
 @section('custom-css')
 <style>

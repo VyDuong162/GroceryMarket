@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('title')
-Thêm mới sản phẩm
+Sản phẩm - Thêm mới sản phẩm
 @endsection
 
 @section('custom-css')

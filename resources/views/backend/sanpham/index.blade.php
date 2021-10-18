@@ -70,7 +70,7 @@ Sản phẩm
                 <div class="bulk-section mt-30">
                     <div class="input-group">
                         {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="DELETE" />
+                        <input type="hidden" name="_method" value="DELETE">
                         <select id="action" name="action" class="form-control">
                             <option selected value="0">Bulk Actions</option>
                             <option value="1">Hoạt động </option>
@@ -78,14 +78,14 @@ Sản phẩm
                             <option value="3">Xóa</option>
                         </select>
                         <div class="input-group-append">
-                            <button class="status-btn hover-btn" formaction="/sanpham/bulkaction" id="btn_apply" type="submit">Apply</button>
+                            <button class="status-btn hover-btn" id="btn_apply" type="submit">Apply</button>
                         </div>
 
                     </div>
 
                 </div>
             </div>
-
+        </form>
             <div class="col-lg-12 col-md-12" >
                 <div class="card card-static-2 mt-30 mb-30">
                     <div class="card-title-2">
@@ -110,7 +110,7 @@ Sản phẩm
                                 <tbody>
                                     @foreach($dsSanPham as $sp)
                                     <tr>
-                                        <td><input type="checkbox" class="check-item" name="ids[]" value="{{$sp->sp_ma}}"></td>
+                                        <td><input type="checkbox"  class="check-item" name="ids[]" value="{{$sp->sp_ma}}"></td>
                                         <td>{{ $sp->sp_ma }}</td>
                                         <td>
                                             @if(!file_exists('storage/products/'.$sp->sp_anhDaiDien))
@@ -147,13 +147,12 @@ Sản phẩm
                                     </tr>
                                     @endforeach
                                 </tbody>
-                            </table>
-                          
+                            </table>     
                         </div>
                     </div>
                 </div>
             </div>
-        </form>
+       
     </div>
 </div>
 
@@ -222,7 +221,7 @@ Sản phẩm
                 $.ajax({
                     type: $(this).attr('method'),
                     url: $(this).attr('action'),
-                    // dataType: "json",
+                     //dataType: "json",
                     data: {
                         id: id,
                         _token: '{{ csrf_token() }}',
@@ -268,6 +267,7 @@ Sản phẩm
             $(".check-item:checked").each(function() {
                 arr.push($(this).attr('value'));
             });
+            alert(arr +' '+$('.frmBulkActions').attr('method')+''+$('.frmBulkActions').data('url'));
             Swal.fire({
                 title: 'Bạn chắc chắn muốn '+name+'?',
                 html: namehtml ? namehtml :'',
@@ -280,14 +280,12 @@ Sản phẩm
 
             }).then((result) => {
                 if (result.isConfirmed) {
-                    var sendData = [];
-                    sendData = arr;
                     $.ajax({
                         type: $(this).attr('method'),
                         url: $(this).data('url'),
                         data: {
                             action: giatri,
-                            ids: sendData,
+                            ids: arr,
                             _token: '{{ csrf_token() }}',
                             _method: $(this).find('[name="_method"]').val()
                         },
@@ -301,8 +299,7 @@ Sản phẩm
                             }).then(function() {
                                 location.href = "{{ route('admin.sanpham.index') }}"
                             })
-                        }
-
+                        },
                     });
 
                 } else {
