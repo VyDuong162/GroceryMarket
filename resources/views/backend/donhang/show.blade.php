@@ -56,6 +56,31 @@ Sản phẩm - Xem chi tiết
                             {{$dh->dh_diaChi}}<br>
                         </div>
                     </div>
+                    
+                    <?php $phi=1000 ?>
+                    <div class="col-lg-7 pt-3"><hr>
+                        <b>Phương thức thanh toán:</b>{{ $dh->phuongthucthanhtoan->pttt_ten }} <br>
+                        <b>Thời gian giao dự kiến:</b>{{ $dh->dh_taoMoi->addHours(24)->format('d/m/Y') }} <br>
+                        <b>Phí vận chuyển:</b>    {{ number_format($phi,'0',',','.') }} <small>đ</small>
+                    </div>
+                    <div class="col-lg-5 right-text">
+                        <div class="select-status">
+                            <label for="status">Trạng thái đơn hàng*</label>
+                            <div class="status-active">
+                            @if($dh->dh_trangThai == 0)
+                                    <span class="badge-item badge-status">Chờ xác nhận</span>
+                                    @elseif($dh->dh_trangThai == 1)
+                                    <span class="badge-item badge-danger">Đã hủy</span>
+                                    @elseif($dh->dh_trangThai == 2)
+                                    <span class="badge-item badge-warning">Đang Xử lý</span>
+                                    @elseif($dh->dh_trangThai == 3)
+                                    <span class="badge-item badge-status">Đang giao</span>
+                                    @elseif($dh->dh_trangThai == 4)
+                                    <span class="badge-item badge-success">Hoàn thành</span>
+                                    @endif
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-12">
                         <div class="card card-static-2 mb-30 mt-30">
                             <div class="card-title-2">
@@ -83,10 +108,10 @@ Sản phẩm - Xem chi tiết
                                                     <td>
                                                         <a href="#" target="_blank">{{ $sp->sanpham->sp_ten }}</a>
                                                     </td>
-                                                    <td class="text-center">{{  number_format($sp->ctdh_giaBan,'0',',','.')  }}</td>
+                                                    <td class="text-center">{{  number_format($sp->ctdh_giaBan,'0',',','.') }}<small>đ</small></td>
                                                     <td class="text-center">{{ $sp->ctdh_soLuong }}</td>
                                                     <?php $tong+=$sp->ctdh_giaBan * $sp->ctdh_soLuong?>
-                                                    <td class="text-center">{{ number_format(($sp->ctdh_giaBan * $sp->ctdh_soLuong),'0',',','.' ) }}</td>
+                                                    <td class="text-center">{{ number_format(($sp->ctdh_giaBan * $sp->ctdh_soLuong),'0',',','.' ) }} <small>đ</small></td>
                                                 </tr>
                                                 @endforeach
                                             @endif
@@ -103,16 +128,17 @@ Sản phẩm - Xem chi tiết
                                 Tạm tổng tiền
                             </div>
                             <div class="order-total-right-text">
-                                {{ number_format($tong,'0',',','.') }}
+                                {{ number_format($tong,'0',',','.') }} <small>đ</small>
                             </div>
+                            
                         </div>
                         <div class="order-total-dt">
                             <div class="order-total-left-text">
                                 Phí vận chuyển
                             </div>
-                            <?php $phi=1000 ?>
+                          
                             <div class="order-total-right-text">
-                                {{ number_format($phi,'0',',','.') }}
+                                {{ number_format($phi,'0',',','.') }} <small>đ</small>
                             </div>
                         </div>
                         <div class="order-total-dt">
@@ -120,26 +146,7 @@ Sản phẩm - Xem chi tiết
                                 Tổng tiền
                             </div>
                             <div class="order-total-right-text fsz-18">
-                            {{ number_format($tong + $phi,'0',',','.') }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-7"></div>
-                    <div class="col-lg-5">
-                        <div class="select-status">
-                            <label for="status">Trạng thái đơn hàng*</label>
-                            <div class="status-active">
-                            @if($dh->dh_trangThai == 0)
-                                    <span class="badge-item badge-status">Chờ xác nhận</span>
-                                    @elseif($dh->dh_trangThai == 1)
-                                    <span class="badge-item badge-danger">Đã hủy</span>
-                                    @elseif($dh->dh_trangThai == 2)
-                                    <span class="badge-item badge-warning">Đang Xử lý</span>
-                                    @elseif($dh->dh_trangThai == 3)
-                                    <span class="badge-item badge-status">Giao</span>
-                                    @elseif($dh->dh_trangThai == 4)
-                                    <span class="badge-item badge-success">Hoàn thành</span>
-                                    @endif
+                            {{ number_format($tong + $phi,'0',',','.') }} <small>đ</small>
                             </div>
                         </div>
                     </div>

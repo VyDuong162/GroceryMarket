@@ -33,7 +33,9 @@
         <div class="card card-static-2 mb-30">
             <div class="card-title-2">
                 <h2 class="title1458">Đơn hàng</h2>
-                @if($dh->dh_ma < 10) <?php $dh_ma = '000' . $dh->dh_ma ?> @elseif($dh->dh_ma > 10 && $dh->dh_ma < 100) <?php $dh_ma = '00' . $dh->dh_ma ?> @endif <span class="order-id">Mã đơn hàng #DH{{ $dh_ma }}</span>
+                @if($dh->dh_ma < 10) <?php $dh_ma = '000' . $dh->dh_ma ?> 
+                @elseif($dh->dh_ma > 10 && $dh->dh_ma < 100) <?php $dh_ma = '00' . $dh->dh_ma ?> 
+                @endif <span class="order-id">Mã đơn hàng #DH{{ $dh_ma }}</span>
             </div>
             <div class="invoice-content">
                 <div class="row">
@@ -54,6 +56,30 @@
                             {{$dh->phoneNumber($dh->dh_soDienThoai)}}<br>
                             {{$dh->phoneNumber($dh->dh_email)}}<br>
                             {{$dh->dh_diaChi}}<br>
+                        </div>
+                    </div>
+                    <?php $phi=1000 ?>
+                    <div class="col-lg-7 pt-3"><hr>
+                        <b>Phương thức thanh toán:</b>{{ $dh->phuongthucthanhtoan->pttt_ten }} <br>
+                        <b>Thời gian giao dự kiến:</b>{{ $dh->dh_taoMoi->addHours(24)->format('d/m/Y') }} <br>
+                        <b>Phí vận chuyển:</b>    {{ number_format($phi,'0',',','.') }} <small>đ</small>
+                    </div>
+                    <div class="col-lg-5 right-text">
+                        <div class="select-status">
+                            <label for="status">Trạng thái đơn hàng hiện tại*</label>
+                            <div class="status-active">
+                                @if($dh->dh_trangThai == 0)
+                                <span class="badge-item badge-status">Chờ xác nhận</span>
+                                @elseif($dh->dh_trangThai == 1)
+                                <span class="badge-item badge-danger">Đã hủy</span>
+                                @elseif($dh->dh_trangThai == 2)
+                                <span class="badge-item badge-warning">Đang Xử lý</span>
+                                @elseif($dh->dh_trangThai == 3)
+                                <span class="badge-item badge-status">Đang giao</span>
+                                @elseif($dh->dh_trangThai == 4)
+                                <span class="badge-item badge-success">Hoàn thành</span>
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -83,10 +109,10 @@
                                                 <td>
                                                     <a href="#" target="_blank">{{ $sp->sanpham->sp_ten }}</a>
                                                 </td>
-                                                <td class="text-center">{{ number_format($sp->ctdh_giaBan,'0',',','.')  }}</td>
+                                                <td class="text-center">{{ number_format($sp->ctdh_giaBan,'0',',','.')  }} <small>đ</small></td>
                                                 <td class="text-center">{{ $sp->ctdh_soLuong }}</td>
                                                 <?php $tong += $sp->ctdh_giaBan * $sp->ctdh_soLuong ?>
-                                                <td class="text-center">{{ number_format(($sp->ctdh_giaBan * $sp->ctdh_soLuong),'0',',','.' ) }}</td>
+                                                <td class="text-center">{{ number_format(($sp->ctdh_giaBan * $sp->ctdh_soLuong),'0',',','.' ) }} <small>đ</small></td>
                                             </tr>
                                             @endforeach
                                             @endif
@@ -103,16 +129,15 @@
                                 Tạm tổng tiền
                             </div>
                             <div class="order-total-right-text">
-                                {{ number_format($tong,'0',',','.') }}
+                                {{ number_format($tong,'0',',','.') }} <small>đ</small>
                             </div>
                         </div>
                         <div class="order-total-dt">
                             <div class="order-total-left-text">
                                 Phí vận chuyển
                             </div>
-                            <?php $phi = 1000 ?>
                             <div class="order-total-right-text">
-                                {{ number_format($phi,'0',',','.') }}
+                                {{ number_format($phi,'0',',','.') }}<small>đ</small>
                             </div>
                         </div>
                         <div class="order-total-dt">
@@ -120,55 +145,33 @@
                                 Tổng tiền
                             </div>
                             <div class="order-total-right-text fsz-18">
-                                {{ number_format($tong + $phi,'0',',','.') }}
+                                {{ number_format($tong + $phi,'0',',','.') }}<small>đ</small>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-7"></div>
-                    <div class="col-lg-5">
-                       
-                            <div class="select-status">
-                                <label for="status">Trạng thái đơn hàng*</label>
-                                <div class="status-active">
-                                    @if($dh->dh_trangThai == 0)
-                                    <span class="badge-item badge-status">Chờ xác nhận</span>
-                                    @elseif($dh->dh_trangThai == 1)
-                                    <span class="badge-item badge-danger">Đã hủy</span>
-                                    @elseif($dh->dh_trangThai == 2)
-                                    <span class="badge-item badge-warning">Đang Xử lý</span>
-                                    @elseif($dh->dh_trangThai == 3)
-                                    <span class="badge-item badge-status">Giao</span>
-                                    @elseif($dh->dh_trangThai == 4)
-                                    <span class="badge-item badge-success">Hoàn thành</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <form name="frmEdit" id="frmEdit" method="post" action="{{ route('admin.donhang.update',$dh->dh_ma) }}">
+                        <form name="frmEdit" id="frmEdit" method="post" action="{{ route('admin.donhang.update',$dh->dh_ma) }}">
                             <input type="hidden" name="_method" value="PUT" />
                             @csrf
-                            <div class="select-status">
+                            <div class="select-status p-0 m-0" >
                                 <label for="status">Trạng thái đơn hàng*</label>
                                 <div class="input-group">
-                                <select id="dh_trangThai" name="dh_trangThai" class="custom-select">
-                                <option value="">Vui lòng chọn trạng thái đơn hàng</option>
-                                <option value ="0">Chờ xác nhận</option>
-                                <option value="1">Đã hủy</option>
-                                <option value="2">Đang Xử lý</option>
-                                <option value="3">Giao</option>
-                                <option value="4">Hoàn thành</option>
-                            </select>
-                            <button class="save-btn hover-btn" type="submit">Lưu dữ liệu</button>
-                            </form>
-                    </div>
+                                    <select id="dh_trangThai" name="dh_trangThai" class="custom-select">
+                                        <option value="">Vui lòng chọn trạng thái đơn hàng</option>
+                                        <option value="0">Chờ xác nhận</option>
+                                        <option value="1">Đã hủy</option>
+                                        <option value="2">Đang Xử lý</option>
+                                        <option value="3">Đang giao</option>
+                                        <option value="4">Hoàn thành</option>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <button class="status-btn hover-btn" type="submit">Lưu dữ liệu</button>
+                                    </div>
+                        </form>
+                   
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-
-<div class="input-group-append">
-    <button class="status-btn hover-btn" type="submit">Submit</button>
 </div>
 @endsection
 

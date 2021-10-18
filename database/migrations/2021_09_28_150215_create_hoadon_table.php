@@ -17,12 +17,12 @@ class CreateHoadonTable extends Migration
             $table->engine = 'InnoDB';
             $table->string('hd_ma')->length(50)->primary();
             $table->decimal('hd_giaTri');
-            $table->dateTime('hd_ngayLap')->format('d-m-Y H:i:s');
+            $table->timestamp('hd_ngayLap')->useCurrent();
             $table->unsignedBigInteger('dh_ma')->length(11);
+            $table->timestamp('hd_capNhat')->nullable();
             $table->foreign('dh_ma')->references('dh_ma')->on('donhang')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');
-            $table->timestamps();
         });
     }
 

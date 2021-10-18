@@ -44,19 +44,20 @@
     </ol>
 
     <div class="row justify-content-between">
-        <div class="col-lg-12 px-4">
-            <a href="{{ route('admin.donhang.create') }}" class="add-btn hover-btn">Thêm mới</a>
-        </div>
+      
         <div class="col-lg-12 col-md-12 px-4">
             <form name="frmSearch" name="frmSearch" method="GET" action="/backend/donhang/search">
                 <div class="bulk-section mt-30 row">
                         <div class="search-by-name-input col-md-8 px-3 mr-0">
-                            <input type="text" class="form-control" name="search" class="search">
+                          
                         </div>
-                        <div class="input-group col-md-4 px-0 mr-0">
+                        <div class="input-group col-md-4 px-0 mr-0 " style="margin-bottom: -5em;">
                             <select id="status" name="status" class="form-control">
-                                <option selected value="1">Hoạt động</option>
-                                <option value="2">Không hoạt động</option>
+                                <option selected value="0">Chờ xác nhận</option>
+                                <option value="1">Hủy</option>
+                                <option value="2">Đang xử lý</option>
+                                <option value="3">Đang giao</option>
+                                <option value="4">Hoàn thành</option>
                             </select>
                             <div class="input-group-append">
                                 <button class="status-btn hover-btn" type="submit">Tìm kiếm</button>
@@ -72,10 +73,11 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="DELETE">
                         <select id="action" name="action" class="form-control">
-                            <option selected value="0">Bulk Actions</option>
-                            <option value="1">Hoạt động </option>
-                            <option value="2">Không hoạt động</option>
-                            <option value="3">Xóa</option>
+                                <option selected value="0">Chờ xác nhận</option>
+                                <option value="1">Hủy</option>
+                                <option value="2">Đang xử lý</option>
+                                <option value="3">Đang giao</option>
+                                <option value="4">Hoàn thành</option>
                         </select>
                         <div class="input-group-append">
                             <button class="status-btn hover-btn" id="btn_apply" type="submit">Apply</button>
@@ -140,7 +142,7 @@
                                             @elseif($dh->dh_trangThai == 2)
                                             <span class="badge-item badge-warning">Đang Xử lý</span>
                                             @elseif($dh->dh_trangThai == 3)
-                                            <span class="badge-item badge-status">Giao</span>
+                                            <span class="badge-item badge-status">Đang giao</span>
                                             @elseif($dh->dh_trangThai == 4)
                                             <span class="badge-item badge-success">Hoàn thành</span>
                                             @endif
@@ -151,7 +153,7 @@
                                             <a href="{{ route('admin.donhang.edit',$dh->dh_ma) }}" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
                                           
                                             @if($dh->dh_trangThai == 4)
-                                                <a href="#"  style="float: left;" title="Print"><i class="fas fa-print"></i></a>
+                                                <a href="{{ route('donhang.inhoadon',$dh->dh_ma) }}" class="btn-print"  style="float: left;" title="Print"><i class="fas fa-print"></i></a>
                                             @endif
                                             <form name="frmDelete" id="frmDelete" class="frmDelete" action="{{ route('admin.donhang.destroy',$dh->dh_ma) }}" method="post" data-id="{{$dh->dh_ma}}" data-name="{{$dh->khachhang->kh_hoTen}}">
                                                 {{ csrf_field() }}
@@ -213,6 +215,7 @@
             ]
         });
     });
+
     // Checkbox All Selection
     $(".check-all").click(function() {
         $(".check-item").prop('checked', $(this).prop('checked'));

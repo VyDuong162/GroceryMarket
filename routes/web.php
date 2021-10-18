@@ -55,3 +55,4 @@ Route::post('/sanpham/gia',[CuaHangTapHoaController::class,'UpdatePrice'])->name
 Route::get('/backend/sanpham/cuahangtaphoa/search',[CuaHangTapHoaController::class,'Search']);
 // đơn hàng
 Route::resource('admin/donhang',DonHangController::class,['as'=>'admin']);
+Route::get('/donhang/inhoadon/{id}',[DonHangController::class,'pdf'])->name('donhang.inhoadon');

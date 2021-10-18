@@ -39,20 +39,22 @@ class DonHangTableSeeder extends Seeder
             'kh_ma' => $kh1->kh_ma,
             'chth_ma' => 1,
             'dh_diaChi' => $dsDiaChi[0][0],
-            'dh_giaTri' => 30000,
+            'dh_giaTri' => 31000,
             'dh_soDienThoai' =>  $kh1->kh_soDienThoai,
             'dh_email' => $kh1->kh_email,
             'dh_trangThai' => 4,
+            'pttt_ma' => 3,
             'dh_taoMoi' => $date
         ]);
         array_push($list,[
             'kh_ma' => $kh2->kh_ma,
             'chth_ma' => 2,
             'dh_diaChi' => $dsDiaChi[1][0],
-            'dh_giaTri' => 45000,
+            'dh_giaTri' => 31000,
             'dh_soDienThoai' =>  $kh2->kh_soDienThoai,
             'dh_email' => $kh2->kh_email,
             'dh_trangThai' => 2,
+            'pttt_ma' => 3,
             'dh_taoMoi' => $date
         ]);
         DB::table('donhang')->insert($list);

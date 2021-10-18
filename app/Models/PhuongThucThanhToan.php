@@ -12,9 +12,9 @@ class PhuongThucThanhToan extends Model
     protected $fillable =['pttt_ten','created_at','updated_at'];
     protected $guarded =['pttt_ma'];
 
-    protected $primaryKey =['pttt_ma'];
+    protected $primaryKey ='pttt_ma';
 
-    protected $timestamps =false;
+    public $timestamps =false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
 }

@@ -32,7 +32,6 @@ class HoaDonTableSeeder extends Seeder
             'hd_giaTri' =>  DonHang::all()->last()->dh_giaTri,
             'hd_ngayLap' =>  new DateTime(),
             'dh_ma' =>  DonHang::all()->last()->dh_ma,
-            'created_at' => $date
         ]);
         DB::table('hoadon')->insert($list);
     }
