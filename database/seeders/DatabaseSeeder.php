@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
         Model::reguard();
         $this->call(DonHangTableSeeder::class);
         $this->call(ChiTiet_DonHangTableSeeder::class);
+        $this->call(VanChuyenTableSeeder::class);
         $this->call(HoaDonTableSeeder::class);
         $this->call(DanhGiaTableSeeder::class);
         

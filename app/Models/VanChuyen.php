@@ -14,8 +14,9 @@ class VanChuyen extends Model
     protected $guarded =['dh_ma','tt_ma'];
 
     protected $primaryKey =['dh_ma','tt_ma'];
-
+  
     public $timestamps =false;
+    public $incrementing = false;
     protected $dates =['vc_ngay','created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
 }

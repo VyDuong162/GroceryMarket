@@ -28,7 +28,7 @@ class DonHangTableSeeder extends Seeder
         $faker = \Faker\Factory::create('vi_VN');
         $date = new DateTime();
         $limit =2;
-        $kh1 =KhachHang::all()->first();
+        $kh1 =KhachHang::where('vt_ma',3)->first();
         $kh2 =KhachHang::all()->last();
         $dsDiaChi =[
             ['121, Phường Thạnh An, Quận Thốt Nốt, TP.Cần Thơ'],
@@ -42,7 +42,7 @@ class DonHangTableSeeder extends Seeder
             'dh_giaTri' => 31000,
             'dh_soDienThoai' =>  $kh1->kh_soDienThoai,
             'dh_email' => $kh1->kh_email,
-            'dh_trangThai' => 4,
+            'dh_trangThai' => 3,
             'pttt_ma' => 3,
             'dh_taoMoi' => $date
         ]);
@@ -53,7 +53,7 @@ class DonHangTableSeeder extends Seeder
             'dh_giaTri' => 31000,
             'dh_soDienThoai' =>  $kh2->kh_soDienThoai,
             'dh_email' => $kh2->kh_email,
-            'dh_trangThai' => 2,
+            'dh_trangThai' => 4,
             'pttt_ma' => 3,
             'dh_taoMoi' => $date
         ]);

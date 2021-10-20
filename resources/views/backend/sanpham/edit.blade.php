@@ -23,7 +23,7 @@ Sản phẩm - Chỉnh sửa sản phẩm
 @endsection
 
 @section('content')
-<h2 class="mt-30 page-title">Sản phẩm</h2>
+<h2 class=" page-title">Sản phẩm</h2>
 <ol class="breadcrumb mb-30">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('admin.sanpham.index') }}">Sản phẩm</a></li>

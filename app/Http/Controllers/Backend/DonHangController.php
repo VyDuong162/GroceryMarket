@@ -20,10 +20,11 @@ class DonHangController extends Controller
      */
     public function index()
     {
-        $dsDonHang = DonHang::all();
+        $dsDonHang = DonHang::orderBy('dh_taoMoi','desc')->get();
         return view('backend.donhang.index')
         ->with('dsDonHang',$dsDonHang);
     }
+  
 
     /**
      * Show the form for creating a new resource.
@@ -135,17 +136,35 @@ class DonHangController extends Controller
            }elseif($action == 3){
                $setupdate = DonHang::whereIn('dh_ma',$ids)->update(['dh_trangThai' => '3','dh_capNhat' => $datetime]);
            }elseif($action == 4){
-            $setupdate = DonHang::whereIn('dh_ma',$ids)->update(['dh_trangThai' => '5','dh_capNhat' => $datetime]);
-            }    
+                $setupdate = DonHang::whereIn('dh_ma',$ids)->update(['dh_trangThai' => '4','dh_capNhat' => $datetime]);
+            }elseif($action == 5){
+                $setupdate = DonHang::whereIn('dh_ma',$ids)->update(['dh_trangThai' => '5','dh_capNhat' => $datetime]);
+            } 
+            elseif($action == 6){
+                $setupdate = DonHang::whereIn('dh_ma',$ids)->update(['dh_trangThai' => '6','dh_capNhat' => $datetime]);
+            }  
         return redirect(route('admin.sanpham.index'));   
        }
        //return redirect(route('admin.sanpham.index'))->with('alert-info','Xóa thành công sản phẩm với ID_SP:'.$ids);
 
     }
+    public function Search( Request $request){
+     
+        $status = $request->get('status');
+        if( $status == 7){
+            return redirect(route('admin.donhang.index'));
+        }
+        $dulieu = DonHang::where('donhang.dh_trangThai','=',$status)
+                            ->orderBy('donhang.dh_ma', 'asc')->get();
+        
+        //$dssanpham = DB::table("sanpham")->whereIn('sp_ma',$dulieu)->get();
+        return  view('backend.donhang.index')->with('dsDonHang',$dulieu)
+        ->with('status',$status);
+    }
     public function pdf($id){
         $dh =DonHang::find($id);
         $hd =HoaDon::where('dh_ma',$id)->first();
-      
+        if(!empty($hd)){
         $chth = $dh->chth_ma;
         $cuahang = CuaHangTapHoa::where('chth_ma', $chth)->first();
         $ctdh = ChiTiet_DonHang::where('dh_ma',$id)->get();
@@ -162,5 +181,8 @@ class DonHangController extends Controller
         ->with('ctdh',$ctdh);
         $pdf = PDF::loadView('backend.hoadon.pdf',$data);
         return $pdf->download('HoaDon'.$id.'.pdf');
+        }else{
+            return redirect(route('admin.donhang.index'))->with('alert-warning','Đơn hàng DH00'.$id.' chưa có hóa đơn');
+        }
     }
 }

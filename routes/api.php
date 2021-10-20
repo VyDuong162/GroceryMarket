@@ -22,3 +22,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/khachhang/thongtin',[ApiController::class,'getThongTinKhachHang'])->name('api.khachhang.thongtin');
+// don hang
+Route::get('/thongke/donhang/chothanhtoan',[ApiController::class,'thongKeDonHangChoThanhToan'])->name('api.thongke.donhang.chothanhtoan');
+Route::get('/thongke/donhang/dahuy',[ApiController::class,'thongKeDonHangDaHuy'])->name('api.thongke.donhang.dahuy');
+Route::get('/thongke/donhang/dangxuly',[ApiController::class,'thongKeDonHangDangXuLy'])->name('api.thongke.donhang.dangxuly');
+Route::get('/thongke/donhang/dagiao',[ApiController::class,'thongKeDonHangDaGiao'])->name('api.thongke.donhang.dagiao');
+// san pham
+Route::get('/thongke/tongsanpham',[ApiController::class,'thongKeTongSanPham'])->name('api.thongke.tongsanpham');
+// cua hang tap hoa
+Route::get('/thongke/tongcuahang',[ApiController::class,'thongKeTongCuaHang'])->name('api.thongke.tongcuahang');
+Route::get('/thongke/doanhthuhomnay',[ApiController::class,'thongKeTongDoanhThuHomNay'])->name('api.thongke.doanhthuhomnay');
+// bao cao don hang
+Route::get('/baocao/donhang',[ApiController::class,'baoCaoDonHang'])->name('api.baocao.donhang');
+Route::get('/donhang/ganday',[ApiController::class,'baoCaoDonHangGanDay'])->name('api.donhang.ganday');

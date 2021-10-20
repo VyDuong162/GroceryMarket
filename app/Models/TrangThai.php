@@ -12,7 +12,7 @@ class TrangThai extends Model
     protected $fillable =['tt_ten','created_at','updated_at'];
     protected $guarded =['tt_ma'];
 
-    protected $primaryKey =['tt_ma'];
+    protected $primaryKey ='tt_ma';
 
     public $timestamps =false;
     protected $dates =['created_at','updated_at'];

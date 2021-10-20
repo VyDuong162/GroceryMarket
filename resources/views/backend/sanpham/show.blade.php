@@ -17,7 +17,7 @@ Sản phẩm - Xem chi tiết
 </style>
 @endsection
 @section('content')
-<h2 class="mt-30 page-title">Shops</h2>
+<h2 class=" page-title">Shops</h2>
 <ol class="breadcrumb mb-30">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="shops.html">Shops</a></li>

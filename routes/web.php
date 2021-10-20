@@ -4,7 +4,7 @@ use App\Http\Controllers\Backend\SanPhamController;
 use App\Http\Controllers\Backend\KhachHangController;
 use App\Http\Controllers\Backend\CuaHangTapHoaController;
 use App\Http\Controllers\Backend\DonHangController;
-
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -25,6 +25,10 @@ Route::get('/test',function(){
     $date = new DateTime();
         $today = $date->format('YmdHis');
     return $today;
+});
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
 });
 Auth::routes();
 
@@ -56,3 +60,5 @@ Route::get('/backend/sanpham/cuahangtaphoa/search',[CuaHangTapHoaController::cla
 // đơn hàng
 Route::resource('admin/donhang',DonHangController::class,['as'=>'admin']);
 Route::get('/donhang/inhoadon/{id}',[DonHangController::class,'pdf'])->name('donhang.inhoadon');
+Route::delete('/donhang/bulkaction',[DonHangController::class,'BulkAction'])->name('donhang.bulkaction');
+Route::get('/backend/donhang/search',[DonHangController::class,'Search']);

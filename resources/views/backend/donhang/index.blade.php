@@ -7,7 +7,7 @@
 @section('custom-css')
 <!-- Datatables CSS CDN -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.3/fc-4.0.0/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.3/fc-4.0.0/datatables.min.css" />
 <style>
     tbody,
     td,
@@ -29,105 +29,106 @@
     .btn-delete {
         border: none;
     }
-    .paginate_button{
-        padding: 0px!important;
+
+    .paginate_button {
+        padding: 0px !important;
     }
 </style>
 @endsection
 
 @section('content')
-<div class="container-fluid">
-    <h2 class="mt-30 page-title">Đơn hàng</h2>
-    <ol class="breadcrumb mb-30">
-        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-        <li class="breadcrumb-item active">Đơn hàng</li>
-    </ol>
 
-    <div class="row justify-content-between">
-      
-        <div class="col-lg-12 col-md-12 px-4">
-            <form name="frmSearch" name="frmSearch" method="GET" action="/backend/donhang/search">
-                <div class="bulk-section mt-30 row">
-                        <div class="search-by-name-input col-md-8 px-3 mr-0">
-                          
-                        </div>
-                        <div class="input-group col-md-4 px-0 mr-0 " style="margin-bottom: -5em;">
-                            <select id="status" name="status" class="form-control">
-                                <option selected value="0">Chờ xác nhận</option>
-                                <option value="1">Hủy</option>
-                                <option value="2">Đang xử lý</option>
-                                <option value="3">Đang giao</option>
-                                <option value="4">Hoàn thành</option>
-                            </select>
-                            <div class="input-group-append">
-                                <button class="status-btn hover-btn" type="submit">Tìm kiếm</button>
-                            </div>
-                        </div>
+<h2 class="page-title"> <a href="{{route('admin.donhang.index')}}"></a>Đơn hàng</h2>
+<ol class="breadcrumb mb-30">
+    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+    <li class="breadcrumb-item active">Đơn hàng</li>
+</ol>
+
+<div class="row justify-content-between">
+
+    <div class="col-lg-12 col-md-12 px-4">
+        <form name="frmSearch" name="frmSearch" method="GET" action="/backend/donhang/search">
+            <div class="bulk-section mt-30 row">
+                <div class="search-by-name-input col-md-8 px-3 mr-0">
+
                 </div>
-            </form>
-        </div>
-        <form name="frmBulkActions" id="frmBulkActions" class="frmBulkActions" data-url="{{ url('donhang/bulkaction') }}" method="post">
-            <div class="col-lg-3 col-md-4">
-                <div class="bulk-section mt-30">
-                    <div class="input-group">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="DELETE">
-                        <select id="action" name="action" class="form-control">
-                                <option selected value="0">Chờ xác nhận</option>
-                                <option value="1">Hủy</option>
-                                <option value="2">Đang xử lý</option>
-                                <option value="3">Đang giao</option>
-                                <option value="4">Hoàn thành</option>
-                        </select>
-                        <div class="input-group-append">
-                            <button class="status-btn hover-btn" id="btn_apply" type="submit">Apply</button>
-                        </div>
-
+                <div class="input-group col-md-4 px-0 mr-0 " style="margin-bottom: -5em;">
+                    <select id="status" name="status" class="form-control">
+                        <option selected value="0">Chờ thanh toán</option>
+                        <option value="1">Hủy</option>
+                        <option value="2">Đang xử lý</option>
+                        <option value="3">Đang giao</option>
+                        <option value="4">Đã giao</option>
+                        <option value="5">Chờ đánh giá</option>
+                        <option value="6">Hoàn thành</option>
+                        <option value="7">Tất cả</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="status-btn hover-btn" type="submit">Tìm kiếm</button>
                     </div>
-
                 </div>
             </div>
         </form>
-            <div class="col-lg-12 col-md-12" >
-                <div class="card card-static-2 mt-30 mb-30">
-                    <div class="card-title-2">
-                        <h4>Tất cả đơn hàng</h4>
+    </div>
+    <form name="frmBulkActions" id="frmBulkActions" class="frmBulkActions" action="{{route('donhang.bulkaction')}}" data-url="{{ url('donhang/bulkaction') }}" method="post">
+        <div class="col-lg-3 col-md-4">
+            <div class="bulk-section mt-30">
+                <div class="input-group">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="_method" value="DELETE">
+                    <select id="action" name="action" class="form-control">
+                        <option selected value="0">Chờ thanh toán</option>
+                        <option value="1">Hủy</option>
+                        <option value="2">Đang xử lý</option>
+                        <option value="3">Đang giao</option>
+                        <option value="4">Đã giao</option>
+                        <option value="5">Chờ đánh giá</option>
+                        <option value="6">Hoàn thành</option>
+                    </select>
+                    <div class="input-group-append">
+                        <button class="status-btn hover-btn" id="btn_apply" type="submit">Apply</button>
                     </div>
-                    <div class="card-body-table">
-                        <div class="table-responsive">
-                            <table id="donhangTable" class="table ucp-table table-hover" >
-                                <thead>
-                                    <tr>
-                                        <th style="width:10px" class="px-md-2"><input type="checkbox" class="check-all"></th>
-                                        <th style="width:30px">ID</th>
-                                        <th style="width:30px">Mã ĐH</th>
-                                        <th style="width:100px">Khách hàng</th>
-                                        <th>Cửa hàng</th>
-                                        <th>Ngày đặt</th>
-                                        <th>Giá trị</th>
-                                        <th>Địa chỉ</th>
-                                        <th>Số điện thoại</th>
-                                        <th>Email</th>
-                                        <th>Trạng thái</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $i=1?>
-                                    @foreach($dsDonHang as $dh)
-                                    <tr>
-                                        <td><input type="checkbox"  class="check-item" name="ids[]" value="{{$dh->dh_ma}}"></td>
-                                        <td>{{ $i++ }}</td>
-                                        @if($dh->dh_ma < 10)
-                                        <?php $dh_ma='000'.$dh->dh_ma?>
-                                        @elseif($dh->dh_ma > 10 && $dh->dh_ma < 100)
-                                        <?php $dh_ma='00'.$dh->dh_ma?>
-                                        @endif
-                                        <td>DH{{ $dh_ma }}</td>
-                                       
+
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <div class="col-lg-12 col-md-12">
+        <div class="card card-static-2 mt-30 mb-30">
+            <div class="card-title-2">
+                <h4>Tất cả đơn hàng</h4>
+            </div>
+            <div class="card-body-table">
+                <div class="table-responsive">
+                    <table id="donhangTable" class="table ucp-table table-hover">
+                        <thead>
+                            <tr>
+                                <th style="width:10px" class="px-md-2"><input type="checkbox" class="check-all"></th>
+                                <th style="width:30px">ID</th>
+                                <th style="width:30px">Mã ĐH</th>
+                                <th style="width:100px">Khách hàng</th>
+                                <th>Cửa hàng</th>
+                                <th>Ngày đặt</th>
+                                <th>Giá trị</th>
+                                <th>Địa chỉ</th>
+                                <th>Số điện thoại</th>
+                                <th>Email</th>
+                                <th>Trạng thái</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $i = 1 ?>
+                            @foreach($dsDonHang as $dh)
+                            <tr>
+                                <td><input type="checkbox" class="check-item" name="ids[]" value="{{$dh->dh_ma}}"></td>
+                                <td>{{ $i++ }}</td>
+                                @if($dh->dh_ma < 10) <?php $dh_ma = '000' . $dh->dh_ma ?> @elseif($dh->dh_ma > 10 && $dh->dh_ma < 100) <?php $dh_ma = '00' . $dh->dh_ma ?> @endif <td>DH{{ $dh_ma }}</td>
+
                                         <td>{{ $dh->khachhang->kh_hoTen }}</td>
-                                        
-                                    
+
+
                                         <td>{{ $dh->cuahangtaphoa->chth_ten }}</td>
                                         <td>{{ $dh->dh_taoMoi }}</td>
                                         <td>{{ number_format($dh->dh_giaTri,'0',',','.') }} <small>đ</small></td>
@@ -136,7 +137,7 @@
                                         <td>{{ $dh->dh_email }}</td>
                                         <td>
                                             @if($dh->dh_trangThai == 0)
-                                            <span class="badge-item badge-status">Chờ xác nhận</span>
+                                            <span class="badge-item badge-status">Chờ thanh toán</span>
                                             @elseif($dh->dh_trangThai == 1)
                                             <span class="badge-item badge-danger">Đã hủy</span>
                                             @elseif($dh->dh_trangThai == 2)
@@ -144,16 +145,20 @@
                                             @elseif($dh->dh_trangThai == 3)
                                             <span class="badge-item badge-status">Đang giao</span>
                                             @elseif($dh->dh_trangThai == 4)
+                                            <span class="badge-item badge-status">Đã giao</span>
+                                            @elseif($dh->dh_trangThai == 5)
+                                            <span class="badge-item badge-secondary">Chờ đánh giá</span>
+                                            @elseif($dh->dh_trangThai == 6)
                                             <span class="badge-item badge-success">Hoàn thành</span>
                                             @endif
                                         </td>
                                         <td class="action-btns">
-                                            
+
                                             <a href="{{ route('admin.donhang.show',$dh->dh_ma) }}" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
                                             <a href="{{ route('admin.donhang.edit',$dh->dh_ma) }}" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
-                                          
-                                            @if($dh->dh_trangThai == 4)
-                                                <a href="{{ route('donhang.inhoadon',$dh->dh_ma) }}" class="btn-print"  style="float: left;" title="Print"><i class="fas fa-print"></i></a>
+
+                                            @if($dh->dh_trangThai >= 4)
+                                            <a href="{{ route('donhang.inhoadon',$dh->dh_ma) }}" class="btn-print" style="float: left;" title="Print"><i class="fas fa-print"></i></a>
                                             @endif
                                             <form name="frmDelete" id="frmDelete" class="frmDelete" action="{{ route('admin.donhang.destroy',$dh->dh_ma) }}" method="post" data-id="{{$dh->dh_ma}}" data-name="{{$dh->khachhang->kh_hoTen}}">
                                                 {{ csrf_field() }}
@@ -161,17 +166,17 @@
                                                 <button type="submit" class="edit-btn btn-delete" title="Delete"><i class="fas fa-trash-alt"></i></button>
                                             </form>
                                         </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>     
-                        </div>
-                    </div>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-       
+        </div>
     </div>
+
 </div>
+
 
 @endsection
 
@@ -181,7 +186,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/fc-4.0.0/datatables.min.js"></script>
 
 <script>
-  $(document).ready(function() {
+    $(document).ready(function() {
         var table = $('#donhangTable').DataTable({
             dom: "<'row'<'col-md-12 text-center'B>><'row'<'col-md-6'l><'col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-md-6'i><'col-md-6'p>>",
             buttons: [
@@ -239,7 +244,7 @@
                 $.ajax({
                     type: $(this).attr('method'),
                     url: $(this).attr('action'),
-                     //dataType: "json",
+                    //dataType: "json",
                     data: {
                         id: id,
                         _token: '{{ csrf_token() }}',
@@ -272,23 +277,31 @@
     $('.frmBulkActions').submit(function(e) {
         e.preventDefault();
         var giatri = $('#action').val();
-        if(giatri == 1){
-            var name = "hoạt động";
-        }else if(giatri == 2){
-            var name = "Không hoạt động";
-        }else{
-            var name = "Xóa";
-            var namehtml ="Dữ liệu đơn hàng sẽ không thể phục hồi lại được";
+        if (giatri == 0) {
+            var name = "Chờ thanh toán";
+        } else if (giatri == 1) {
+            var name = "Hủy";
+        } else if (giatri == 2) {
+            var name = "Đang xử lý";
+
+        } else if (giatri == 3) {
+            var name = "Đang giao";
+        } else if (giatri == 4) {
+            var name = "Đã giao";
+        } else if (giatri == 5) {
+            var name = "Chờ đánh giá";
+        } else if (giatri == 6) {
+            var name = "Hoàn thành";
+            var namehtml = "Bạn không thể chính sửa thêm khi đơn hàng hoàn thành";
         }
-        if (giatri != 0) {
+        if (giatri >= 0) {
             var arr = [];
             $(".check-item:checked").each(function() {
                 arr.push($(this).attr('value'));
             });
-            alert(arr +' '+$('.frmBulkActions').attr('method')+''+$('.frmBulkActions').data('url'));
             Swal.fire({
-                title: 'Bạn chắc chắn muốn '+name+'?',
-                html: namehtml ? namehtml :'',
+                title: 'Bạn chắc chắn muốn ' + name + '?',
+                html: namehtml ? namehtml : '',
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -297,20 +310,22 @@
                 cancelButtonText: 'Hủy bỏ'
 
             }).then((result) => {
+                var sendData = [];
+                sendData = arr;
                 if (result.isConfirmed) {
                     $.ajax({
                         type: $(this).attr('method'),
                         url: $(this).data('url'),
                         data: {
                             action: giatri,
-                            ids: arr,
+                            ids: sendData,
                             _token: '{{ csrf_token() }}',
                             _method: $(this).find('[name="_method"]').val()
                         },
                         success: function(data, textStatus, jqXHR) {
                             Swal.fire({
                                 icon: 'success',
-                                title: namehtml ? 'Đã xóa thành công':'Thay đổi thành công',
+                                title: namehtml ? 'Đã hoàn thành thành công' : 'Thay đổi thành công',
                                 showConfirmButton: false,
                                 timer: 1000
 
@@ -322,7 +337,7 @@
 
                 } else {
                     Swal.fire({
-                        title: namehtml ? 'Đã hủy xóa':'Thay đổi thành công',
+                        title: namehtml ? 'Đã hủy' : 'Thay đổi thành công',
                         icon: 'info',
                         showConfirmButton: false,
                         timer: 1000

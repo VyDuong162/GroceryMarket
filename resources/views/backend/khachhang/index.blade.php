@@ -37,7 +37,7 @@ Sản phẩm
 
 @section('content')
 <div class="container-fluid">
-    <h2 class="mt-30 page-title">Khách hàng</h2>
+    <h2 class=" page-title">Khách hàng</h2>
     <ol class="breadcrumb mb-30">
         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
         <li class="breadcrumb-item active">Khách hàng</li>

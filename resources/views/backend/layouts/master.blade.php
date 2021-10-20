@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-App="app">
 
 <head>
     <meta charset="UTF-8">
@@ -23,7 +23,7 @@
 
 </head>
 
-<body>
+<body >
     <!-- Sidebar -->
     @include('backend.layouts.partials.sidebar')
     <!-- End Sidebar -->
@@ -49,8 +49,7 @@
             </div>
               <!-- End Content -->
         </div>
-       <!-- Include script angularJS --> 
-   
+    
     <!-- coreui -->
     <script src="{{ asset('coreui/js/main.js') }}"></script>
 
@@ -67,7 +66,17 @@
     <!--thông báo Lỗi  -->
     <script src="{{ asset('vendors/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('vendors/jquery-validation/localization/messages_vi.min.js') }}"></script>
-    @yield('custom-scripts')
+         <!-- Include thư viện quản lý Cart - AngularJS -->
+    <script src="{{ asset('vendor/ngCart/dist/ngCart.js') }}"></script>
+       <!-- Include script angularJS --> 
+   <script src="{{ asset('vendors/angular/angular.min.js') }}"></script>
+    <script>
+        var app= angular.module('app',[],function($interpolateProvider){
+            $interpolateProvider.startSymbol('<%');
+            $interpolateProvider.endSymbol('%>');
+        });
+    </script>
+   @yield('custom-scripts')
 </body>
 
 </html>

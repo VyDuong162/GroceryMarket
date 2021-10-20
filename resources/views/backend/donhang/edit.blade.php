@@ -21,11 +21,11 @@
 @endsection
 
 @section('content')
-<h2 class="mt-30 page-title">Sản phẩm</h2>
+<h2 class="page-title">Đơn hàng</h2>
 <ol class="breadcrumb mb-30">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.sanpham.index') }}">Sản phẩm</a></li>
-    <li class="breadcrumb-item active">Chỉnh sửa sản phẩm</li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.donhang.index') }}">Đơn hàng</a></li>
+    <li class="breadcrumb-item active">Chỉnh sửa đơn hàng</li>
 </ol>
 
 <div class="row">
@@ -69,15 +69,19 @@
                             <label for="status">Trạng thái đơn hàng hiện tại*</label>
                             <div class="status-active">
                                 @if($dh->dh_trangThai == 0)
-                                <span class="badge-item badge-status">Chờ xác nhận</span>
-                                @elseif($dh->dh_trangThai == 1)
-                                <span class="badge-item badge-danger">Đã hủy</span>
-                                @elseif($dh->dh_trangThai == 2)
-                                <span class="badge-item badge-warning">Đang Xử lý</span>
-                                @elseif($dh->dh_trangThai == 3)
-                                <span class="badge-item badge-status">Đang giao</span>
-                                @elseif($dh->dh_trangThai == 4)
-                                <span class="badge-item badge-success">Hoàn thành</span>
+                                    <span class="badge-item badge-status">Chờ thanh toán</span>
+                                    @elseif($dh->dh_trangThai == 1)
+                                    <span class="badge-item badge-danger">Đã hủy</span>
+                                    @elseif($dh->dh_trangThai == 2)
+                                    <span class="badge-item badge-warning">Đang Xử lý</span>
+                                    @elseif($dh->dh_trangThai == 3)
+                                    <span class="badge-item badge-status">Đang giao</span>
+                                    @elseif($dh->dh_trangThai == 4)
+                                    <span class="badge-item badge-status">Đã giao</span>
+                                    @elseif($dh->dh_trangThai == 5)
+                                    <span class="badge-item badge-secondary">Chờ đánh giá</span>
+                                    @elseif($dh->dh_trangThai == 6)
+                                    <span class="badge-item badge-success">Hoàn thành</span>
                                 @endif
                             </div>
                         </div>
@@ -157,11 +161,13 @@
                                 <div class="input-group">
                                     <select id="dh_trangThai" name="dh_trangThai" class="custom-select">
                                         <option value="">Vui lòng chọn trạng thái đơn hàng</option>
-                                        <option value="0">Chờ xác nhận</option>
-                                        <option value="1">Đã hủy</option>
-                                        <option value="2">Đang Xử lý</option>
+                                        <option selected value="0">Chờ thanh toán</option>
+                                        <option value="1">Hủy</option>
+                                        <option value="2">Đang xử lý</option>
                                         <option value="3">Đang giao</option>
-                                        <option value="4">Hoàn thành</option>
+                                        <option value="4">Đã giao</option>
+                                        <option value="5">Chờ đánh giá</option>
+                                        <option value="6">Hoàn thành</option>
                                     </select>
                                     <div class="input-group-append">
                                         <button class="status-btn hover-btn" type="submit">Lưu dữ liệu</button>

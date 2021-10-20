@@ -17,7 +17,7 @@ Sản phẩm - Xem chi tiết
 </style>
 @endsection
 @section('content')
-<h2 class="mt-30 page-title">Đơn hàng</h2>
+<h2 class="page-title">Đơn hàng</h2>
 <ol class="breadcrumb mb-30">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('admin.donhang.index') }}">Đơn hàng</a></li>
@@ -68,7 +68,7 @@ Sản phẩm - Xem chi tiết
                             <label for="status">Trạng thái đơn hàng*</label>
                             <div class="status-active">
                             @if($dh->dh_trangThai == 0)
-                                    <span class="badge-item badge-status">Chờ xác nhận</span>
+                                    <span class="badge-item badge-status">Chờ thanh toán</span>
                                     @elseif($dh->dh_trangThai == 1)
                                     <span class="badge-item badge-danger">Đã hủy</span>
                                     @elseif($dh->dh_trangThai == 2)
@@ -76,6 +76,10 @@ Sản phẩm - Xem chi tiết
                                     @elseif($dh->dh_trangThai == 3)
                                     <span class="badge-item badge-status">Đang giao</span>
                                     @elseif($dh->dh_trangThai == 4)
+                                    <span class="badge-item badge-status">Đã giao</span>
+                                    @elseif($dh->dh_trangThai == 5)
+                                    <span class="badge-item badge-secondary">Chờ đánh giá</span>
+                                    @elseif($dh->dh_trangThai == 6)
                                     <span class="badge-item badge-success">Hoàn thành</span>
                                     @endif
                             </div>
