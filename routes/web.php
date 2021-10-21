@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\SanPhamController;
 use App\Http\Controllers\Backend\KhachHangController;
 use App\Http\Controllers\Backend\CuaHangTapHoaController;
 use App\Http\Controllers\Backend\DonHangController;
+use App\Http\Controllers\Backend\AdminController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +35,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function(){
-    return view('backend.dashboards');
+    return view('welcome');
 });
 Route::get('/frontend', function(){
     return view('frontend.index');
@@ -42,6 +43,8 @@ Route::get('/frontend', function(){
 Route::get('/index1', function(){
     return view('frontend.index1');
 });
+//dashboards
+Route::get('/admin',[AdminController::class,'dashboards'])->name('admin');
 // sản phẩm
 Route::resource('admin/sanpham',SanPhamController::class,['as'=>'admin']);
 Route::delete('/sanpham/bulkaction',[SanPhamController::class,'BulkAction']);
