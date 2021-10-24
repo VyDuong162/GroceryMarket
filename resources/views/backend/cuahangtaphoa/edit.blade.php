@@ -37,6 +37,9 @@ Cửa hàng - Chỉnh sửa
                             <div class="form-group">
                                     <label class="form-label">Chủ của hàng</label>
                                     <select name="kh_ma" id="kh_ma" class="form-control">
+                                        @if(Auth::user()->vt_ma==2)
+                                        <option value="{{Auth::user()->kh_ma}} " selected>{{Auth::user()->kh_hoTen}}</option>
+                                        @else
                                             @foreach($dsKhachHang as $kh)
                                                 @if($chth->kh_ma == $kh->kh_ma)
                                                 <option value="{{ $kh->kh_ma }}" selected>{{ $kh->kh_hoTen }}</option>
@@ -44,6 +47,8 @@ Cửa hàng - Chỉnh sửa
                                                 <option value="{{ $kh->kh_ma }}">{{ $kh->kh_hoTen }}</option>
                                                 @endif
                                             @endforeach
+                                        @endif 
+                                         
                                     </select>
                                 </div>
                                 <div class="form-group">

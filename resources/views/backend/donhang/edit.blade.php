@@ -69,7 +69,7 @@
                             <label for="status">Trạng thái đơn hàng hiện tại*</label>
                             <div class="status-active">
                                 @if($dh->dh_trangThai == 0)
-                                    <span class="badge-item badge-status">Chờ thanh toán</span>
+                                    <span class="badge-item badge-status">Chờ xác nhận</span>
                                     @elseif($dh->dh_trangThai == 1)
                                     <span class="badge-item badge-danger">Đã hủy</span>
                                     @elseif($dh->dh_trangThai == 2)
@@ -161,7 +161,7 @@
                                 <div class="input-group">
                                     <select id="dh_trangThai" name="dh_trangThai" class="custom-select">
                                         <option value="">Vui lòng chọn trạng thái đơn hàng</option>
-                                        <option selected value="0">Chờ thanh toán</option>
+                                        <option selected value="0">Chờ xác nhận</option>
                                         <option value="1">Hủy</option>
                                         <option value="2">Đang xử lý</option>
                                         <option value="3">Đang giao</option>

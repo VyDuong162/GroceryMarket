@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Models\HoaDon;
 use PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DonHangController extends Controller
 {
@@ -20,7 +21,16 @@ class DonHangController extends Controller
      */
     public function index()
     {
-        $dsDonHang = DonHang::orderBy('dh_taoMoi','desc')->get();
+        if(Auth::user()->vt_ma==2){
+            $kh_ma = auth::user()->kh_ma;
+            $dsDonHang=DonHang::leftjoin('cuahangtaphoa','cuahangtaphoa.chth_ma','=','donhang.chth_ma')
+                                    ->where('cuahangtaphoa.kh_ma','=',$kh_ma)
+                                    ->orderBy('donhang.dh_taoMoi','desc')
+                                    ->get();
+        }
+        else{
+            $dsDonHang = DonHang::orderBy('dh_taoMoi','desc')->get();
+        }
         return view('backend.donhang.index')
         ->with('dsDonHang',$dsDonHang);
     }
@@ -104,6 +114,15 @@ class DonHangController extends Controller
             $dh->dh_trangThai = $request->dh_trangThai;
             $dh->dh_capNhat =Carbon::now();
             $dh->save();
+            if($dh->dh_trangThai >=4){
+                $hd = new HoaDon();
+                $today = Carbon::now()->format('YmdHis');
+                $hd->hd_ma = $today;
+                $hd->dh_ma = $dh->dh_ma;
+                $hd->hd_ngayLap = Carbon::now();
+                $hd->hd_giaTri = $dh->dh_giaTri;
+                $hd->save();
+            }
             return redirect(route('admin.donhang.index'))->with('alert-info','Đơn hàng DH'. $dh_ma . ' cập nhật trạng thái thành công!');
         }
         return redirect(route('admin.donhang.index'))->with('alert-info','Đơn hàng DH'. $dh_ma . ' chưa cập nhật trạng thái!');
@@ -154,8 +173,18 @@ class DonHangController extends Controller
         if( $status == 7){
             return redirect(route('admin.donhang.index'));
         }
-        $dulieu = DonHang::where('donhang.dh_trangThai','=',$status)
-                            ->orderBy('donhang.dh_ma', 'asc')->get();
+        if(Auth::user()->vt_ma==2){
+            $kh_ma= Auth::user()->kh_ma;
+            $dulieu =  DonHang::leftjoin('cuahangtaphoa','cuahangtaphoa.chth_ma','=','donhang.chth_ma')
+            ->where('cuahangtaphoa.kh_ma','=',$kh_ma)
+            ->where('donhang.dh_trangThai','=',$status)
+            ->orderBy('donhang.dh_taoMoi','desc')
+            ->get();
+        }else{
+            $dulieu = DonHang::where('donhang.dh_trangThai','=',$status)
+            ->orderBy('donhang.dh_ma', 'asc')->get();
+        }
+       
         
         //$dssanpham = DB::table("sanpham")->whereIn('sp_ma',$dulieu)->get();
         return  view('backend.donhang.index')->with('dsDonHang',$dulieu)

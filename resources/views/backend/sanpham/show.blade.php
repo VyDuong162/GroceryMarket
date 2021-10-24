@@ -17,10 +17,10 @@ Sản phẩm - Xem chi tiết
 </style>
 @endsection
 @section('content')
-<h2 class=" page-title">Shops</h2>
+<h2 class=" page-title">Sản phẩm</h2>
 <ol class="breadcrumb mb-30">
     <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-    <li class="breadcrumb-item"><a href="shops.html">Shops</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin.sanpham.index') }}">Sản Phẩm</a></li>
     <li class="breadcrumb-item active">Xem thông tin sản phẩm</li>
 </ol>
 <div class="row">
@@ -35,6 +35,7 @@ Sản phẩm - Xem chi tiết
                         <img src="#" alt="">
                         @endif
                     </div>
+                    <small>{{ $sp->sp_ten }}</small>
                     <ul class="product-dt-purchases">
                         <li>
                             <div class="product-status">

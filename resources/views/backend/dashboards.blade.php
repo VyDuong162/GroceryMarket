@@ -58,11 +58,19 @@ Dashboard
     <ol class="breadcrumb mb-30">
         <li class="breadcrumb-item active">Dashboard</li>
     </ol>
-    <div class="row" ng-controller="dashboardController">
+    <div class="row" ng-controller="dashboardController" >
+        <?php
+             if(Session::has('user')) 
+                $user = Session::get('user')[0];
+        ?>
+    
+        <input type="hidden" name="kh_ma" value="{{ $user->kh_ma }}" ng-model="kh_ma">
+        <input type="hidden" name="vt_ma" value="{{ $user->vt_ma }}" ng-model="vt_ma">
+    
         <div class="col-xl-3 col-md-6">
             <div class="dashboard-report-card purple">
                 <div class="card-content">
-                    <span class="card-title">chờ thanh toán</span>
+                    <span class="card-title">Chờ xác nhận</span>
                     <span class="card-count"><%soLuongDHCTT%></span>
                 </div>
                 <div class="card-media">
@@ -129,7 +137,7 @@ Dashboard
             <div class="dashboard-report-card success">
                 <div class="card-content">
                     <span class="card-title">Tổng thu nhập hôm nay</span>
-                    <span class="card-count">
+                    <span class="card-count" ng-if="tongDoanhThu != null">
                         <% tongDoanhThu | currency:'':true:'4.0'%> <small>VND</small>
                        
                     </span>
@@ -210,8 +218,7 @@ Dashboard
                                         <td><% dh.phoneNumber(dh.dh_soDienThoai) %></td>
                                         <td><% dh.dh_email %></td>
                                         <td>
-                                      
-                                            <span ng-if="dh.dh_trangThai == 0" class="badge-item badge-status">Chờ thanh toán</span>
+                                            <span ng-if="dh.dh_trangThai == 0" class="badge-item badge-status">Chờ xác nhận</span>
                                       
                                             <span ng-if="dh.dh_trangThai == 1" class="badge-item badge-danger">Đã hủy</span>
                                         
@@ -259,65 +266,67 @@ Dashboard
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.3/fc-4.0.0/datatables.min.js"></script>
 
 <script>
+    
     app.controller('dashboardController',function($scope,$http){
         function thongKeData(){
             $http({
             method:'GET',
-            url:"{{ route('api.thongke.donhang.chothanhtoan') }}"
+            url:"{{ route('api.thongke.donhang.chothanhtoan') }}?vt_ma={{Session::get('user')[0]->vt_ma}}&&kh_ma={{Session::get('user')[0]->kh_ma}}"
             }).then(function successCallback(response){
                 $scope.soLuongDHCTT = response.data.result[0].soLuong; 
             });
             $http({
             method:'GET',
-            url:"{{ route('api.thongke.donhang.dahuy') }}"
+            url:"{{ route('api.thongke.donhang.dahuy') }}?vt_ma={{Session::get('user')[0]->vt_ma}}&&kh_ma={{Session::get('user')[0]->kh_ma}}"
             }).then(function successCallback(response){
                 $scope.soLuongDHDH = response.data.result[0].soLuong;
             });
             $http({
             method:'GET',
-            url:"{{ route('api.thongke.donhang.dangxuly') }}"
+            url:"{{ route('api.thongke.donhang.dangxuly') }}?vt_ma={{Session::get('user')[0]->vt_ma}}&&kh_ma={{Session::get('user')[0]->kh_ma}}"
             }).then(function successCallback(response){
                 $scope.soLuongDHDXL = response.data.result[0].soLuong;
             });
             $http({
             method:'GET',
-            url:"{{ route('api.thongke.donhang.dagiao') }}"
+            url:"{{ route('api.thongke.donhang.dagiao') }}?vt_ma={{Session::get('user')[0]->vt_ma}}&&kh_ma={{Session::get('user')[0]->kh_ma}}"
             }).then(function successCallback(response){
                 $scope.soLuongDHDG = response.data.result[0].soLuong;
             });
             $http({
             method:'GET',
-            url:"{{ route('api.thongke.tongsanpham') }}"
+            url:"{{ route('api.thongke.tongsanpham') }}?vt_ma={{Session::get('user')[0]->vt_ma}}&&kh_ma={{Session::get('user')[0]->kh_ma}}"
             }).then(function successCallback(response){
                 $scope.tongSanPham = response.data.result[0].soLuong;
             });
             $http({
             method:'GET',
-            url:"{{ route('api.thongke.tongcuahang') }}"
+            url:"{{ route('api.thongke.tongcuahang') }}?vt_ma={{Session::get('user')[0]->vt_ma}}&&kh_ma={{Session::get('user')[0]->kh_ma}}"
             }).then(function successCallback(response){
                 $scope.tongCH = response.data.result[0].soLuong;
             });
             $http({
             method:'GET',
-            url:"{{ route('api.thongke.doanhthuhomnay') }}"
+            url:"{{ route('api.thongke.doanhthuhomnay') }}?vt_ma={{Session::get('user')[0]->vt_ma}}&&kh_ma={{Session::get('user')[0]->kh_ma}}"
             }).then(function successCallback(response){
                 $scope.tongDoanhThu = response.data.result[0].tong;
             });
         }
         thongKeData();
         setInterval(function() {
-            getData();
+            thongKeData();
         }, 1000 * 60 * 5);
-        $scope.dsDonHang =[];
-        $http({
-            url: "{{ route('api.donhang.ganday') }}",
-            method: "GET"
-        }).then(function successCallback(response){
-            console.log(response.data.result);
-            $scope.dsDonHang = response.data.result;
-        },function errorCallback(response){
-            console.log(response);
-        });
+            $scope.dsDonHang =[];
+            $http({
+                url: "{{route('api.donhang.ganday')}}?vt_ma={{Session::get('user')[0]->vt_ma}}&&kh_ma={{Session::get('user')[0]->kh_ma}}",
+                method: "GET"
+            }).then(function successCallback(response){
+                console.log(response.data.result);
+                $scope.dsDonHang = response.data.result;
+            },function errorCallback(response){
+                console.log(response);
+            });
+
     });
 </script>
 <script>
@@ -464,7 +473,7 @@ Dashboard
         $("#btnLapBaoCao").click(function(e) {
             e.preventDefault();
             $.ajax({
-                url: "{{ route('api.baocao.donhang') }}",
+                url: "{{ route('api.baocao.donhang') }}?vt_ma={{Session::get('user')[0]->vt_ma}}&&kh_ma={{Session::get('user')[0]->kh_ma}}",
                 type: "GET",
                 data: {
                     tuNgay: $('#tuNgay').val(),

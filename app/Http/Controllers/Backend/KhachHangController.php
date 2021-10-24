@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 class KhachHangController extends Controller
 {
     /**
@@ -25,6 +26,7 @@ class KhachHangController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny',KhachHang::class);
         $dsKhachHang = KhachHang::Where('kh_trangThai','<','3')->orderby('created_at')->get();
         $dsVaiTro = VaiTro::all();
         return view('backend.khachhang.index')
@@ -52,6 +54,7 @@ class KhachHangController extends Controller
      */
     public function create()
     {
+        $this->authorize('create',KhachHang::class);
         $dsVaiTro = VaiTro::orderBy('vt_ten')->get();
         
         $dsPhuongXa = PhuongXa::orderBy('px_ten')->get();
@@ -72,7 +75,7 @@ class KhachHangController extends Controller
      */
     public function store(Request $request)
     {
-      
+        $this->authorize('create',KhachHang::class);
         $validator = Validator::make($request->all(),[
             'kh_hoTen' => 'required | max:100',
             'kh_ngaySinh' => 'required',
@@ -122,6 +125,7 @@ class KhachHangController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view',KhachHang::class);
         $kh = KhachHang::find($id);
         $cuahang = CuaHangTapHoa::where('kh_ma',$id)->get();
         $tencuahang =CuaHangTapHoa::where('kh_ma',$id)->get('chth_ten');
@@ -145,6 +149,7 @@ class KhachHangController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update',KhachHang::class);
         $kh = KhachHang::where('kh_ma',$id)->first();
         $pxid = $kh->px_ma;
         $px = PhuongXa::where('px_ma',$pxid)->get();
@@ -177,6 +182,7 @@ class KhachHangController extends Controller
      */
     public function update(Request $request, $id)
     { 
+        $this->authorize('update',KhachHang::class);
         $validator = Validator::make($request->all(),[
             'kh_hoTen' => 'required | max:100',
             'kh_ngaySinh' => 'required',
@@ -230,11 +236,13 @@ class KhachHangController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',KhachHang::class);
         $kh= KhachHang::where('kh_ma',$id)->first();
         $kh-> delete();
     }
     public function BulkAction(Request $request)
     {
+        $this->authorize('update',KhachHang::class);
        $action=$request->action;
        $datetime = Carbon::now();
        $ids = $request->get('ids'); 

@@ -35,10 +35,14 @@ Cửa hàng - Thêm mới
                             <div class="form-group">
                                 <label class="form-label">Chủ của hàng</label>
                                    <select name="kh_ma" id="kh_ma" class="form-control">
-                                    <option value=" ">-- Chọn khách hàng --</option>
-                                        @foreach($dsKhachHang as $kh)
-                                        <option value="{{ $kh->kh_ma }}">{{ $kh->kh_hoTen }}</option>
-                                        @endforeach
+                                       @if(Auth::user()->vt_ma==2)
+                                        <option value="{{Auth::user()->kh_ma}}">{{Auth::user()->kh_hoTen}}</option>
+                                       @else
+                                        <option value=" ">-- Chọn khách hàng --</option>
+                                            @foreach($dsKhachHang as $kh)
+                                            <option value="{{ $kh->kh_ma }}">{{ $kh->kh_hoTen }}</option>
+                                            @endforeach
+                                        @endif 
                                    </select>
                             </div>
                             <div class="form-group">

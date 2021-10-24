@@ -68,7 +68,7 @@ Sản phẩm - Xem chi tiết
                             <label for="status">Trạng thái đơn hàng*</label>
                             <div class="status-active">
                             @if($dh->dh_trangThai == 0)
-                                    <span class="badge-item badge-status">Chờ thanh toán</span>
+                                    <span class="badge-item badge-status">Chờ xác nhận</span>
                                     @elseif($dh->dh_trangThai == 1)
                                     <span class="badge-item badge-danger">Đã hủy</span>
                                     @elseif($dh->dh_trangThai == 2)

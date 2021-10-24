@@ -18,6 +18,7 @@
                      <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-pencil') }}"></use>
                  </svg> Typography</a></li>
          <li class="c-sidebar-nav-title">Components</li> -->
+         @can('admin')
          <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
                  <svg class="c-sidebar-nav-icon">
                      <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-puzzle') }}"></use>
@@ -25,22 +26,55 @@
              <ul class="c-sidebar-nav-dropdown-items">
                  <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.cuahangtaphoa.index') }}"><span class="c-sidebar-nav-icon"></span>Danh sách</a></li>
                  <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.cuahangtaphoa.create') }}"><span class="c-sidebar-nav-icon"></span>Thêm mới</a></li>
-
              </ul>
          </li>
+         @endcan
+         
+            <?php
+             if(Session::has('user')) 
+                $user = Session::get('user')[0];
+           ?>
+        @can('viewAny',App\Models\CuaHangTapHoa::class)
+            @if($user->vt_ma==2)
+         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                 <svg class="c-sidebar-nav-icon">
+                     <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-puzzle') }}"></use>
+                 </svg>Quản lý cửa hàng</a>
+             <ul class="c-sidebar-nav-dropdown-items">
+                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.cuahangtaphoa.index') }}"><span class="c-sidebar-nav-icon"></span>Xem</a></li>
+                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.cuahangtaphoa.create') }}"><span class="c-sidebar-nav-icon"></span>Thêm mới</a></li>
+             </ul>
+         </li>
+            @endif
+         @endcan
+         @can('viewAny',App\Models\SanPham::class)
          <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
                  <svg class="c-sidebar-nav-icon">
                      <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-cursor') }}"></use>
-                 </svg>Sản phẩm</a>
+                 </svg>Quản lý mặt hàng</a>
              <ul class="c-sidebar-nav-dropdown-items">
                  <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.sanpham.index') }}"><span class="c-sidebar-nav-icon"></span>Danh sách</a></li>
                  <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.sanpham.create') }}"><span class="c-sidebar-nav-icon"></span>Thêm mới</a></li>
              </ul>
          </li>
+         @endcan
+         @can('admin')
+         <li class="c-sidebar-nav-item c-sidebar-nav-dropdown"><a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                 <svg class="c-sidebar-nav-icon">
+                     <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-people') }}"></use>
+                 </svg>Quản lý khách hàng</a>
+             <ul class="c-sidebar-nav-dropdown-items">
+                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.khachhang.index') }}"><span class="c-sidebar-nav-icon"></span>Danh sách</a></li>
+                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.khachhang.create') }}"><span class="c-sidebar-nav-icon"></span>Thêm mới</a></li>
+             </ul>
+         </li>
+         @endcan
+         @can('viewAny',App\Models\DonHang::class)
          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('admin.donhang.index') }}">
                  <svg class="c-sidebar-nav-icon">
                      <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-chart-pie') }}"></use>
                  </svg>Đơn hàng</a></li>
+        @endcan
          <li class="c-sidebar-nav-dropdown"><a class="c-sidebar-nav-dropdown-toggle" href="#">
                  <svg class="c-sidebar-nav-icon">
                      <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-star') }}"></use>

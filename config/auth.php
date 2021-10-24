@@ -66,9 +66,14 @@ return [
     */
 
     'providers' => [
-        'users' => [
+       /*  'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+ */
+        'users' => [
+            'driver' => 'custom',
+            'model' => App\Models\KhachHang::class,
         ],
 
         // 'users' => [

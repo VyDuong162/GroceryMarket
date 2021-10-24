@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Exists;
 use Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 class SanPhamController extends Controller
 {
     /**
@@ -25,7 +26,19 @@ class SanPhamController extends Controller
      */
     public function index()
     {
-        $dsSanPham = SanPham::Where('sp_trangThai','<','3')->orderby('created_at')->get();
+        $this->authorize('viewAny',SanPham::class);
+        if(Auth::user()->vt_ma==2){
+            $kh_ma =Auth::user()->kh_ma;
+            $dsSanPham = SanPham::Leftjoin('dongia_mathang','sanpham.sp_ma','=','dongia_mathang.sp_ma')
+                                ->Leftjoin('cuahangtaphoa','cuahangtaphoa.chth_ma','=','dongia_mathang.chth_ma')
+                                ->where('cuahangtaphoa.kh_ma','=',$kh_ma)
+                                ->where('sanpham.sp_trangThai','<','3')
+                                ->orderby('sanpham.created_at','desc')->get();
+        }
+        else{
+            $dsSanPham = SanPham::Where('sp_trangThai','<','3')->orderby('created_at')->get();
+        }
+        
         
         return view('backend.sanpham.index')
             ->with('dsSanPham', $dsSanPham);
@@ -38,7 +51,15 @@ class SanPhamController extends Controller
      */
     public function create()
     {
-        $dsCuaHang = CuaHangTapHoa::Where('chth_trangThai','<','3')->get();
+        $this->authorize('create',SanPham::class);
+        if(Auth::user()->vt_ma==2){
+            $kh_ma = Auth::user()->kh_ma;
+            $dsCuaHang = CuaHangTapHoa::Where('kh_ma',$kh_ma)
+                                        ->Where('chth_trangThai','<','3')
+                                        ->get();
+        }else{
+            $dsCuaHang = CuaHangTapHoa::Where('chth_trangThai','<','3')->get();
+        }
         $dsLoaiSanPham = LoaiSanPham::all();
         $dsNhaSanXuat = NhaSanXuat::all();
         return view('backend.sanpham.create')
@@ -55,6 +76,7 @@ class SanPhamController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create',SanPham::class);
         $validator = Validator::make($request->all(), [
             'sp_ten'       => 'required|max:255',
             'lsp_ma'      => 'required',
@@ -128,6 +150,7 @@ class SanPhamController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view',SanPham::class);
         $sp = SanPham::find($id);
         $dh = $sp->chitietdonhang()->get();
         $shop = $sp->dongiamathang()->first();
@@ -158,8 +181,16 @@ class SanPhamController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update',SanPham::class);
         $sp = SanPham::where('sp_ma', $id)->first();
-        $dsCuaHang = CuaHangTapHoa::Where('chth_trangThai','<','3')->get();
+        if(Auth::user()->vt_ma==2){
+            $kh_ma = Auth::user()->kh_ma;
+            $dsCuaHang = CuaHangTapHoa::Where('kh_ma',$kh_ma)
+                                        ->Where('chth_trangThai','<','3')
+                                        ->get();
+        }else{
+            $dsCuaHang = CuaHangTapHoa::Where('chth_trangThai','<','3')->get();
+        }
         $dgmh = DonGia_MatHang::where('sp_ma', $id)->first();
         $dsLoaiSanPham = LoaiSanPham::all();
         $dsNhaSanXuat = NhaSanXuat::all();
@@ -180,6 +211,7 @@ class SanPhamController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('update',SanPham::class);
         $validator = Validator::make($request->all(), [
             'sp_ten'       => 'required|max:255',
             'lsp_ma'      => 'required',
@@ -256,12 +288,14 @@ class SanPhamController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete',SanPham::class);
            $row = DB::table("sanpham")->where('sp_ma', $id)->update(['sp_trangThai' => '3']);
            
             //return redirect(route('admin.sanpham.index'))->with('alert-info','Xóa thành công sản phẩm với ID_SP:'.$id);
        
     }
     public function Search( Request $request){
+        $this->authorize('view',SanPham::class);
         $status = $request->get('status');
         $search = $request->get('search');
         $dulieu = SanPham::leftjoin('loaisanpham', 'sanpham.lsp_ma', '=', 'loaisanpham.lsp_ma')
@@ -284,6 +318,7 @@ class SanPhamController extends Controller
     }
     public function BulkAction(Request $request)
      {
+        $this->authorize('update',SanPham::class);
         $action=$request->action;
         $ids = $request->get('ids'); 
         if($action != 0){

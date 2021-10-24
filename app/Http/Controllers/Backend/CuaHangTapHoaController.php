@@ -12,6 +12,7 @@ use App\Models\QuanHuyen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 class CuaHangTapHoaController extends Controller
@@ -23,7 +24,15 @@ class CuaHangTapHoaController extends Controller
      */
     public function index()
     {
-        $dsCuaHang = CuaHangTapHoa::Where('chth_trangThai','<','3')->get();
+        $this->authorize('viewAny', CuaHangTapHoa::class);
+        if(Auth::user()->vt_ma ==2){
+            $kh_ma = Auth::user()->kh_ma;
+            $dsCuaHang = CuaHangTapHoa::Where('kh_ma',$kh_ma)
+                                        ->Where('chth_trangThai','<','3')
+                                        ->get();
+        }else{
+            $dsCuaHang = CuaHangTapHoa::Where('chth_trangThai','<','3')->get();
+        }
         return view('backend.cuahangtaphoa.index')
         ->with('dsCuaHang',$dsCuaHang);
     }
@@ -35,6 +44,7 @@ class CuaHangTapHoaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', CuaHangTapHoa::class);
         $dsKhachHang = KhachHang::where('vt_ma',2)->orderBy('kh_hoTen')->get();
         $dsPhuongXa = PhuongXa::orderBy('px_ten')->get();
         $dsQuanHuyen = QuanHuyen::orderBy('qh_ten')->get();
@@ -54,6 +64,7 @@ class CuaHangTapHoaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', CuaHangTapHoa::class);
         $validator = Validator::make($request->all(),
             [
                 'kh_ma' => 'required',
@@ -102,6 +113,7 @@ class CuaHangTapHoaController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view', CuaHangTapHoa::class);
         $chth = CuaHangTapHoa::find($id);
         $kh_ma = $chth->kh_ma;
         $kh =KhachHang::where('kh_ma',$kh_ma)->first();
@@ -124,6 +136,7 @@ class CuaHangTapHoaController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('update', CuaHangTapHoa::class);
         $chth = CuaHangTapHoa::where('chth_ma',$id)->first();
         $pxid = $chth->px_ma;
         $dsKhachHang = KhachHang::where('vt_ma',2)->orderBy('kh_hoTen')->get();  
@@ -155,6 +168,7 @@ class CuaHangTapHoaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->authorize('update', CuaHangTapHoa::class);
         $validator = Validator::make($request->all(),
         [
             'kh_ma' => '',
@@ -202,6 +216,7 @@ class CuaHangTapHoaController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', CuaHangTapHoa::class);
         $chth = CuaHangTapHoa::find($id);
         if(!file_exists('public/avatarshop/'.$chth->chth_anhDaiDien)){
             Storage::delete('public/avatarshop/' . $chth->chth_anhDaiDien);
@@ -210,6 +225,7 @@ class CuaHangTapHoaController extends Controller
     }
     public function BulkAction(Request $request)
     {
+       $this->authorize('update', CuaHangTapHoa::class);
        $action=$request->action;
        $datetime = Carbon::now();
        $ids = $request->get('ids'); 
@@ -224,6 +240,7 @@ class CuaHangTapHoaController extends Controller
        }
     }
     public function SanPhamCuaHang($id){
+        $this->authorize('view', CuaHangTapHoa::class);
         $dsSanPham = DonGia_MatHang::leftjoin('sanpham','dongia_mathang.sp_ma','=','sanpham.sp_ma')
                                     ->leftjoin('cuahangtaphoa','dongia_mathang.chth_ma','=','cuahangtaphoa.chth_ma')
                                     ->where('cuahangtaphoa.chth_ma','=',$id)
@@ -233,7 +250,7 @@ class CuaHangTapHoaController extends Controller
         ->with('chth_ma',$id);
     }
     public function Search( Request $request){
-     
+        $this->authorize('view', CuaHangTapHoa::class);
         $status = $request->get('status');
         $chth_ma =$request->chth_ma;
         $dulieu = DonGia_MatHang::leftjoin('sanpham','dongia_mathang.sp_ma','=','sanpham.sp_ma')
@@ -248,11 +265,12 @@ class CuaHangTapHoaController extends Controller
         ->with('status',$status);
     }
     public function UpdatePrice(Request $request){
+        $this->authorize('update', CuaHangTapHoa::class);
         $dgmh = DonGia_MatHang::where('sp_ma',$request->sp_ma)->first();
         $dgmh->dgmh_gia = $request->dgmh_gia ? $request->dgmh_gia:$dgmh->dgmh_gia;
         $dgmh->updated_at = Carbon::now();
         $dgmh->save();
-       Session::flash('alert-info','Cập nhật giá thành công mã sản phẩm',$request->sp_ma);
+       Session::flash('alert-info','Cập nhật giá thành công mã sản phẩm '.$request->sp_ma);
        return redirect(route('sanpham.cuahangtaphoa',$dgmh->chth_ma));
     }
 }

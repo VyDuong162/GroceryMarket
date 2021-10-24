@@ -51,9 +51,13 @@ Sản phẩm
         <div class="col-lg-12 col-md-12 px-4">
             <form name="frmSearch" name="frmSearch" method="GET" action="/backend/sanpham/search">
                 <div class="bulk-section mt-30 row">
+                   
                     <div class="search-by-name-input col-md-8 px-3 mr-0">
+                        @can('admin')
                         <input type="text" class="form-control" name="search" class="search">
+                        @endcan
                     </div>
+                    
                     <div class="input-group col-md-4 px-0 mr-0">
                         <select id="status" name="status" class="form-control">
                             <option selected value="1">Hoạt động</option>

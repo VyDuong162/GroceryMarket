@@ -54,7 +54,7 @@
                 </div>
                 <div class="input-group col-md-4 px-0 mr-0 " style="margin-bottom: -5em;">
                     <select id="status" name="status" class="form-control">
-                        <option selected value="0">Chờ thanh toán</option>
+                        <option selected value="0">Chờ xác nhận</option>
                         <option value="1">Hủy</option>
                         <option value="2">Đang xử lý</option>
                         <option value="3">Đang giao</option>
@@ -77,7 +77,7 @@
                     {{ csrf_field() }}
                     <input type="hidden" name="_method" value="DELETE">
                     <select id="action" name="action" class="form-control">
-                        <option selected value="0">Chờ thanh toán</option>
+                        <option selected value="0">Chờ xác nhận</option>
                         <option value="1">Hủy</option>
                         <option value="2">Đang xử lý</option>
                         <option value="3">Đang giao</option>
@@ -137,7 +137,7 @@
                                         <td>{{ $dh->dh_email }}</td>
                                         <td>
                                             @if($dh->dh_trangThai == 0)
-                                            <span class="badge-item badge-status">Chờ thanh toán</span>
+                                            <span class="badge-item badge-status">Chờ xác nhận</span>
                                             @elseif($dh->dh_trangThai == 1)
                                             <span class="badge-item badge-danger">Đã hủy</span>
                                             @elseif($dh->dh_trangThai == 2)
@@ -278,7 +278,7 @@
         e.preventDefault();
         var giatri = $('#action').val();
         if (giatri == 0) {
-            var name = "Chờ thanh toán";
+            var name = "Chờ xác nhận";
         } else if (giatri == 1) {
             var name = "Hủy";
         } else if (giatri == 2) {

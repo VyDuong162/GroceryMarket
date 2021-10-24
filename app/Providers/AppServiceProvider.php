@@ -27,5 +27,6 @@ class AppServiceProvider extends ServiceProvider
         {
             return number_format($price, 2, '.', '\'');
         });
+        
     }
 }

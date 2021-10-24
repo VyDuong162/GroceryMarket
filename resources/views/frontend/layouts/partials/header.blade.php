@@ -374,7 +374,11 @@
                             <a href="offers.html" class="item channel_item"><i class="uil uil-gift icon__1"></i>Ưu
                                 đãi</a>
                             <a href="faq.html" class="item channel_item"><i class="uil uil-info-circle icon__1"></i>Câu hỏi thường gặp</a>
-                            <a href="sign_in.html" class="item channel_item"><i class="uil uil-lock-alt icon__1"></i>Đăng xuất</a>
+                            <a href="{{ route('logout') }}" class="item channel_item"><i class="uil uil-lock-alt icon__1"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"></i>Đăng xuất</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="_method" value="PUT">
+                            </form>
                         </div>
                     </li>
                 </ul>
@@ -415,7 +419,7 @@
                                             hang</a>
                                         <a href="bill.html" class="item channel_item page__links">Phiếu thanh
                                             toán</a>
-                                        <a href="sign_in.html" class="item channel_item page__links">Đăng nhập</a>
+                                        <a href="{{ route('login') }}" class="item channel_item page__links">Đăng nhập</a>
                                         <a href="sign_up.html" class="item channel_item page__links">Đăng ký</a>
                                         <a href="forgot_password.html" class="item channel_item page__links">Quên
                                             mật khẩu</a>

@@ -11,29 +11,29 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <div class="form-group {{ $errors->has('kh_taiKhoan') ? 'has-error':'' }} row">
+                            <label for="kh_taiKhoan" class="col-md-4 col-form-label text-md-right">Tên tài khoản</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="kh_taiKhoan" type="text" class="form-control @error('kh_taiKhoan') is-invalid @enderror" name="kh_taiKhoan" value="{{ old('kh_taiKhoan') }}" required autocomplete="kh_taiKhoan" autofocus>
 
-                                @error('email')
+                                @if($errors->has('kh_taiKhoan'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $errors->first('kh_taiKhoan') }}</strong>
                                     </span>
-                                @enderror
+                                @endif
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <div class="form-group {{ $errors->has('kh_matKhau') ? 'has-error':'' }} row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Mật khẩu</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="kh_matKhau" required autocomplete="current-password">
 
-                                @error('password')
+                                @error('kh_matKhau'))
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $errors->first('kh_matKhau') }}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -42,10 +42,10 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="kh_ghinhodangnhap" id="kh_ghinhodangnhap" {{ old('kh_ghinhodangnhap') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        Ghi nhớ đăng nhập
                                     </label>
                                 </div>
                             </div>
@@ -54,12 +54,12 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    Đăng nhập
                                 </button>
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
+                                        Quên mật khẩu
                                     </a>
                                 @endif
                             </div>

@@ -41,9 +41,9 @@ Sản phẩm - Thêm mới sản phẩm
                         <div class="form-group">
                             <label class="form-label">Cửa hàng tập hóa</label>
                             <select id="chth_ma" name="chth_ma" class="form-control">
-                                @foreach($dsCuaHang as $ch)
-                                <option value="{{ $ch->chth_ma }}" {{old('$ch->chth_ma') }}>{{ $ch->chth_ten }}</option>
-                                @endforeach
+                                    @foreach($dsCuaHang as $ch)
+                                    <option value="{{ $ch->chth_ma }}" >{{ $ch->chth_ten }}</option>
+                                    @endforeach
                             </select>
                         </div>
                         <div class="form-group">
