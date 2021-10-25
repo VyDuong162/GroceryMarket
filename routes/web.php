@@ -35,7 +35,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function(){
-    return view('welcome');
+    return view('frontend.index');
 });
 Route::get('/frontend', function(){
     return view('frontend.index');

@@ -59,14 +59,6 @@ Dashboard
         <li class="breadcrumb-item active">Dashboard</li>
     </ol>
     <div class="row" ng-controller="dashboardController" >
-        <?php
-             if(Session::has('user')) 
-                $user = Session::get('user')[0];
-        ?>
-    
-        <input type="hidden" name="kh_ma" value="{{ $user->kh_ma }}" ng-model="kh_ma">
-        <input type="hidden" name="vt_ma" value="{{ $user->vt_ma }}" ng-model="vt_ma">
-    
         <div class="col-xl-3 col-md-6">
             <div class="dashboard-report-card purple">
                 <div class="card-content">
@@ -137,7 +129,7 @@ Dashboard
             <div class="dashboard-report-card success">
                 <div class="card-content">
                     <span class="card-title">Tổng thu nhập hôm nay</span>
-                    <span class="card-count" ng-if="tongDoanhThu != null">
+                    <span class="card-count">
                         <% tongDoanhThu | currency:'':true:'4.0'%> <small>VND</small>
                        
                     </span>

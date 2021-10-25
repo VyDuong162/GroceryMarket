@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 class LoginController extends Controller
@@ -30,10 +31,10 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home'; //Sau khi đăng nhập thành công, sẽ tự động trỏ về trang /home/
+ //   protected $redirectTo = '/home'; //Sau khi đăng nhập thành công, sẽ tự động trỏ về trang /home/
     protected function redirectTo()
     {
-        if (auth()->user()->vt_ma ==1 || auth()->user()->vt_ma ==2) {
+        if (Auth::user()->vt_ma ==1 || Auth::user()->vt_ma ==2) {
             return '/admin';
         }
         return '/home';
@@ -92,9 +93,10 @@ class LoginController extends Controller
             $this->credentials($request), $request->filled('remember')
         );
     }
-    /* public function logout(Request $request)
+    protected function logout()
     {
-        $this->logout($request);
+        Auth::logout();
+        Session::flush();
         return redirect()->route('home');
-    } */
+    }
 }

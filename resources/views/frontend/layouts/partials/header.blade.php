@@ -351,10 +351,18 @@
                     <li>
                         <a href="dashboard_my_wishlist.html" class="option_links" title="Wishlist"><i class='uil uil-heart icon_wishlist'></i><span class="noti_count1">3</span></a>
                     </li>
+                    
                     <li class="ui dropdown">
+                        <?php if(Session::has('user')){
+                                $user = Session::get('user')[0];
+                            }
+                            ?>
                         <a href="#" class="opts_account">
+                           
+                            @if(isset($user))
                             <img src="{{ asset('themes/gambo/images/avatar/img-5.jpg') }}" alt="">
-                            <span class="user__name">John Doe</span>
+                            @endif
+                            <span class="user__name fw-bold">{{ isset($user) ? $user->kh_taiKhoan:'Tài khoản'}}</span>
                             <i class="uil uil-angle-down"></i>
                         </a>
                         <div class="menu dropdown_account">
@@ -366,6 +374,10 @@
                                     </span>
                                 </a>
                             </div>
+                            @if(!isset($user))
+                            <a href="{{ route('login') }}" class="item channel_item"><i class="uil uil-lock-alt icon__1" ></i>Đăng nhập</a>
+                            <a href="{{ route('register') }}" class="item channel_item"><i class="uil uil-lock-alt icon__1" ></i>Đăng ký</a>
+                            @else
                             <a href="dashboard_overview.html" class="item channel_item"><i class="uil uil-apps icon__1"></i>Bảng điều khiển</a>
                             <a href="dashboard_my_orders.html" class="item channel_item"><i class="uil uil-box icon__1"></i>Đơn đặt hàng của tôi</a>
                             <a href="dashboard_my_wishlist.html" class="item channel_item"><i class="uil uil-heart icon__1"></i>Sản phẩm yêu thích</a>
@@ -374,11 +386,14 @@
                             <a href="offers.html" class="item channel_item"><i class="uil uil-gift icon__1"></i>Ưu
                                 đãi</a>
                             <a href="faq.html" class="item channel_item"><i class="uil uil-info-circle icon__1"></i>Câu hỏi thường gặp</a>
-                            <a href="{{ route('logout') }}" class="item channel_item"><i class="uil uil-lock-alt icon__1"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"></i>Đăng xuất</a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                           
+                            <a href="javascript:$('#logout-form').submit();" class="item channel_item"><i class="uil uil-lock-alt icon__1"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"></i>Đăng xuất</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 {{ csrf_field() }}
-                                <input type="hidden" name="_method" value="PUT">
+                             
                             </form>
+                            @endif
+                           
                         </div>
                     </li>
                 </ul>
