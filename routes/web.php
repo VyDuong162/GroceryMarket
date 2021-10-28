@@ -5,6 +5,8 @@ use App\Http\Controllers\Backend\KhachHangController;
 use App\Http\Controllers\Backend\CuaHangTapHoaController;
 use App\Http\Controllers\Backend\DonHangController;
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -33,15 +35,13 @@ Route::get('/clear-cache', function() {
 });
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', function(){
-    return view('frontend.index');
-});
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 Route::get('/frontend', function(){
     return view('frontend.index');
 });
-Route::get('/index1', function(){
-    return view('frontend.index1');
+Route::get('/dangnhap', function(){
+    return view('auth.login1');
 });
 //dashboards
 Route::get('/admin',[AdminController::class,'dashboards'])->name('admin');
@@ -65,3 +65,6 @@ Route::resource('admin/donhang',DonHangController::class,['as'=>'admin']);
 Route::get('/donhang/inhoadon/{id}',[DonHangController::class,'pdf'])->name('donhang.inhoadon');
 Route::delete('/donhang/bulkaction',[DonHangController::class,'BulkAction'])->name('donhang.bulkaction');
 Route::get('/backend/donhang/search',[DonHangController::class,'Search']);
+
+// Frontend
+Route::get('/index',[FrontendController::class,'index'])->name('frontend.index');

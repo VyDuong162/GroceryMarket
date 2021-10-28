@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-App="app">
+<html lang="en" ng-app="app">
 
 <head>
     <meta charset="UTF-8">
@@ -23,7 +23,7 @@
 
 </head>
 
-<body >
+<body>
     <!-- Sidebar -->
     @include('backend.layouts.partials.sidebar')
     <!-- End Sidebar -->

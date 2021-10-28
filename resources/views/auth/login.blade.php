@@ -15,7 +15,8 @@
                             <label for="kh_taiKhoan" class="col-md-4 col-form-label text-md-right">Tên tài khoản</label>
 
                             <div class="col-md-6">
-                                <input id="kh_taiKhoan" type="text" class="form-control @error('kh_taiKhoan') is-invalid @enderror" name="kh_taiKhoan" value="{{ old('kh_taiKhoan') }}" required autocomplete="kh_taiKhoan" autofocus>
+                                <input id="kh_taiKhoan" type="text" class="form-control @error('kh_taiKhoan') is-invalid @enderror"
+                                @if(Cookie::has('users')) value="{{ Cookie::get('users') }}" @endif name="kh_taiKhoan"  required autocomplete="kh_taiKhoan" autofocus>
 
                                 @if($errors->has('kh_taiKhoan'))
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +30,8 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">Mật khẩu</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="kh_matKhau" required autocomplete="current-password">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" 
+                                @if(Cookie::has('pwd'))  value="{{ Cookie::get('pwd') }}" @endif name="kh_matKhau" required autocomplete="current-password">
 
                                 @error('kh_matKhau'))
                                     <span class="invalid-feedback" role="alert">

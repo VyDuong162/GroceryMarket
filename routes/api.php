@@ -35,3 +35,7 @@ Route::get('/thongke/doanhthuhomnay',[ApiController::class,'thongKeTongDoanhThuH
 // bao cao don hang
 Route::get('/baocao/donhang',[ApiController::class,'baoCaoDonHang'])->name('api.baocao.donhang');
 Route::get('/donhang/ganday',[ApiController::class,'baoCaoDonHangGanDay'])->name('api.donhang.ganday');
+
+//frontend
+Route::get('/thongke/top_sanpham_noibat',[ApiController::class,'thongke_top_sanphamnoibat'])->name('api.thongke.topsanphamnoibat');
+Route::get('/loaisanpham',[ApiController::class,'getloaisanpham'])->name('api.loaisanpham');

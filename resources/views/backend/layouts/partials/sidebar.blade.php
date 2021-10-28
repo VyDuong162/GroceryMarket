@@ -1,7 +1,7 @@
  <!-- sidebar -->
  <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
      <div class="c-sidebar-brand d-lg-down-none">
-         <img src="{{ asset('logo.png') }}"  height="50" alt="logo"><small><b>SMARTKET</b></small>
+         <img src="{{ asset('logo.png') }}"  height="30" alt="logo"><small><b>SMARKET</b></small>
      </div>
      <ul class="c-sidebar-nav">
          <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{route('admin')}}">

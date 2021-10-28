@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\QuanHuyen;
 use App\Models\PhuongXa;
 use App\Models\DonHang;
+use App\Models\LoaiSanPham;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -278,6 +279,16 @@ EOT;
         return response()->json(array(
             'code'=>200,
             'data'=>$data,
+        ));
+    }
+    public function thongke_top_sanphamnoibat(){
+        
+    }
+    public function getloaisanpham(){
+        $result = DB::table('loaisanpham')->orderBy('lsp_ten')->get();
+        return response()->json(array(
+            'code'=>200,
+            'result'=>$result,
         ));
     }
 }

@@ -94,9 +94,7 @@
         </div>
     </div>
 </div>
-
-
-<div class="section145">
+<div class="section145" ng-controller="loaisanphamController" novaliate>
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -108,102 +106,22 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <div class="owl-carousel cate-slider owl-theme">
+                <div class="owl-carousel cate-slider owl-theme" >
+                    @foreach($dsLoaiSanPham as $index =>$lsp)
                     <div class="item">
-                        <a href="#" class="category-item">
+                        <a href="#" class="category-item" >
                             <div class="cate-img">
-                                <img src="{{ asset('themes/gambo/images/category/icon-1.svg') }}" alt="">
+                                <img src="{{ asset('themes/gambo/images/category/icon-'.($index+1).'.svg') }}" alt="">
                             </div>
-                            <h4>Rau và trái cây</h4>
+                            <h4>{{ $lsp->lsp_ten }}</h4>
                         </a>
                     </div>
-                    <div class="item">
-                        <a href="#" class="category-item">
-                            <div class="cate-img">
-                                <img src="{{ asset('themes/gambo/images/category/icon-2.svg') }}" alt="">
-                            </div>
-                            <h4> Hàng tạp hóa & mặt hàng chủ lực </h4>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="category-item">
-                            <div class="cate-img">
-                                <img src="{{ asset('themes/gambo/images/category/icon-3.svg') }}" alt="">
-                            </div>
-                            <h4> Sữa & Trứng </h4>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="category-item">
-                            <div class="cate-img">
-                                <img src="{{ asset('themes/gambo/images/category/icon-4.svg') }}" alt="">
-                            </div>
-                            <h4> Đồ uống </h4>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="category-item">
-                            <div class="cate-img">
-                                <img src="{{ asset('themes/gambo/images/category/icon-5.svg') }}" alt="">
-                            </div>
-                            <h4> Đồ ăn nhẹ </h4>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="category-item">
-                            <div class="cate-img">
-                                <img src="{{ asset('themes/gambo/images/category/icon-6.svg') }}" alt="">
-                            </div>
-                            <h4> Chăm sóc tại nhà </h4>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="category-item">
-                            <div class="cate-img">
-                                <img src="{{ asset('themes/gambo/images/category/icon-7.svg') }}" alt="">
-                            </div>
-                            <h4> Mì & nước sốt </h4>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="category-item">
-                            <div class="cate-img">
-                                <img src="{{ asset('themes/gambo/images/category/icon-8.svg') }}" alt="">
-                            </div>
-                            <h4> Chăm sóc cá nhân </h4>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="category-item">
-                            <div class="cate-img">
-                                <img src="{{ asset('themes/gambo/images/category/icon-9.svg') }}" alt="">
-                            </div>
-                            <h4> Chăm sóc thú cưng </h4>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="category-item">
-                            <div class="cate-img">
-                                <img src="{{ asset('themes/gambo/images/category/icon-10.svg') }}" alt="">
-                            </div>
-                            <h4> Thịt & Hải sản </h4>
-                        </a>
-                    </div>
-                    <div class="item">
-                        <a href="#" class="category-item">
-                            <div class="cate-img">
-                                <img src="{{ asset('themes/gambo/images/category/icon-11.svg') }}" alt="">
-                            </div>
-                            <h4> Thiết bị điện tử </h4>
-                        </a>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
 <div class="section145">
     <div class="container">
         <div class="row">
@@ -218,10 +136,11 @@
             </div>
             <div class="col-md-12">
                 <div class="owl-carousel featured-slider owl-theme">
+                    @foreach($dsSanPhamNoiBat as $sp)
                     <div class="item">
                         <div class="product-item">
                             <a href="#" class="product-img">
-                                <img src="{{ asset('themes/gambo/images/product/img-1.jpg') }}" alt="">
+                                <img src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" alt="">
                                 <div class="product-absolute-options">
                                     <span class="offer-badge-1">6% off</span>
                                     <span class="like-icon" title="wishlist"></span>
@@ -229,12 +148,12 @@
                             </a>
                             <div class="product-text-dt">
                                 <p>Có sẵn<span>(Trong kho)</span></p>
-                                <h4>Tiêu đề sản phẩm tại đây</h4>
-                                <div class="product-price">$12 <span>$15</span></div>
+                                <h4>{{ $sp->sp_ten }}</h4>
+                                <div class="product-price">{{ number_format($sp->dgmh_gia,'0',',','.') }} <small>đ</small></div>
                                 <div class="qty-cart">
                                     <div class="quantity buttons_added">
                                         <input type="button" value="-" class="minus minus-btn">
-                                        <input type="number" step="1" name="quantity" value="1" class="input-text qty text">
+                                        <input type="number" step="1" min="1" name="quantity" value="1" class="input-text qty text">
                                         <input type="button" value="+" class="plus plus-btn">
                                     </div>
                                     <span class="cart-icon"><i class="uil uil-shopping-cart-alt"></i></span>
@@ -242,6 +161,7 @@
                             </div>
                         </div>
                     </div>
+                    @endforeach
                     <div class="item">
                         <div class="product-item">
                             <a href="#" class="product-img">
@@ -416,7 +336,6 @@
     </div>
 </div>
 
-
 <div class="section145">
     <div class="container">
         <div class="row">
@@ -455,8 +374,6 @@
         </div>
     </div>
 </div>
-
-
 <div class="section145">
     <div class="container">
         <div class="row">
@@ -881,9 +798,22 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 @section('custom-scripts')
+<script>
+    
+    app.controller('loaisanphamController', function($scope,$http){
+        $http({
+        method: 'GET',
+        url: "{{ route('api.loaisanpham') }}",
+        }).then(function successCallback(response) {   
+            console.log(response.data.result) ;
+            $scope.dsLoaiSanPham = response.data.result;
+        }, function errorCallback(response) {
+            console.log('thất bại');
+        });
 
+    });
+</script>
 @endsection

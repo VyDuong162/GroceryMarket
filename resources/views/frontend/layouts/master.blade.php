@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" ng-app="app">
 
 <head>
     <meta charset="UTF-8">
@@ -41,7 +41,7 @@
         @include('frontend.layouts.partials.footer')
         <!-- End Footer -->
         <!-- js -->
-        <script src="{{ asset('themes/gambo/js/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('vendors/jquery/jquery.min.js')}}"></script>
         <script src="{{ asset('themes/gambo/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('themes/gambo/vendor/OwlCarousel/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('themes/gambo/vendor/semantic/semantic.min.js') }}"></script>
@@ -49,7 +49,19 @@
         <script src="{{ asset('themes/gambo/js/custom.js') }}"></script>
         <script src="{{ asset('themes/gambo/js/offset_overlay.js') }}"></script>
         <script src="{{ asset('themes/gambo/js/night-mode.js') }}"></script>
-        @yield('scripts-custom')
+             <!-- Include thư viện quản lý Cart - AngularJS -->
+            <script src="{{ asset('vendor/ngCart/dist/ngCart.js') }}"></script>
+            <!-- Include script angularJS --> 
+        <script src="{{ asset('vendors/angular/angular.min.js') }}"></script>
+            <script>
+                var app= angular.module('app',[],function($interpolateProvider){
+                    $interpolateProvider.startSymbol('<%');
+                    $interpolateProvider.endSymbol('%>');
+                });
+    
+            </script>
+           
+        @yield('custom-scripts')
 </body>
 
 </html>

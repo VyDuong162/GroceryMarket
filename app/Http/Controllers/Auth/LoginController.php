@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 class LoginController extends Controller
@@ -79,6 +80,12 @@ class LoginController extends Controller
             $this->username() => 'required|string', // tên tài khoản bắt buộc nhập
             'kh_matKhau' => 'required|string',      // mật khẩu bắt buộc nhập
         ]);
+        
+        $remember_me = $request->has('kh_ghinhodangnhap') ? true : false;
+        if($remember_me){
+            Cookie::queue('users',$request->kh_taiKhoan,1440);
+            Cookie::queue('pwd',$request->kh_matKhau,1440);
+        }
     }
 
     /**
@@ -90,13 +97,19 @@ class LoginController extends Controller
     protected function attemptLogin(Request $request)
     {
         return $this->guard()->attempt(
-            $this->credentials($request), $request->filled('remember')
+            $this->credentials($request), $request->filled('kh_ghinhodangnhap')
         );
+      
     }
-    protected function logout()
-    {
-        Auth::logout();
-        Session::flush();
-        return redirect()->route('home');
+    public function logout(){
+        // Auth::logout();
+      	Auth::logoutCurrentDevice(); // use this instead of Auth::logout()
+        
+        request()->session()->invalidate();
+    
+        request()->session()->regenerateToken();
+    
+        return redirect('/login');
     }
+   
 }
