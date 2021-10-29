@@ -29,6 +29,7 @@
 <body>
     <!-- Header -->
     @include('frontend.layouts.partials.header')
+    @include('frontend.layouts.partials.sidebar-cart')
     <!-- End Header -->
     <!-- main -->
     <main id="main">
@@ -40,6 +41,7 @@
         <!-- Footer -->
         @include('frontend.layouts.partials.footer')
         <!-- End Footer -->
+            
         <!-- js -->
         <script src="{{ asset('vendors/jquery/jquery.min.js')}}"></script>
         <script src="{{ asset('themes/gambo/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -48,19 +50,33 @@
         <script src="{{ asset('themes/gambo/js/jquery.countdown.min.js') }}"></script>
         <script src="{{ asset('themes/gambo/js/custom.js') }}"></script>
         <script src="{{ asset('themes/gambo/js/offset_overlay.js') }}"></script>
-        <script src="{{ asset('themes/gambo/js/night-mode.js') }}"></script>
-             <!-- Include thư viện quản lý Cart - AngularJS -->
-            <script src="{{ asset('vendor/ngCart/dist/ngCart.js') }}"></script>
-            <!-- Include script angularJS --> 
-        <script src="{{ asset('vendors/angular/angular.min.js') }}"></script>
+        <script src="{{ asset('themes/gambo/js/night-mode.js') }}"></script> 
+        <script src="{{ asset('vendors/isotope/isotope.pkgd.min.js') }}"></script>
+        <script src="{{ asset('vendors/sweetalert/sweetalert.js') }}"></script>
+          <!-- Include script angularJS --> 
+          <script src="{{ asset('vendors/angular/angular.min.js') }}"></script>
+         <!-- Include thư viện quản lý Cart - AngularJS -->
+         <script src="{{ asset('vendors/ngCart/dist/ngCart.js') }}"></script>
+          
             <script>
-                var app= angular.module('app',[],function($interpolateProvider){
+              
+                var app= angular.module('app',['ngCart'],
+                    function($interpolateProvider){
                     $interpolateProvider.startSymbol('<%');
                     $interpolateProvider.endSymbol('%>');
                 });
-    
+            
+                app.controller('ctrlController',function($scope){
+                $scope.qty=1;
+                $scope.increment = function(){
+                    $scope.qty++;
+                },
+                $scope.decrement = function(){
+                    $scope.qty--;
+                }
+            });
             </script>
-           
+         
         @yield('custom-scripts')
 </body>
 

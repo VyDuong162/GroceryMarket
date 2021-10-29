@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\CuaHangTapHoaController;
 use App\Http\Controllers\Backend\DonHangController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\ShoppingCartController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -68,3 +69,4 @@ Route::get('/backend/donhang/search',[DonHangController::class,'Search']);
 
 // Frontend
 Route::get('/index',[FrontendController::class,'index'])->name('frontend.index');
+Route::get('/shopping-cart',[ShoppingCartController::class,'index'])->name('frontend.shoppingcart');

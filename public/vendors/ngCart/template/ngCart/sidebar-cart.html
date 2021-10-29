@@ -1,66 +1,92 @@
-<div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
-    Giỏ hàng trống
-</div>
-
-<div class="table-responsive col-lg-12 ngCart cart" ng-show="ngCart.getTotalItems() > 0">
-    <ul class="header-cart-wrapitem w-full">
-        <li class="header-cart-item flex-w flex-t m-b-12" ng-repeat="item in ngCart.getCart().items track by $index">
-            <div class="header-cart-item-img">
-                <img src="<% item.getData().sp_hinh_url %>" alt="IMG">
+<div class="bs-canvas bs-canvas-left position-fixed bg-cart h-100">
+    <div class="bs-canvas-header side-cart-header p-3">
+        <div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
+            Giỏ hàng trống
+        </div>
+        <div class="d-inline-block  main-cart-title" ng-show="ngCart.getTotalItems() > 0">Giỏ hàng của tôi <span>
+            (<% ngCart.getTotalItems() %> Sản phẩm)
+            </span></div>
+        <button type="button" class="bs-canvas-close close btn-close " aria-label="Close">
+            <i class="uil-multiply"></i>
+        </button>
+    </div>
+    <div class="bs-canvas-body table-responsive col-lg-12 ngCart cart" ng-show="ngCart.getTotalItems() > 0">
+        <div class="cart-top-total">
+            <div class="side-cart-items ul">
+                <div class="cart-item li" ng-repeat="item in ngCart.getCart().items track by $index">
+                    <div class="cart-product-img">
+                        <img src="<% item.getData().sp_hinh_url %>" height="100" alt="">
+                        <!-- <div class="offer-badge">6% OFF</div> -->
+                    </div>
+                    <div class="cart-text">
+                        <h4>
+                            <% item.getName() %>
+                        </h4>
+                        <div class="qty-cart">
+                           
+                            <div class="quantity buttons_added" > 
+                                <input type="button" ng-click="item.setQuantity(-1, true)" class="minus minus-btn" value="-"
+                                    ng-disabled="qty<=1" >
+                                <input type="number" ng-model="qty" name="quantity"
+                                    value="<% item.getQuantity() | number %>" class="input-text qty text">
+                                <input type="button" ng-click="item.setQuantity(1, true)" class="plus plus-btn" value="+"
+                                    ng-disabled="qty>=100" >
+                            </div>
+                        </div>
+                        <div class="cart-item-price">
+                            <% item.getPrice() | currency: "" :0 %>đ 
+                        </div>
+                        <button type="button" class="cart-close-btn" ng-click="ngCart.removeItemById(item.getId())"><i
+                                class="uil uil-multiply"></i></button>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="header-cart-item-txt p-t-8">
-                <a href="/san-pham/<% item.getId() %>" class="header-cart-item-name m-b-18 hov-cl1 trans-04 title">
-                    <% item.getName() %>
-                </a>
-
-                <span class="header-cart-item-info">
-                    <% item.getQuantity() | number %> x <% item.getPrice() | currency %>
-                </span>
-
-                <span ng-click="ngCart.removeItemById(item.getId())"
-                    class="glyphicon glyphicon-remove remove">Xóa</span>
-            </div>
-        </li>
-    </ul>
-</div>
-
-<div class="w-full">
-    <div class="header-cart-total w-full p-tb-40" ng-show="ngCart.getTax()">
-        Thuế (<% ngCart.getTaxRate() %>%): <% ngCart.getTax() | currency %>
+       
     </div>
-    <div class="header-cart-total w-full p-tb-40" ng-show="ngCart.getShipping()">
-        Shipping: <% ngCart.getShipping() | currency %>
-    </div>
-    <div class="header-cart-total w-full p-tb-40">
-        Tổng thành tiền: <% ngCart.totalCost() | currency %>
-    </div>
+    <div class="bs-canvas-footer">
+        <div class="cart-total-dil saving-total ">
+            <h4>Tổng tạm:</h4>
+            <span>
+                <% ngCart.getSubTotal() | currency: "" :0 %>đ
+            </span>
+        </div>
+        <div class="cart-total-dil saving-total">
+            <h4>Phí vận chuyển:</h4>
+            <span>
+                <%ngCart.setShipping(1000) | currency: "" :0 %>đ
+            </span>
+        </div>
 
-    <div class="header-cart-buttons flex-w w-full">
-        <a href="/gio-hang" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-            Xem giỏ hàng
-        </a>
+        <div class="main-total-cart">
+            <h2>Tổng tiền:</h2>
+            <span>
+                <% ngCart.totalCost() | currency: "" :0 %>đ
+            </span>
+        </div>
 
-        <a href="/gio-hang" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-            Thanh toán
-        </a>
+        <div class="checkout-cart">
+            <!--   <a href="#" class="promo-code">Có mã khuyến mãi?</a> -->
+            <a href="#" class="cart-checkout-btn hover-btn">Tiến hành thanh toán</a>
+        </div>
     </div>
 </div>
-<style>
-    .ngCart.cart span[ng-click] {
-        cursor: pointer;
-    }
+    <style>
+        .ngCart.cart span[ng-click] {
+            cursor: pointer;
+        }
 
-    .ngCart.cart .glyphicon.disabled {
-        color: #aaa;
-    }
+        .ngCart.cart .glyphicon.disabled {
+            color: #aaa;
+        }
 
-    .ngCart.cart .title {
-        color: blue;
-        font-weight: bold;
-    }
+        .ngCart.cart .title {
+            color: blue;
+            font-weight: bold;
+        }
 
-    .ngCart.cart .remove {
-        color: red;
-    }
-</style>
+        .ngCart.cart .remove {
+            color: red;
+        }
+    </style>

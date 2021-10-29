@@ -66,8 +66,6 @@
     <!--thông báo Lỗi  -->
     <script src="{{ asset('vendors/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('vendors/jquery-validation/localization/messages_vi.min.js') }}"></script>
-         <!-- Include thư viện quản lý Cart - AngularJS -->
-    <script src="{{ asset('vendor/ngCart/dist/ngCart.js') }}"></script>
        <!-- Include script angularJS --> 
    <script src="{{ asset('vendors/angular/angular.min.js') }}"></script>
     <script>

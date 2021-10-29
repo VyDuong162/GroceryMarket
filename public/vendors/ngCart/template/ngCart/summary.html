@@ -1,5 +1,9 @@
-<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-	data-notify="<% ngCart.getTotalItems() %>">
+
+<a href="#" class="giohang cart__btn hover-btn pull-bs-canvas-left " title="Cart">
+	<i class="uil uil-shopping-cart-alt"></i><span>Giỏ hàng</span>
+	<ins><% ngCart.getTotalItems() %> Sản phẩm</ins>
 	<i class="zmdi zmdi-shopping-cart"></i>
-	<% ngCart.totalCost() | currency %>
-</div>
+	
+	<span><% ngCart.totalCost() | currency: "" :0 %>đ</span>
+	<i class="uil uil-angle-down"></i>
+</a>
