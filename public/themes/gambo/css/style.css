@@ -3062,7 +3062,7 @@ label.control-label {
     color: #f55d2c;
 }
 
-.checout-address-step .form-control {
+/* .checout-address-step .form-control {
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
@@ -3070,7 +3070,7 @@ label.control-label {
     border: 1px solid #efefef;
 	position: relative;
 	padding: 0 1rem 0 1rem;
-}
+} */
 
 .form-control:focus {
     outline: none !important;

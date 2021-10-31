@@ -16,6 +16,10 @@ class ShoppingCartController extends Controller
     {
         return view('frontend.pages.shopping-cart');
     }
+    public function checkout()
+    {
+        return view('frontend.pages.checkout');
+    }
 
     /**
      * Show the form for creating a new resource.

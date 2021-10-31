@@ -1,14 +1,14 @@
 <div class="bs-canvas bs-canvas-left position-fixed bg-cart h-100">
     <div class="bs-canvas-header side-cart-header p-3">
-        <div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
-            Giỏ hàng trống
-        </div>
         <div class="d-inline-block  main-cart-title" ng-show="ngCart.getTotalItems() > 0">Giỏ hàng của tôi <span>
             (<% ngCart.getTotalItems() %> Sản phẩm)
             </span></div>
         <button type="button" class="bs-canvas-close close btn-close " aria-label="Close">
             <i class="uil-multiply"></i>
         </button>
+    </div>
+    <div class="alert alert-warning" role="alert" ng-show="ngCart.getTotalItems() === 0">
+        Giỏ hàng trống
     </div>
     <div class="bs-canvas-body table-responsive col-lg-12 ngCart cart" ng-show="ngCart.getTotalItems() > 0">
         <div class="cart-top-total">

@@ -1,0 +1,48 @@
+
+    <div class="pdpt-bg mt-0">
+        <div class="pdpt-title">
+            <h4>Đơn hàng</h4>
+        </div>
+        <div class="right-cart-dt-body ul" ng-show="ngCart.getTotalItems() > 0" style=" overflow-y: auto; height: 150px;">
+            <div class="cart-item border_radius li"  ng-repeat="item in ngCart.getCart().items track by $index">
+                <div class="cart-product-img">
+                    <img src="<% item.getData().sp_hinh_url %>" height="100" alt="">
+                   <!--  <div class="offer-badge">4% OFF</div> -->
+                </div>
+                <div class="cart-text">
+                    <h4><% item.getName() %></h4>
+                    <div class="cart-item-price"><span style="text-decoration: none;
+                        color: black;
+                        font-weight: 300;"><% item.getQuantity() %> x</span>  <% item.getPrice() | currency: "":0 %>đ</div>
+                    <button type="button" class="cart-close-btn" ng-click="ngCart.removeItemById(item.getId())"><i class="uil uil-multiply"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="total-checkout-group">
+            <div class="cart-total-dil">
+                <h4>Tổng tạm</h4>
+                <span><% ngCart.getSubTotal() | currency: "" :0 %>đ</span>
+            </div>
+            <div class="cart-total-dil pt-3">
+                <h4>Phí vận chuyển</h4>
+                <span><%ngCart.setShipping(1000) | currency: "" :0 %>đ</span>
+            </div>
+        </div>
+       <!--  <div class="cart-total-dil saving-total ">
+            <h4>Total Saving</h4>
+            <span>$3</span>
+        </div> -->
+        <div class="main-total-cart">
+            <h2>Tổng thành tiền</h2>
+            <span> <% ngCart.totalCost() | currency: "" :0 %>đ</span>
+        </div>
+        <div class="payment-secure">
+            <i class="uil uil-padlock"></i>Secure checkout
+        </div>
+    </div>
+    <a href="#" class="promo-link45">Have a promocode?</a>
+    <div class="checkout-safety-alerts">
+        <p><i class="uil uil-sync"></i>100% Replacement Guarantee</p>
+        <p><i class="uil uil-check-square"></i>100% Sản phẩm được đảm bảo</p>
+        <p><i class="uil uil-shield-check"></i>Thanh toán an toàn</p>
+    </div>

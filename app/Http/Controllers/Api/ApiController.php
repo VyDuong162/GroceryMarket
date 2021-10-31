@@ -291,4 +291,29 @@ EOT;
             'result'=>$result,
         ));
     }
+    public function gettinhtp(){
+        $result = DB::table('tinhtp')->orderBy('ttp_ten')->get();
+        return response()->json(array(
+            'code'=>200,
+            'result'=>$result,
+        ));
+    }
+    public function getquanhuyen(request $request){
+        $result = DB::table('quanhuyen')
+                            ->where('ttp_ma',$request->id)
+                            ->orderBy('qh_ten')->get();
+        return response()->json(array(
+            'code'=>200,
+            'result'=>$result,
+        ));
+    }
+    public function getphuongxa(request $request){
+        $result = DB::table('phuongxa')
+                            ->where('qh_ma',$request->id)
+                            ->orderBy('px_ten')->get();
+        return response()->json(array(
+            'code'=>200,
+            'result'=>$result,
+        ));
+    }
 }

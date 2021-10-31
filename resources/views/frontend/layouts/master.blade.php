@@ -74,7 +74,8 @@
                 $scope.decrement = function(){
                     $scope.qty--;
                 }
-            });
+                });
+                
             </script>
          
         @yield('custom-scripts')

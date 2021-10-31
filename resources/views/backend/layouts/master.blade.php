@@ -12,6 +12,7 @@
     <link href="{{ asset('coreui/vendor/css/style.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('coreui/vendor/css/coreui-chartjs.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('vendors/fontawesome/css/all.min.css') }}" rel="stylesheet" type="text/css">
+   
     <!-- Bootstrap CSS  -->
     <link rel="stylesheet" href="{{ asset('vendors/bootstrap/css/bootstrap.min.css') }}">
     <!-- Custom CSS -->

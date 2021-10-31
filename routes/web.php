@@ -70,3 +70,5 @@ Route::get('/backend/donhang/search',[DonHangController::class,'Search']);
 // Frontend
 Route::get('/index',[FrontendController::class,'index'])->name('frontend.index');
 Route::get('/shopping-cart',[ShoppingCartController::class,'index'])->name('frontend.shoppingcart');
+Route::get('/checkout',[ShoppingCartController::class,'checkout'])->name('frontend.checkout');
+Route::post('/order',[ShoppingCartController::class,'store'])->name('frontend.order');
