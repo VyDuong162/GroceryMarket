@@ -7,17 +7,18 @@ Shoping cart
 <link rel="stylesheet" href="{{asset('themes/gambo/css/step-wizard.css') }}" type="text/css">
 <link href="{{ asset('vendors/daterangepicker/daterangepicker.css') }}" rel="stylesheet" type="text/css">
 <style>
-     .checout-address-step .form-control {
-    font-size: auto;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    color: #2b2f4c;
-    border:auto;
-    position: relative; 
-     padding: auto;
+    .checout-address-step .form-control {
+        font-size: auto;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        color: #2b2f4c;
+        border: auto;
+        position: relative;
+        padding: auto;
     }
-    .error{
-        color:red;
+
+    .error {
+        color: red;
     }
 </style>
 @endsection
@@ -38,11 +39,12 @@ Shoping cart
     </div>
 </div>
 <div class="all-product-grid">
-    <div class="container" ng-controller="checkoutController">
-        <div class="row">
-            <div class="col-lg-8 col-md-7">
-                <div id="checkout_wizard" class="checkout accordion left-chck145">
-                    <form id="frmCheckout" name="frmCheckout" ng-submit="submitForm()" novalidate>
+    <div class="container" ng-controller="checkoutController" >
+        
+        <form id="frmCheckout" name="frmCheckout" ng-submit="thanhtoan()" novalidate>
+            <div class="row">
+                <div class="col-lg-8 col-md-7">
+                    <div id="checkout_wizard" class="checkout accordion left-chck145">
                         <div class="checkout-step">
                             <div class="checkout-card" id="headingTwo">
                                 <span class="checkout-step-number">1</span>
@@ -57,17 +59,17 @@ Shoping cart
                                             <div class="col-lg-12">
                                                 <div class="form-group">
                                                     <div class="product-radio">
-                                                        <ul class="product-now">
+                                                        <ul class="product-now" ng-init="dh.address='Nhà'">
                                                             <li style="width:100px">
-                                                                <input type="radio" id="ad1" ng-model="dh.address" name="address" checked>
+                                                                <input type="radio" id="ad1" value="Nhà" name="address"  ng-model="dh.address" ng-checked="true">
                                                                 <label for="ad1">Nhà</label>
                                                             </li>
                                                             <li style="width:100px">
-                                                                <input type="radio" id="ad2" ng-model="dh.address" name="address">
+                                                                <input type="radio" id="ad2" value="Văn phòng" name="address"  ng-model="dh.address">
                                                                 <label for="ad2">Văn phòng</label>
                                                             </li>
                                                             <li style="width:100px">
-                                                                <input type="radio" id="ad3" ng-model="dh.address" name="address">
+                                                                <input type="radio" id="ad3" value="Địa điểm khác"  name="address" ng-model="dh.address">
                                                                 <label for="ad3">Địa điểm khác</label>
                                                             </li>
                                                         </ul>
@@ -79,83 +81,96 @@ Shoping cart
                                                             <!-- họ tên khách hàng -->
                                                             <div class="form-group">
                                                                 <label class="control-label">Họ tên khách hàng:</label>
-                                                                <input type="text" id="kh_hoTen" name="kh_hoTen" ng-model="dh.kh_hoTen" 
-                                                                placeholder="họ tên khách hàng" class="form-control input-md" ng-minlength="10"
-                                                                ng-maxlength="100" ng-required=true
-                                                                ng-class="frmCheckout.kh_hoTen.$touched?frmCheckout.kh_hoTen.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
+                                                                <input type="text" id="kh_hoTen" name="kh_hoTen" ng-model="dh.kh_hoTen" value="{{ !empty($thongtinkh)? old('dh.kh_hoTen',$thongtinkh->kh_hoTen):'' }}" placeholder="họ tên khách hàng" class="form-control input-md" ng-minlength="10" ng-maxlength="100" ng-required=true ng-class="frmCheckout.kh_hoTen.$touched?frmCheckout.kh_hoTen.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
                                                                 <div class="invalid-feedback">
                                                                     <span class="error" ng-show="frmCheckout.kh_hoTen.$error.required">Vui lòng nhập họ tên</span>
                                                                     <span class="error" ng-show="frmCheckout.kh_hoTen.$error.minlength">Họ tên phải > 10 ký tự</span>
                                                                     <span class="error" ng-show="frmCheckout.kh_hoTen.$error.maxlength">Họ tên phải <= 100 ký tự</span>
-                                                                </div> 
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <!-- sdt -->
                                                         <div class="col-lg-6 col-md-12">
                                                             <div class="form-group">
                                                                 <label class="control-label">Số điện thoại</label>
-                                                                <input id="kh_soDienThoai" name="kh_soDienThoai" type="text" ng-model="dh.kh_soDienThoai" placeholder="Nhập số điện thoại" class="form-control input-md" ng-minlength="10"
-                                                                ng-maxlength="10" ng-required=true
-                                                                ng-class="frmCheckout.kh_soDienThoai.$touched?frmCheckout.kh_soDienThoai.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
+                                                                <input id="kh_soDienThoai" name="kh_soDienThoai" type="text" ng-model="dh.kh_soDienThoai" value="{{ !empty($thongtinkh)? old('dh.kh_soDienThoai',$thongtinkh->kh_soDienThoai):'' }}" placeholder="Nhập số điện thoại" class="form-control input-md" ng-minlength="10" ng-maxlength="10" ng-required=true ng-class="frmCheckout.kh_soDienThoai.$touched?frmCheckout.kh_soDienThoai.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
                                                                 <div class="invalid-feedback">
-                                                                <span class="error" ng-show="frmCheckout.kh_soDienThoai.$error.required">Vui lòng nhập số điện thoại</span>
-                                                                <span class="error" ng-show="frmCheckout.kh_soDienThoai.$error.minlength">Số điện thoại phải = 10 ký tự</span>
-                                                                <span class="error" ng-show="frmCheckout.kh_soDienThoai.$error.maxlength">Số điện thoại phải = 100 ký tự</span>
+                                                                    <span class="error" ng-show="frmCheckout.kh_soDienThoai.$error.required">Vui lòng nhập số điện thoại</span>
+                                                                    <span class="error" ng-show="frmCheckout.kh_soDienThoai.$error.minlength">Số điện thoại phải = 10 ký tự</span>
+                                                                    <span class="error" ng-show="frmCheckout.kh_soDienThoai.$error.maxlength">Số điện thoại phải = 100 ký tự</span>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12 col-md-12">
                                                             <div class="form-group">
                                                                 <label class="control-label">Địa chỉ email (nếu có)</label>
-                                                                <input id="kh_email" class="form-control" name="kh_email" type="email" ng-model="dh.kh_email" placeholder="Nhập địa chỉ email" class="form-control input-md" 
-                                                                ng-maxlength="100" ng-email=true
-                                                                ng-class="frmCheckout.kh_email.$touched?frmCheckout.kh_email.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
+                                                                <input id="kh_email" class="form-control" name="kh_email" type="email" ng-model="dh.kh_email" value="{{ !empty($thongtinkh)? old('dh.kh_email',$thongtinkh->kh_email):'' }}" placeholder="Nhập địa chỉ email" class="form-control input-md" ng-maxlength="100" ng-email=true ng-class="frmCheckout.kh_email.$touched?frmCheckout.kh_email.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
                                                                 <div class="invalid-feedback">
-                                                                <span class="error" ng-show="frmCheckout.kh_email.$error.email">Email không đúng định dạng</span>
-                                                                <span class="error" ng-show="frmCheckout.kh_email.$error.maxlength">Email phải <= 100 ký tự</span>
+                                                                    <span class="error" ng-show="frmCheckout.kh_email.$error.email">Email không đúng định dạng</span>
+                                                                    <span class="error" ng-show="frmCheckout.kh_email.$error.maxlength">Email phải <= 100 ký tự</span>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                       
+                                                        @if(!empty(Session::has('user')) && $diachi!='')
+                                                        <div class="row col-lg-12" ng-controller="tinhtpController">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Địa chỉ cụ thể</label>
+                                                                    <select name="dh_diaChi" id="dh_diaChi" class="form-control" ng-model="dh.kh_diaChi"  ng-required="true" ng-class="frmCheckout.dh_diaChi.$touched?frmCheckout.dh_diaChi.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
+                                                                        <option value="">chọn địa chỉ giao</option>
+                                                                        @foreach($diachi as $index => $dc)
+                                                                            @if($index == 0)
+                                                                            <option value="{{ $dc->dc_ma }}" ng-selected="selected">{{ $dc->dc_ten }}</option>
+                                                                            @else
+                                                                            <option value="{{ $dc->dc_ma }}">{{ $dc->dc_ten }}</option>
+                                                                            @endif
+                                                                        @endforeach
+                                                                        <div class="invalid-feedback">
+                                                                            <span class="error" ng-show="frmCheckout.dh_diaChi.$error.required">Vui lòng chọn địa chỉ</span>
+                                                                        </div>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @else
                                                         <div class="row col-lg-12" ng-controller="tinhtpController">
                                                             <div class="col-lg-4 col-md-12">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Tỉnh/Thành phố</label>
-                                                                    <select name="ttp_id" id="ttp_id" class="form-control" ng-model="dh.selectttp" ng-change="ontpchange($event.target.value)" ng-required="true"
-                                                                    ng-class="frmCheckout.ttp_id.$touched?frmCheckout.ttp_id.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
+                                                                    <select name="ttp_id" id="ttp_id" class="form-control" ng-model="dh.selectttp" ng-change="ontpchange($event.target.value)" ng-required="true" ng-class="frmCheckout.ttp_id.$touched?frmCheckout.ttp_id.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
                                                                         <option value="">Chọn tỉnh/Tp</option>
                                                                         <option ng-repeat="ttp in dsTinhTp" value="<% ttp.ttp_ma %>"><% ttp.ttp_ten %></option>
                                                                         <div class="invalid-feedback">
-                                                                        <span class="error" ng-show="frmCheckout.ttp_id.$error.required">Vui lòng chọn thành phố</span>
+                                                                            <span class="error" ng-show="frmCheckout.ttp_id.$error.required">Vui lòng chọn thành phố</span>
                                                                         </div>
                                                                     </select>
-                                                                    
+
                                                                 </div>
-                                                               
+
                                                             </div>
                                                             <div class="col-lg-4 col-md-12">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Quận/huyện</label>
-                                                                    <select name="qh_id" id="qh_id" class="form-control" ng-model="dh.selectqh" ng-change="onqhchange($event.target.value)"  ng-required="true"
-                                                                    ng-class="frmCheckout.qh_id.$touched?frmCheckout.qh_id.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
+                                                                    <select name="qh_id" id="qh_id" class="form-control" ng-model="dh.selectqh" ng-change="onqhchange($event.target.value)" ng-required="true" ng-class="frmCheckout.qh_id.$touched?frmCheckout.qh_id.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
                                                                         <option value="">Chọn quận huyện</option>
                                                                         <option ng-repeat="qh in dsQuanHuyen" value="<% qh.qh_ma %>"><% qh.qh_ten %></option>
                                                                     </select>
                                                                     <div class="invalid-feedback">
-                                                                    <span class="error" ng-show="frmCheckout.qh_id.$error.required">Vui lòng chọn quận huyện</span>
-                                                                </div>
+                                                                        <span class="error" ng-show="frmCheckout.qh_id.$error.required">Vui lòng chọn quận huyện</span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-4 col-md-12">
                                                                 <div class="form-group">
                                                                     <label class="control-label">Phường/xã</label>
-                                                                    <select name="px_id" id="px_id" class="form-control" ng-model="dh.selectpx" ng-required="true"
-                                                                    ng-class="frmCheckout.px_id.$touched?frmCheckout.px_id.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
+                                                                    <select name="px_ma" id="px_ma" class="form-control" ng-model="dh.px_ma" ng-required="true" ng-class="frmCheckout.px_ma.$touched?frmCheckout.px_ma.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
                                                                         <option value="">Chọn phường xã</option>
                                                                         <option ng-repeat="px in dsPhuongXa" value="<% px.px_ma %>"><% px.px_ten %></option>
                                                                     </select>
                                                                     <div class="invalid-feedback">
-                                                                    <span class="error" ng-show="frmCheckout.px_id.$error.required">Vui lòng chọn phường xã</span>
-                                                                </div>
+                                                                        <span class="error" ng-show="frmCheckout.px_ma.$error.required">Vui lòng chọn phường xã</span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -163,20 +178,20 @@ Shoping cart
                                                         <div class="col-lg-12 col-md-12">
                                                             <div class="form-group">
                                                                 <label class="control-label">Địa chỉ cụ thể</label>
-                                                                <input id="dh_diaChi" name="dh_diaChi" type="text" class="form-control" ng-model="dh.kh_diaChi" placeholder="Nhập đầy đủ: số nhà - đường/(phường xã)- quận/huyện- tỉnh/tp"  ng-required="true"
-                                                                ng-minlength="5" ng-maxlength="100"
-                                                                ng-class="frmCheckout.dh_diaChi.$touched?frmCheckout.dh_diaChi.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
-                                                               <div class="invalid-feedback">
+                                                                <input id="dh_diaChi" name="dh_diaChi" type="text" class="form-control" ng-model="dh.kh_diaChi" placeholder="Nhập đầy đủ: số nhà - đường/(phường xã)- quận/huyện- tỉnh/tp" ng-required="true" ng-minlength="5" ng-maxlength="100" ng-class="frmCheckout.dh_diaChi.$touched?frmCheckout.dh_diaChi.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
+                                                                <div class="invalid-feedback">
                                                                     <span class="error" ng-show="frmCheckout.dh_diaChi.$error.required">Vui lòng nhập địa chỉ cụ thể</span>
                                                                     <span class="error" ng-show="frmCheckout.dh_diaChi.$error.minlength">Địa chỉ phải >= 5 ký tự</span>
                                                                     <span class="error" ng-show="frmCheckout.dh_diaChi.$error.maxlength">Địa Chỉ phải <= 100 ký tự</span>
                                                                 </div>
                                                             </div>
-                                                            
+
                                                         </div>
+                                                        @endif
+                                                       
                                                     </div>
                                                 </div>
-                                                <div class="checkout-step-body" >
+                                                <div class="checkout-step-body">
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="form-group">
@@ -184,10 +199,9 @@ Shoping cart
                                                                 <div class="date-slider-group">
                                                                     <div class="owl-carousel date-slider owl-theme">
                                                                         <div class="item">
-                                                                            <div class="date-now">
+                                                                            <div class="date-now" >
                                                                                 <label for="ngaygiao">Ngày</label>
-                                                                                <input type="text" id="ngaygiao" name="ngaygiao" ng-model="dh.ngaygiao" ng-required="true"
-                                                                                ng-class="frmCheckout.ngaygiao.$touched?frmCheckout.ngaygiao.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
+                                                                                <input type="text" id="ngaygiao" name="ngaygiao" ng-model="dh.ngaygiao" ng-required="true" ng-class="frmCheckout.ngaygiao.$touched?frmCheckout.ngaygiao.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
                                                                                 <span class="error" ng-show="frmCheckout.ngaygiao.$error.required">Vui lòng nhập ngày giao</span>
                                                                             </div>
                                                                         </div>
@@ -196,39 +210,18 @@ Shoping cart
                                                                 <div class="time-radio">
                                                                     <div class="ui form">
                                                                         <div class="grouped fields">
+
                                                                             <div class="field">
-                                                                                <div class="ui radio checkbox chck-rdio">
-                                                                                    <input type="radio" name="giogiao" checked tabindex="0" class="hidden" ng-model="dh.giogiao"
-                                                                                    ng-class="frmCheckout.giogiao.$touched?frmCheckout.giogiao.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
-                                                                                    <label>8.00AM - 10.00AM</label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <div class="ui radio checkbox chck-rdio">
-                                                                                    <input type="radio" name="giogiao" tabindex="0" class="hidden" ng-model="dh.giogiao"
-                                                                                    ng-class="frmCheckout.giogiao.$touched?frmCheckout.giogiao.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
-                                                                                    <label>10.00AM - 12.00PM</label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <div class="ui radio checkbox chck-rdio">
-                                                                                    <input type="radio" name="giogiao" tabindex="0" class="hidden" ng-model="dh.giogiao"
-                                                                                    ng-class="frmCheckout.giogiao.$touched?frmCheckout.giogiao.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
-                                                                                    <label>12.00PM - 2.00PM</label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <div class="ui radio checkbox chck-rdio">
-                                                                                    <input type="radio" name="giogiao" tabindex="0" class="hidden" ng-model="dh.giogiao"
-                                                                                    ng-class="frmCheckout.giogiao.$touched?frmCheckout.giogiao.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
-                                                                                    <label>2.00PM - 4.00PM</label>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="field">
-                                                                                <div class="ui radio checkbox chck-rdio">
-                                                                                    <input type="radio" name="giogiao" tabindex="0" class="hidden" ng-model="dh.giogiao"
-                                                                                    ng-class="frmCheckout.giogiao.$touched?frmCheckout.giogiao.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
-                                                                                    <label>4.00PM - 6.00PM</label>
+                                                                                <label for="thoigian">Thời gian</label>
+                                                                                <select name="giogiao" id="giogiao" ng-model="dh.giogiao" ng-required="true" ng-class="frmCheckout.giogiao.$touched?frmCheckout.giogiao.$invalid?'form-control is-invalid':'form-control is-valid':'form-control'">
+                                                                                    <option value="">Chọn thời gian</option>
+                                                                                    <option value="8.00AM - 10.00AM" ng-selected="selected">8.00AM - 12.00AM</option>
+                                                                                    <option value="12.00PM - 2.00PM">12.00PM - 2.00PM</option>
+                                                                                    <option value="2.00PM - 4.00PM">2.00PM - 4.00PM</option>
+                                                                                    <option value="4.00PM - 6.00PM">4.00PM - 6.00PM</option>
+                                                                                </select>
+                                                                                <div class="invalid-feedback">
+                                                                                    <span class="error" ng-show="frmCheckout.giogiao.$error.required">Vui lòng chọn thời gian</span>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -258,22 +251,22 @@ Shoping cart
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="rpt100">
-                                                    <ul class="radio--group-inline-container_1">
+                                                    <ul class="radio--group-inline-container_1" ng-init="dh.paymentmethod=3">
                                                         <li>
                                                             <div class="radio-item_1">
-                                                                <input type="radio" id="cashondelivery1" value="cashondelivery" name="paymentmethod"  ng-checked="true" data-minimum="50.0" ng-model="dh.paymentmethod" > 
-                                                                <label for="cashondelivery1" class="radio-label_1">Thanh toán trực tiệp</label>
+                                                                <input type="radio" id="paymentmethod1" value="3" name="paymentmethod" ng-checked="true" ng-model="dh.paymentmethod">
+                                                                <label for="paymentmethod1" class="radio-label_1">Thanh toán trực tiệp</label>
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div class="radio-item_1">
-                                                                <input  type="radio" id="card1" value="card" name="paymentmethod" data-minimum="50.0" ng-model="dh.paymentmethod">
-                                                                <label for="card1" class="radio-label_1">Thanh toán online</label>
+                                                                <input type="radio" id="paymentmethod2" value="1" name="paymentmethod" ng-model="dh.paymentmethod">
+                                                                <label for="paymentmethod2" class="radio-label_1">Thanh toán online</label>
                                                             </div>
                                                         </li>
                                                     </ul>
                                                 </div>
-                                                <div class="form-group return-departure-dts" data-method="cashondelivery">
+                                                <div class="form-group return-departure-dts" data-method="3">
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="pymnt_title">
@@ -283,7 +276,7 @@ Shoping cart
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group return-departure-dts" data-method="card">
+                                                <div class="form-group return-departure-dts" data-method="1">
                                                     <div class="row">
                                                         <div class="col-lg-12">
                                                             <div class="pymnt_title mb-4">
@@ -295,7 +288,7 @@ Shoping cart
                                                                 <label class="control-label">Họ tên người chủ thẻ</label>
                                                                 <div class="ui search focus">
                                                                     <div class="ui left icon input swdh11 swdh19">
-                                                                        <input class="prompt srch_explore" type="text" name="holdername" value="" id="holder[name]" required="" maxlength="64" placeholder="Holder Name">
+                                                                        <input class="prompt srch_explore" type="text" name="holdername"  id="holder[name]"  maxlength="64" placeholder="Holder Name">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -305,12 +298,12 @@ Shoping cart
                                                                 <label class="control-label">Mã thẻ</label>
                                                                 <div class="ui search focus">
                                                                     <div class="ui left icon input swdh11 swdh19">
-                                                                        <input class="prompt srch_explore" type="text" name="cardnumber" value="" id="card[number]" required="" maxlength="64" placeholder="Card Number">
+                                                                        <input class="prompt srch_explore" type="text" name="cardnumber" id="card[number]"  maxlength="64" placeholder="Card Number">
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                     <!--    <div class="col-lg-4">
+                                                        <!--    <div class="col-lg-4">
                                                             <div class="form-group mt-1">
                                                                 <label class="control-label">Expiration
                                                                     Month*</label>
@@ -354,20 +347,24 @@ Shoping cart
                                                         </div> -->
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="next-btn16 hover-btn"  ng-disabled="frmCheckout.$invalid">Đặt hàng</button>
+                                              <!--   <ngcart-checkout service="http" settings="{ url:'order' }" template-url="{{ asset('vendors/ngCart/template/ngCart/checkout.html') }}">
+                                                    <button class="next-btn16 hover-btn" ng-disabled="frmCheckout.$invalid">Đặt hàng</button>
+                                                </ngcart-checkout> -->
+                                                <button class="next-btn16 hover-btn" type="submit"  ng-disabled="frmCheckout.$invalid">Đặt hàng</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </form>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-5">
+                    <ngcart-cart template-url="{{ asset('vendors/ngCart/template/ngCart/cart-checkout.html') }}"></ngcart-cart>
                 </div>
             </div>
-            <div class="col-lg-4 col-md-5">
-                <ngcart-cart template-url="{{ asset('vendors/ngCart/template/ngCart/cart-checkout.html') }}"></ngcart-cart>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
@@ -413,27 +410,50 @@ Shoping cart
 
         }
     });
-    app.controller('checkoutController', function($scope,$http) {
-        $scope.submitForm = function(){
+   
+    app.controller('checkoutController', function($scope, $http,ngCart) {
+        
+        sessionStorage.setItem("kh_ma", "{{ Session::has('user') }}");
+       if(sessionStorage.getItem("kh_ma")==''){
+        console.log("rỗng");
+       }else{
+        $scope.dh={kh_hoTen:'{{ $thongtinkh->kh_hoTen }}',kh_soDienThoai:'{{ $thongtinkh->kh_soDienThoai }}',kh_email:'{{ $thongtinkh->kh_email }}',ngaygiao:moment().format("DD-MM-YYYY"),paymentmethod:3,address:"Nhà"};  
+           
+       }
+      
+        $scope.thanhtoan = function() {
             var data = $.param($scope.dh);
             $http({
                 method: 'POST',
                 url: "{{ route('frontend.order') }}",
-                data:data,
-                header:{ 'Content-Type': 'application/x-www-form-urlencoded'}
+                data: {
+                    datakh:$scope.dh,
+                    datagh:ngCart.toObject()
+                },
+                header: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
             }).then(function successCallback(response) {
-                console.log("gửi thành công");
-               
+                Swal.fire({  
+                     position: 'top-end',   
+                     icon: 'success',   
+                     title: 'Đơn hàng của bạn đặt thành công!',   
+                     showConfirmButton: false,   
+                     timer: 2000 });  
+                ngCart.empty(); 
+                window.location.href ="{{route('home')}}";
             }, function errorCallback(response) {
                 console.log('thất bại');
             });
         }
-       
+
+
     });
     $(document).ready(function() {
         $('#ngaygiao').daterangepicker({
             singleDatePicker: true,
             showDropdowns: true,
+            startDate:  moment().format("DD-MM-YYYY"),
             minDate: moment().format("DD-MM-YYYY"),
             maxDate: moment().add(15, 'days'),
             "locale": {
@@ -456,6 +476,5 @@ Shoping cart
 
         });
     });
-
 </script>
 @endsection

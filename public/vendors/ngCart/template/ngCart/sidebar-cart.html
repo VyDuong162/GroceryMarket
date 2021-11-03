@@ -1,3 +1,9 @@
+<style>
+    a.disabled {
+    pointer-events: none;
+    cursor: default;
+    }
+</style>
 <div class="bs-canvas bs-canvas-left position-fixed bg-cart h-100">
     <div class="bs-canvas-header side-cart-header p-3">
         <div class="d-inline-block  main-cart-title" ng-show="ngCart.getTotalItems() > 0">Giỏ hàng của tôi <span>
@@ -68,7 +74,7 @@
 
         <div class="checkout-cart">
             <!--   <a href="#" class="promo-code">Có mã khuyến mãi?</a> -->
-            <a href="#" class="cart-checkout-btn hover-btn">Tiến hành thanh toán</a>
+            <a href="checkout" class="cart-checkout-btn hover-btn" ng-class="ngCart.getTotalItems() === 0?'disabled':''">Tiến hành thanh toán</a>
         </div>
     </div>
 </div>

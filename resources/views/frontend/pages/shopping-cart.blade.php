@@ -10,6 +10,7 @@ Shoping cart
 <div class="section145">
     <div class="container">
         <ngcart-cart template-url="{{ asset('vendors/ngCart/template/ngCart/cart.html') }}"></ngcart-cart>
+       
     </div>
 </div>
 

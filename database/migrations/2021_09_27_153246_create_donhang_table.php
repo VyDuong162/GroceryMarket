@@ -19,14 +19,15 @@ class CreateDonhangTable extends Migration
             $table->unsignedBigInteger('kh_ma')->length(11);
             $table->unsignedBigInteger('chth_ma')->length(11);
             $table->string('dh_diaChi',200);
-            $table->decimal('dh_giaTri',13,2);
+            $table->decimal('dh_giaTri',13,2)->nullable();
             $table->string('dh_soDienThoai',10);
-            $table->string('dh_email',100);
+            $table->string('dh_email',100)->nullable();
             
             $table->string('dh_trangThai')->comment('Trạng thái đơn hàng hiện tại: 1 - chưa hoàn thành, 2-hoàn thành');
             $table->unsignedTinyInteger('pttt_ma')->length(10);
             $table->timestamp('dh_taoMoi')->useCurrent();
             $table->timestamp('dh_capNhat')->nullable();
+            $table->string('dh_ghiChu')->nullable();
             $table->foreign('kh_ma')->references('kh_ma')->on('khachhang')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');

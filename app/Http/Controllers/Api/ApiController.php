@@ -316,4 +316,20 @@ EOT;
             'result'=>$result,
         ));
     }
+    public function thongtinkhachhang(request $request){
+        if($request->id!=null){
+            $result = DB::table('khachhang')
+            ->where('kh_ma',$request->id)
+                    ->get();
+        $diachi = DB::table('diachi')
+                    ->where('kh_ma',$request->id)
+                    ->orderBy('dc_ma')->get();
+        return response()->json(array(
+        'code'=>200,
+        'result'=>$result,
+        'diachi'=>$diachi,
+        ));
+        }
+       
+    }
 }

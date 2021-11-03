@@ -440,8 +440,10 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
                     //     });
                     fulfilmentProvider.checkout()
                         .then(function (data, status, headers, config) {
+							console.log(data);
                             $rootScope.$broadcast('ngCart:checkout_succeeded', data);
                         }, function (data, status, headers, config) {
+							console.log(status);
                             $rootScope.$broadcast('ngCart:checkout_failed', {
                                 statusCode: status,
                                 error: data
@@ -507,11 +509,11 @@ angular.module('ngCart.fulfilment', [])
  }])
 
 .service('ngCart.fulfilment.http', ['$http', 'ngCart', function($http, ngCart){
-
+		
         this.checkout = function(settings){
             return $http.post(settings.url,
                 { data: ngCart.toObject(), options: settings.options});
-        }
+        };
  }])
 
 

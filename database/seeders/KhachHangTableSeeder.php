@@ -56,7 +56,7 @@ class KhachHangTableSeeder extends Seeder
                 'kh_ngaySinh' => $faker->date('Y-m-d'),
                 'kh_soDienThoai'=>$faker->numerify('##########'),
                 'kh_email' => $faker->unique()->email,
-                'kh_taiKhoan' =>$dsTaiKhoan[$i-2].Str::random(2).random_int(1,100),
+                'kh_taiKhoan' =>$dsTaiKhoan[$i-2].'0'.$i,
                 'kh_matKhau' => Hash::make(12345678),
                 'vt_ma' => $vt_ma,
                 'px_ma'=>PhuongXa::all()->random()->px_ma,

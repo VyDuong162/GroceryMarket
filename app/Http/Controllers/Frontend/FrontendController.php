@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\DonHang;
 use App\Models\LoaiSanPham;
 use App\Models\SanPham;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class FrontendController extends Controller
 {
   
@@ -43,5 +44,12 @@ class FrontendController extends Controller
          }
          $data = $query;
          return $data;
+    }
+    public function myorders(){
+        $kh_ma = Auth::user()->kh_ma;
+        $dsDonHang = DonHang::where('kh_ma','=',$kh_ma)
+                            ->orderBy('dh_taoMoi')->get();
+        return view('frontend.pages.my_orders')
+        ->with('dsDonHang',$dsDonHang);
     }
 }

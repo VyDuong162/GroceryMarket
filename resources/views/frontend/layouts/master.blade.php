@@ -75,7 +75,7 @@
                     $scope.qty--;
                 }
                 });
-                
+               
             </script>
          
         @yield('custom-scripts')

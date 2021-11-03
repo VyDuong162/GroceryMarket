@@ -13,10 +13,9 @@ class DonHang extends Model
     protected $table ='donhang';
     protected $fillable =['kh_ma','chth_ma','dh_diaChi','dh_giaTri','dh_soDienThoai','dh_email','dh_trangThai','pttt_ma','dh_taoMoi','dh_capNhat'];
     
-    protected $guarded = ['dh_ma'];
+    protected $guarded = 'dh_ma';
 
     protected $primaryKey='dh_ma';
-    public    $incrementing = false;
     public $timestamps =false;
     protected $dates =['dh_taoMoi','dh_capNhat'];
     protected $dateFormat ='Y-m-d H:i:s';
@@ -37,6 +36,9 @@ class DonHang extends Model
     }
     public function hoadon(){
         return $this->hasOne('App\Models\HoaDon','dh_ma','dh_ma');
+    }
+    public function chitietdh(){
+        return $this->hasMany('App\Models\ChiTiet_DonHang','dh_ma','dh_ma');
     }
     public function vanchuyen(){
         return $this->hasMany('App\Models\VanChuyen','dh_ma','dh_ma');
