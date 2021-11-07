@@ -19,7 +19,7 @@ class QuanHuyen extends Model
     protected $dateFormat ='Y-m-d H:i:s';
 
     public function tinhtp(){
-        return $this->belongsTo('App\Model\TinhTp','tp_ma','tp_ma');
+        return $this->belongsTo('App\Models\TinhTp','tp_ma','tp_ma');
     }
    
 }

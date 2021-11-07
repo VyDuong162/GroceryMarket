@@ -18,6 +18,6 @@ class TrangThai extends Model
     protected $dates =['created_at','updated_at'];
     protected $dateFormat = 'Y-m-d H:i:s';
     public function vanchuyen(){
-        return $this->hasMany('App\Model\VanChuyen','tt_ma','tt_ma');
+        return $this->hasMany('App\Models\VanChuyen','tt_ma','tt_ma');
     }
 }

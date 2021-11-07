@@ -271,8 +271,8 @@
                             <a href="{{ route('register') }}" class="item channel_item"><i class="uil uil-lock-alt icon__1" ></i>Đăng ký</a>
                             @else
                             <a href="dashboard_overview.html" class="item channel_item"><i class="uil uil-apps icon__1"></i>Bảng điều khiển</a>
-                            <a href="dashboard_my_orders.html" class="item channel_item"><i class="uil uil-box icon__1"></i>Đơn đặt hàng của tôi</a>
-                            <a href="dashboard_my_wishlist.html" class="item channel_item"><i class="uil uil-heart icon__1"></i>Sản phẩm yêu thích</a>
+                            <a href="my-orders" class="item channel_item"><i class="uil uil-box icon__1"></i>Đơn đặt hàng của tôi</a>
+                            <a href="my-wishlist" class="item channel_item"><i class="uil uil-heart icon__1"></i>Sản phẩm yêu thích</a>
                             <a href="dashboard_my_wallet.html" class="item channel_item"><i class="uil uil-usd-circle icon__1"></i>Ví của tôi</a>
                             <a href="dashboard_my_addresses.html" class="item channel_item"><i class="uil uil-location-point icon__1"></i>Địa chỉ của tôi</a>
                             <a href="offers.html" class="item channel_item"><i class="uil uil-gift icon__1"></i>Ưu

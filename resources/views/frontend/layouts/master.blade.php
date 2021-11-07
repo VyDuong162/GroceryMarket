@@ -52,6 +52,8 @@
         <script src="{{ asset('themes/gambo/js/offset_overlay.js') }}"></script>
         <script src="{{ asset('themes/gambo/js/night-mode.js') }}"></script> 
         <script src="{{ asset('vendors/isotope/isotope.pkgd.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('vendors/momentjs/moment.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('vendors/daterangepicker/daterangepicker.min.js') }}"></script>
         <script src="{{ asset('vendors/sweetalert/sweetalert.js') }}"></script>
           <!-- Include script angularJS --> 
           <script src="{{ asset('vendors/angular/angular.min.js') }}"></script>
@@ -75,7 +77,7 @@
                     $scope.qty--;
                 }
                 });
-               
+                
             </script>
          
         @yield('custom-scripts')

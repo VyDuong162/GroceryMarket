@@ -19,6 +19,6 @@ class HoaDon extends Model
     protected $dateFormat='Y-m-d H:i:s';
 
     public function donhang(){
-        return $this->belongsTo('App\Model\DonHang','dh_ma','dh_ma');
+        return $this->belongsTo('App\Models\DonHang','dh_ma','dh_ma');
     }
 }

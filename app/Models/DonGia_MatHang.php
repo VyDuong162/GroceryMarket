@@ -18,5 +18,7 @@ class DonGia_MatHang extends Model
     public    $incrementing = false;
     protected $dates =['created_at','updated_at'];
     protected $dateFormat ='Y-m-d H:i:s';
-
+    public function sanpham(){
+        return $this->belongsTo('App\Models\SanPham','sp_ma','sp_ma');
+    }
 }

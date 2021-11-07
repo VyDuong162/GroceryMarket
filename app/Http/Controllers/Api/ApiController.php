@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Svg\Tag\Rect;
+
 class ApiController extends Controller
 {
    public function getThongTinKhachHang(){
@@ -332,4 +334,5 @@ EOT;
         }
        
     }
+ 
 }

@@ -422,7 +422,7 @@ Shoping cart
        }
       
         $scope.thanhtoan = function() {
-            var data = $.param($scope.dh);
+           // var data = $.param($scope.dh);
             $http({
                 method: 'POST',
                 url: "{{ route('frontend.order') }}",

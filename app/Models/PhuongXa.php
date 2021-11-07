@@ -19,6 +19,6 @@ class PhuongXa extends Model
     protected $dateFormat ='Y-m-d H:i:s';
 
     public function quanhuyen(){
-        return $this->belongsTo('App\Model\QuanHuyen','qh_ma','qh_ma');
+        return $this->belongsTo('App\Models\QuanHuyen','qh_ma','qh_ma');
     }
 }
