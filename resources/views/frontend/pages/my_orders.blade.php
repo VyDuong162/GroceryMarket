@@ -114,7 +114,7 @@ Shoping cart
                                 @foreach($dsDonHang as $dh)
                                 <tr>
                                     @if($dh->dh_ma < 10) <?php $dh_ma = '000' . $dh->dh_ma ?> @elseif($dh->dh_ma > 10 && $dh->dh_ma < 100) <?php $dh_ma = '00' . $dh->dh_ma ?> @endif <td>DH{{ $dh_ma }}</td>
-
+                       
                                             <td>{{ $dh->dh_taoMoi }}</td>
                                             <td>{{ number_format($dh->dh_giaTri,'0',',','.') }} <small>đ</small></td>
                                             <td>{{ $dh->dh_diaChi }}</td>
