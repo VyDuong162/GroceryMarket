@@ -19,7 +19,7 @@ Shoping cart
             <div class="col-md-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Đơn hàng của tôi</li>
                     </ol>
                 </nav>
@@ -310,7 +310,25 @@ Shoping cart
 @endsection
 
 @section('custom-scripts')
+<script src="{{ asset('js/frontendController.js') }}"></script>
 <script>
+         app.controller('locationController',function($scope,$http){
+                    $http({
+                    method: 'GET',
+                    url: "{{ route('api.tinhtp') }}",
+                    }).then(function successCallback(response) {
+                        console.log(response);
+                        $scope.dsTinhTp = response.data.result;
+                    }, function errorCallback(response) {
+                        console.log('thất bại');
+                    });
+                    $scope.timcuahangtheotp = function(tp_ma) {
+        window.location.href="{{ route('frontend.shop') }}?ttp_ma="+tp_ma;
+         }
+                });
+    </script>
+<script>
+    
     app.controller('donhangController', function($scope, $http) {
         $scope.show = false;
         $scope.detail = false;

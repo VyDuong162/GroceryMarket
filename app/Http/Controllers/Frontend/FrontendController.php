@@ -10,6 +10,7 @@ use App\Models\CuaHangTapHoa;
 use App\Models\ChiTiet_DonHang;
 use App\Models\DiaChi;
 use App\Models\DonGia_MatHang;
+use App\Models\TinhTp;
 use App\Models\YeuThich;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,6 +38,7 @@ class FrontendController extends Controller
                         ->where('sanpham.sp_trangThai','=',1)
                         ->orderBy('sanpham.sp_ma','desc')
                         ->take(9)->get();
+        $dsTinhTp = TinhTp::orderBy('ttp_ten')->get();
         if(Auth::check()){
             $kh_ma = Auth::user()->kh_ma;
             $dsYeuThich = YeuThich::where('kh_ma','=',$kh_ma)->get('sp_ma');
@@ -50,6 +52,7 @@ class FrontendController extends Controller
         }else{
             $dsYeuThich = '';
             $soluong = 0;
+            $arr1chieu =[];
         }
         return view('frontend.index')
             ->with('dsLoaiSanPham',$dsLoaiSanPham)
@@ -57,7 +60,7 @@ class FrontendController extends Controller
             ->with('dsSanPhamHomNay',$dsSanPhamHomNay)
             ->with('dsSanPhamNoiBat',$dsSanPhamNoiBat)
             ->with('dsYeuThich',$dsYeuThich)
-            ->with('arr', $arr)
+            ->with('dsTinhTp',$dsTinhTp)
             ->with('arr1chieu', $arr1chieu)
             ->with('soluong',$soluong);
     }
@@ -69,6 +72,46 @@ class FrontendController extends Controller
          }
          $data = $query;
          return $data;
+    }
+    public function location(){
+        $dsTinhTp = TinhTp::orderBy('ttp_ten')->get();
+        return view('frontend.layout.master')
+        ->with('dsTinhTp',$dsTinhTp);
+    }
+    public function timkiemcuahang(Request $request){
+        $cuahang = CuaHangTapHoa::leftjoin('phuongxa','cuahangtaphoa.px_ma','=','phuongxa.px_ma')
+                                ->leftjoin('quanhuyen','phuongxa.qh_ma','=','quanhuyen.qh_ma')
+                                ->leftjoin('tinhtp','quanhuyen.ttp_ma','=','tinhtp.ttp_ma')
+                                ->where('tinhtp.ttp_ma','=',$request->ttp_ma)
+                                ->get();
+        return $cuahang;
+    }
+    public function timkiem(Request $request){
+        if($request->ajax()){
+            $query1= $request->get('query');
+            if($query1 != ''){
+                $output='';
+                $dsSanPham = SanPham::leftjoin('loaisanpham', 'sanpham.lsp_ma', '=', 'loaisanpham.lsp_ma')
+                                    ->leftjoin('nhasanxuat', 'sanpham.nsx_ma', '=', 'nhasanxuat.nsx_ma')
+                                    ->where('sp_trangThai','=',1)
+                                    ->where(
+                                        function($query) use ($query1){
+                                            return $query->where('sp_ten','like','%'.$query1.'%')
+                                                ->orWhere('nsx_ten','like','%'.$query1.'%')
+                                                ->orWhere('lsp_ten','like','%'.$query1.'%')
+                                                ;
+                                        }
+                                    )
+                                    ->orderBy('sp_ma', 'asc')->get();
+                
+            }else{
+            }
+            $dem_sp = $dsSanPham->count();
+            if($dem_sp > 0){
+            }else{
+                return "Không tìm thấy sản phẩm";
+            }
+        }
     }
     public function myorders(Request $request){
         if($request->dh_trangThai==null){
@@ -85,6 +128,12 @@ class FrontendController extends Controller
                 $dsDonHang = DonHang::where('kh_ma','=',$kh_ma)
                                     ->where('dh_trangThai','=',$request->dh_trangThai)
                                     ->orderBy('dh_taoMoi')->get();
+            }
+            if(Auth::check()){
+                $dsYeuThich = YeuThich::where('kh_ma','=',$kh_ma)->get('sp_ma');
+                $soluong = $dsYeuThich->count('sp_ma');
+            }else{
+                $soluong=0;
             }
            
            

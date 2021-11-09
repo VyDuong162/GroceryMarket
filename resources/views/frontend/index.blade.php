@@ -110,7 +110,7 @@
                 <div class="owl-carousel cate-slider owl-theme">
                     @foreach($dsLoaiSanPham as $index =>$lsp)
                     <div class="item">
-                        <a href="#" class="category-item">
+                        <a href="{{route('frontend.product')}}?lsp_ma={{$lsp->lsp_ma}}" class="category-item">
                             <div class="cate-img">
                                 <img src="{{ asset('themes/gambo/images/category/icon-'.($index+1).'.svg') }}" alt="">
                             </div>
@@ -140,8 +140,8 @@
                     @foreach($dsSanPhamNoiBat as $sp)
                     <div class="item">
                         <div class="product-item">
-                            <a href="#" class="product-img">
-                                <img src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" alt="">
+                            <a href="javascript:void(0)" class="product-img">
+                                <img  onclick="location.href='product/{{$sp->sp_ma}}'" src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" alt="">
                                 <div class="product-absolute-options">
                                     <!--    <span class="offer-badge-1">6% off</span> -->
                                     @auth
@@ -230,8 +230,8 @@
                     @foreach($dsSanPhamHomNay as $sp)
                     <div class="item">
                         <div class="product-item">
-                            <a href="#" class="product-img">
-                                <img src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" alt="">
+                            <a href="javascript:void(0)" class="product-img">
+                                <img onclick="location.href='product/{{$sp->sp_ma}}'" src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" alt="">
                                 <div class="product-absolute-options">
                                     <span class="offer-badge-1">6% off</span>
                                     @auth
@@ -284,8 +284,8 @@
                     @foreach($dsSanPhamMoi as $sp)
                     <div class="item">
                         <div class="product-item">
-                            <a href="#" class="product-img">
-                                <img src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" alt="">
+                            <a href="javascript:void(0)" class="product-img">
+                                <img  onclick="location.href='product/{{$sp->sp_ma}}'" src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" alt="">
                                 <div class="product-absolute-options">
                                     <span class="offer-badge-1">New</span>
                                    
@@ -324,6 +324,26 @@
 @endsection
 
 @section('custom-scripts')
+<script src="{{ asset('js/frontendController.js') }}"></script>
+<script>
+    function locationController($scope) {
+   
+}
+    app.controller('locationController',function($scope,$http){
+        $http({
+        method: 'GET',
+        url: "{{ route('api.tinhtp') }}",
+        }).then(function successCallback(response) {
+            console.log(response);
+            $scope.dsTinhTp = response.data.result;
+        }, function errorCallback(response) {
+            console.log('thất bại');
+        });
+        $scope.timcuahangtheotp = function(tp_ma) {
+        window.location.href="{{ route('frontend.shop') }}?ttp_ma="+tp_ma;
+         }
+    });
+</script>
 <script>
     app.controller('loaisanphamController', function($scope, $http) {
         $http({
@@ -363,6 +383,7 @@
                     },
                     success: function(data) {
                         console.log(data);
+                       
                     },
                     error: function(data) {
                         console.log('có lỗi xảy ra');
@@ -380,6 +401,7 @@
                     },
                     success: function(data) {
                         console.log(data);
+                        
                     }
                 });
             };

@@ -9,6 +9,8 @@ use App\Http\Controllers\Frontend\DiaChiController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ShoppingCartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Frontend\ProductController;
+use App\Http\Controllers\Frontend\ShopController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -84,3 +86,14 @@ Route::post('/my-address/store',[DiaChiController::class,'store'])->name('fronte
 Route::get('/my-address/edit/{id}',[DiaChiController::class,'edit'])->name('frontend.myaddress.edit');
 Route::post('/my-address/update/{id}',[DiaChiController::class,'update'])->name('frontend.myaddress.update');
 Route::get('/my-address/delete/{id}',[DiaChiController::class,'destroy'])->name('frontend.myaddress.delete');
+//san pham
+Route::get('/product',[ProductController::class,'index'])->name('frontend.product');
+Route::get('/search/product',[ProductController::class,'timkiem'])->name('frontend.product.search');
+Route::get('/productlist',[ProductController::class,'productlist'])->name('frontend.productlist');
+Route::get('/product/{id}',[ProductController::class,'show'])->name('frontend.productdetail');
+// cua hang
+Route::get('/shop',[ShopController::class,'index'])->name('frontend.shop');
+Route::get('/shop/{id}',[ShopController::class,'show'])->name('frontend.shopdetail');
+// tim kiem
+Route::get('/timkiem/cuahang',[FrontendController::class,'timkiemcuahang'])->name('frontend.timkiemcuahang');
+Route::get('/timkiem',[FrontendController::class,'timkiem'])->name('frontend.timkiem');

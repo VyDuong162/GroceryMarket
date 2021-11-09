@@ -49,6 +49,7 @@
         <script src="{{ asset('themes/gambo/vendor/semantic/semantic.min.js') }}"></script>
         <script src="{{ asset('themes/gambo/js/jquery.countdown.min.js') }}"></script>
         <script src="{{ asset('themes/gambo/js/custom.js') }}"></script>
+       
         <script src="{{ asset('themes/gambo/js/offset_overlay.js') }}"></script>
         <script src="{{ asset('themes/gambo/js/night-mode.js') }}"></script> 
         <script src="{{ asset('vendors/isotope/isotope.pkgd.min.js') }}"></script>
@@ -77,9 +78,10 @@
                     $scope.qty--;
                 }
                 });
-                
+               
+             
             </script>
-         
+        
         @yield('custom-scripts')
 </body>
 

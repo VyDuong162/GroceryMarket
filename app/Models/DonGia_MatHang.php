@@ -21,4 +21,7 @@ class DonGia_MatHang extends Model
     public function sanpham(){
         return $this->belongsTo('App\Models\SanPham','sp_ma','sp_ma');
     }
+    public function cuahangtaphoa(){
+        return $this->belongsTo('App\Models\CuaHangTapHoa','chth_ma','chth_ma');
+    }
 }

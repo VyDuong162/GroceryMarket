@@ -21,10 +21,11 @@ class ShoppingCartController extends Controller
      */
     public function index()
     {
+        
         return view('frontend.pages.shopping-cart');
     }
     public function checkout()
-    {
+    {   
         if(Auth::check()){
             $kh_ma =Auth::user()->kh_ma; 
             $thongtinkh =KhachHang::find($kh_ma);

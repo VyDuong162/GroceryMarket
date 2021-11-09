@@ -1,0 +1,24 @@
+<div ng-hide="attrs.id">
+    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+        ng-disabled="true" ng-transclude>
+    </button>
+</div>
+
+<div ng-show="attrs.id"></div>
+<span ng-show="quantityMax">
+    <div class="qty-cart" ng-controller="ctrlController">
+        <div class="quantity buttons_added">
+            <input type="button" ng-click="decrement()" class="minus minus-btn" value="-" ng-disabled="qty<=1">
+            <input type="number" ng-model="qty" name="quantity"  class="input-text qty text">
+            <input type="button" ng-click="increment()" class="plus plus-btn" value="+" ng-disabled="qty>=100">
+        </div>
+        <ul class=" row ordr-crt-share">
+            <button class="add-cart-btn hover-btn "  ng-click="ngCart.addItem(id, name, price, qty, data)" ng-transclude><i class="uil uil-shopping-cart-alt"></i>Thêm vào giỏ hàng</button>
+        </ul>
+       
+    </div>
+</span>
+<!-- <mark ng-show="inCart()">
+    Sản phẩm đã có trong giỏ hàng. <a ng-click="ngCart.removeItemById(id)" style="cursor: pointer;">Xóa</a>
+</mark> -->
+</div>

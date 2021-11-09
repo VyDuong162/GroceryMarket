@@ -39,29 +39,27 @@ Sản phẩm
     </div>
 </div>
 <div class="all-product-grid">
-    <div class="container" >
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="product-top-dt" ng-controller="filterProductController">
+                <div class="product-top-dt">
                     <div class="product-left-title">
                         <h2>Sản phẩm</h2>
                     </div>
-                    <form name="frmfilterPoduct" action="{{route('frontend.product')}}" method="get">
-                        <button type="submit" class="filter-btn">Tìm kiếm</button>
-                        <div class="product-sort">
-                            <div class="ui selection dropdown vchrt-dropdown">
-                                <input name="locGia" type="hidden" value="">
-                                <i class="dropdown icon d-icon"></i>
-                                <div class="text">Lọc sản phẩm</div>
-                                <div class="menu">
-                                    <div class="item" data-value="0">Tất cả</div>
-                                    <div class="item" data-value="1">Giá - thấp đến cao</div>
-                                    <div class="item" data-value="2">Giá - cao đến thấp</div>
-                                    <div class="item" data-value="3">Tên sản phẩm A-Z</div>
-                                </div>
+                    <a href="#" class="filter-btn pull-bs-canvas-right">Tìm kiếm</a>
+                    <div class="product-sort">
+                        <div class="ui selection dropdown vchrt-dropdown">
+                            <input name="gender" type="hidden" value="default">
+                            <i class="dropdown icon d-icon"></i>
+                            <div class="text">Lọc sản phẩm</div>
+                            <div class="menu">
+                                <div class="item" data-value="0">Tất cả</div>
+                                <div class="item" data-value="1">Giá - thấp đến cao</div>
+                                <div class="item" data-value="2">Giá - cao đến thấp</div>
+                                <div class="item" data-value="3">Tên sản phẩm</div>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,8 +68,8 @@ Sản phẩm
                     @foreach($dsSanPham as $index=>$sp)
                     <div class="col-lg-3 col-md-6">
                         <div class="product-item mb-30">
-                            <a href="javascript:void(0)" class="product-img">
-                               <img onclick="location.href='product/{{$sp->sp_ma}}'" src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" alt="">
+                            <a href="" class="product-img">
+                                <a href="product/{{$sp->sp_anhDaiDien}}"><img src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" alt=""></a>
                                 <div class="product-absolute-options">
                                     <!--    <span class="offer-badge-1">6% off</span> -->
                                     @auth
@@ -101,7 +99,7 @@ Sản phẩm
                     @endforeach
                 <div class="col-md-12"> 
                     <div class="more-product-btn">
-                        <button class="show-more-btn hover-btn" >Xem thêm</button>
+                        <button class="show-more-btn hover-btn" ng-click="limit=dsSanPham.length">Xem thêm</button>
                     </div>
                     <div class="more-product-btn">
                         <button class="show-less-btn hover-btn" >Rút gọn</button>
@@ -122,7 +120,6 @@ Sản phẩm
 @section('custom-scripts')
 <script src="{{ asset('js/frontendController.js') }}"></script>
 <script>
-    
      $('.product-item').slice(0, 12).show();
     $(document).ready(function() {
         $('.show-more-btn').on('click', function() {
@@ -155,16 +152,13 @@ Sản phẩm
         window.location.href="{{ route('frontend.shop') }}?ttp_ma="+tp_ma;
          }
             });
-         
-        app.controller('filterProductController',function($scope,$http){
-            $scope.filterProduct= function(){    
-                $scope.giatri =$(this).data('value');
-               console.log($scope.giatri);
-            }
-               
-            });
-         
         app.controller('dsSanPhamController',function($scope,$http){
+            $scope.dsSanPham = "{{$dsSanPham}}";
+            $scope.soluong = "{{$soluong}}";
+            $scope.arr1chieu = "{{$arr1chieu}}";
+            if($scope.dsSanPham.length==0){
+                document.getElementById("thongbao").innerHTML=' <div class="alert alert-warning" role="alert"> Không tìm thấy sản phẩm !!</div>';    
+            }
                 $scope.layanh = function(url) {
                     $scope.http = new XMLHttpRequest();
 

@@ -101,8 +101,8 @@
             </div>
             <div class="category-model-content modal-content">
                 <div class="search-header">
-                    <form action="#">
-                        <input type="search" placeholder="Search for products...">
+                    <form name="frmTimKiem" method="GET" >
+                        <input type="search" name="timkiem" placeholder="Tìm kiếm sản phẩm">
                         <button type="submit"><i class="uil uil-search"></i></button>
                     </form>
                 </div>
@@ -172,51 +172,23 @@
     <div class="top-header-group">
         <div class="top-header">
             <div class="res_main_logo">
-                <a href="index.html"><img src="{{ asset('themes/gambo/images/dark-logo-1.svg') }}" alt=""></a>
+                <a href="{{ route('frontend.index') }}"><img src="{{ asset('logo.png') }}"  style="width:auto" alt="logo"><small><b>SMARKET</b></small></a>
             </div>
             <div class="main_logo" id="logo">
-                <a href="index.html"><img src="{{ asset('themes/gambo/images/logo.svg') }}" alt=""></a>
-                <a href="index.html"><img class="logo-inverse" src="{{ asset('themes/gambo/images/dark-logo.svg') }}" alt=""></a>
+                <a href="{{ route('frontend.index') }}"><img src="{{ asset('logo.png') }}" style="width:auto" alt="logo"><small><b>SMARKET</b></small></a>
+               
             </div>
-            <div class="select_location">
+            <div class="select_location" ng-controller="locationController">
                 <div class="ui inline dropdown loc-title">
                     <div class="text">
                         <i class="uil uil-location-point"></i>
-                        Gurugram
+                        Tất cả
                     </div>
-                    <i class="uil uil-angle-down icon__14"></i>
+                    <i class="uil uil-angle-down icon__14"></i>                         
                     <div class="menu dropdown_loc">
-                        <div class="item channel_item">
+                        <div class="item channel_item" ng-click="timcuahangtheotp(tp.ttp_ma)" ng-repeat="tp in dsTinhTp" >
                             <i class="uil uil-location-point"></i>
-                            Gurugram
-                        </div>
-                        <div class="item channel_item">
-                            <i class="uil uil-location-point"></i>
-                            New Delhi
-                        </div>
-                        <div class="item channel_item">
-                            <i class="uil uil-location-point"></i>
-                            Bangaluru
-                        </div>
-                        <div class="item channel_item">
-                            <i class="uil uil-location-point"></i>
-                            Mumbai
-                        </div>
-                        <div class="item channel_item">
-                            <i class="uil uil-location-point"></i>
-                            Hyderabad
-                        </div>
-                        <div class="item channel_item">
-                            <i class="uil uil-location-point"></i>
-                            Kolkata
-                        </div>
-                        <div class="item channel_item">
-                            <i class="uil uil-location-point"></i>
-                            Ludhiana
-                        </div>
-                        <div class="item channel_item">
-                            <i class="uil uil-location-point"></i>
-                            Chandigrah
+                            <% tp.ttp_ten %>
                         </div>
                     </div>
                 </div>
@@ -224,31 +196,25 @@
             <div class="search120">
                 <div class="ui search">
                     <div class="ui left icon input swdh10">
-                        <input class="prompt srch10" type="text" placeholder="Search for products..">
+                        <input class="prompt srch10" type="text" id="timkiem" ng-model="timkiem" value="" placeholder="Tìm kiếm sản phẩm">
                         <i class='uil uil-search-alt icon icon1'></i>
                     </div>
                 </div>
             </div>
             <div class="header_right">
-                <ul>
-                    <li>
-                        <a href="#" class="offer-link"><i class="uil uil-phone-alt"></i>1800-000-000</a>
-                    </li>
-                    <li>
-                        <a href="offers.html" class="offer-link"><i class="uil uil-gift"></i>Ưu đãi</a>
-                    </li>
-                    <li>
-                        <a href="faq.html" class="offer-link"><i class="uil uil-question-circle"></i>Trợ giúp</a>
-                    </li>
-                    <li>
-                        <a href="dashboard_my_wishlist.html" class="option_links" title="Wishlist"><i class='uil uil-heart icon_wishlist'></i><span class="noti_count1">3</span></a>
-                    </li>
-                    
-                    <li class="ui dropdown">
-                        <?php if(Session::has('user')){
+            <?php if(Session::has('user')){
                                 $user = Session::get('user')[0];
                             }
                             ?>
+                <ul>
+                    <li>
+                        @if(isset($user))
+                        <a href="my-wishlist" class="option_links " title="Wishlist"><i class='uil uil-heart icon_wishlist'></i></a>
+                        @endif
+                    </li>
+                    
+                    <li class="ui dropdown">
+                       
                         <a href="#" class="opts_account">
                            
                             @if(isset($user))
@@ -274,7 +240,7 @@
                             <a href="my-orders" class="item channel_item"><i class="uil uil-box icon__1"></i>Đơn đặt hàng của tôi</a>
                             <a href="my-wishlist" class="item channel_item"><i class="uil uil-heart icon__1"></i>Sản phẩm yêu thích</a>
                             <a href="dashboard_my_wallet.html" class="item channel_item"><i class="uil uil-usd-circle icon__1"></i>Ví của tôi</a>
-                            <a href="dashboard_my_addresses.html" class="item channel_item"><i class="uil uil-location-point icon__1"></i>Địa chỉ của tôi</a>
+                            <a href="my-address" class="item channel_item"><i class="uil uil-location-point icon__1"></i>Địa chỉ của tôi</a>
                             <a href="offers.html" class="item channel_item"><i class="uil uil-gift icon__1"></i>Ưu
                                 đãi</a>
                             <a href="faq.html" class="item channel_item"><i class="uil uil-info-circle icon__1"></i>Câu hỏi thường gặp</a>
@@ -302,10 +268,10 @@
                     <button class="navbar-toggler menu_toggle_btn" type="button" data-target="#navbarSupportedContent"><i class="uil uil-bars"></i></button>
                     <div class="collapse navbar-collapse d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end bg-dark1 p-3 p-lg-0 mt1-5 mt-lg-0 mobileMenu" id="navbarSupportedContent">
                         <ul class="navbar-nav main_nav align-self-stretch">
-                            <li class="nav-item"><a href="index.html" class="nav-link active" title="Home">Trang
+                            <li class="nav-item"><a href="{{ route('frontend.index') }}" class="nav-link active" title="Home">Trang
                                     chủ</a></li>
-                            <li class="nav-item"><a href="shop_grid.html" class="nav-link new_item" title="New Products">Sản phẩm mới</a></li>
-                            <li class="nav-item"><a href="shop_grid.html" class="nav-link" title="Featured Products">Sản phẩm nổi bật</a></li>
+                            <li class="nav-item"><a href="{{ route('frontend.product') }}" class="nav-link new_item" title="New Products">Sản phẩm</a></li>
+                            <li class="nav-item"><a href="{{ route('frontend.shop') }}" class="nav-link" title="Featured Products">Cửa hàng</a></li>
                             <li class="nav-item">
                                 <div class="ui icon top left dropdown nav__menu">
                                     <a class="nav-link" title="Pages">Các trang <i class="uil uil-angle-down"></i></a>
@@ -335,7 +301,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li class="nav-item">
+                           <!--  <li class="nav-item">
                                 <div class="ui icon top left dropdown nav__menu">
                                     <a class="nav-link" title="Blog">Blog <i class="uil uil-angle-down"></i></a>
                                     <div class="menu dropdown_page">
@@ -347,7 +313,7 @@
                                 </div>
                             </li>
                             <li class="nav-item"><a href="contact_us.html" class="nav-link" title="Contact">Liên hệ
-                                    chúng tôi</a></li>
+                                    chúng tôi</a></li> -->
                         </ul>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 @section('title')
-Sản phẩm
+Cửa hàng
 @endsection
 
 @section('custom-css')
@@ -31,7 +31,7 @@ Sản phẩm
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
+                        <li class="breadcrumb-item active" aria-current="page">Cửa hàng</li>
                     </ol>
                 </nav>
             </div>
@@ -39,77 +39,61 @@ Sản phẩm
     </div>
 </div>
 <div class="all-product-grid">
-    <div class="container" >
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <div class="product-top-dt" ng-controller="filterProductController">
+                <div class="product-top-dt">
                     <div class="product-left-title">
-                        <h2>Sản phẩm</h2>
+                        <h2>Cửa hàng</h2>
                     </div>
-                    <form name="frmfilterPoduct" action="{{route('frontend.product')}}" method="get">
-                        <button type="submit" class="filter-btn">Tìm kiếm</button>
-                        <div class="product-sort">
-                            <div class="ui selection dropdown vchrt-dropdown">
-                                <input name="locGia" type="hidden" value="">
-                                <i class="dropdown icon d-icon"></i>
-                                <div class="text">Lọc sản phẩm</div>
-                                <div class="menu">
-                                    <div class="item" data-value="0">Tất cả</div>
-                                    <div class="item" data-value="1">Giá - thấp đến cao</div>
-                                    <div class="item" data-value="2">Giá - cao đến thấp</div>
-                                    <div class="item" data-value="3">Tên sản phẩm A-Z</div>
-                                </div>
+                   <!--  <a href="#" class="filter-btn pull-bs-canvas-right">Tìm kiếm</a>
+                    <div class="product-sort">
+                        <div class="ui selection dropdown vchrt-dropdown">
+                            <input name="gender" type="hidden" value="default">
+                            <i class="dropdown icon d-icon"></i>
+                            <div class="text">Lọc cửa hàng</div>
+                            <div class="menu">
+                                <div class="item" data-value="0">Tất cả</div>
+                                <div class="item" data-value="1">Giá - thấp đến cao</div>
+                                <div class="item" data-value="2">Giá - cao đến thấp</div>
+                                <div class="item" data-value="3">Tên sản phẩm</div>
                             </div>
                         </div>
-                    </form>
+                    </div> -->
                 </div>
             </div>
         </div>
         <div class="product-list-view" ng-controller="dsSanPhamController">
-            <div class="row">
-                    @foreach($dsSanPham as $index=>$sp)
+            <div class="row" ng-init="limit = 12">
+                @foreach($dsCuaHang as $index=>$ch)
                     <div class="col-lg-3 col-md-6">
                         <div class="product-item mb-30">
-                            <a href="javascript:void(0)" class="product-img">
-                               <img onclick="location.href='product/{{$sp->sp_ma}}'" src="{{ asset('storage/products/'.$sp->sp_anhDaiDien) }}" alt="">
-                                <div class="product-absolute-options">
-                                    <!--    <span class="offer-badge-1">6% off</span> -->
-                                    @auth
-                                    @if($soluong >= 0)
-                                    @if(in_array($sp->sp_ma,$arr1chieu))
-                                    <span data-id="{{$sp->sp_ma}}" class="like-icon liked" title="wishlist"></span>
-                                    @else
-                                    <span data-id="{{$sp->sp_ma}}" class="like-icon" title="wishlist"></span>
-                                    @endif
-                                    @else
-                                  
-                                    @endif
-
-                                    @endauth
-                                </div>
+                            <a href="#" class="product-img">
+                            @if(file_exists('storage/avatarshop/'.$ch->chth_anhDaiDien))
+                             <img  src="{{ asset('storage/avatarshop/'.$ch->chth_anhDaiDien) }}" height="200px" alt="">   
+                            @else
+                            <img  src="{{ asset('storage/avatarshop/') }}/0chth.jpg" height="200px" alt="" >   
+                            <div class="product-absolute-options"></div>
+                            @endif
                             </a>
                             <div class="product-text-dt">
-                                <p>Có sẵn<span>(Tại cửa hàng)</span></p>
-                                <h4 class="sp_ten">{{ $sp->sp_ten }}</h4>
-                                <div class="product-price">{{ number_format($sp->dgmh_gia,'0',',','.') }} <small>đ</small></div>
-
-                                <ngcart-addtocart template-url="{{ asset('vendors/ngCart/template/ngCart/addtocart.html') }}" id="{{$sp->sp_ma}}" name="{{$sp->sp_ten}}" price="{{$sp->dgmh_gia}}" quantity="<%qty%>" quantity-max="{{ 100 }}" data="{ sp_hinh_url: '{{ asset('storage/products/' . $sp->sp_anhDaiDien) }}' }">
-                                </ngcart-addtocart>
+                                
+                                <h4 class="sp_ten">{{ $ch->chth_ten }}</h4>
+                                <h6>Địa chỉ:{{$ch->chth_diaChi}}</h6>
+                                <p>Liên hệ:{{$ch->chth_soDienThoai}} - {{$ch->chth_email}}</p>
                             </div>
                         </div>
                     </div>
                     @endforeach
-                <div class="col-md-12"> 
+                <div class="col-md-12">
                     <div class="more-product-btn">
-                        <button class="show-more-btn hover-btn" >Xem thêm</button>
+                        <button class="show-more-btn hover-btn" ng-hide="limit >12?false:true" >Xem thêm</button>
                     </div>
                     <div class="more-product-btn">
                         <button class="show-less-btn hover-btn" >Rút gọn</button>
                     </div>
                 </div>
             </div>
-        </div>
-        <div id="thongbao" class="row">
         </div>
     </div>
 </div>
@@ -122,8 +106,7 @@ Sản phẩm
 @section('custom-scripts')
 <script src="{{ asset('js/frontendController.js') }}"></script>
 <script>
-    
-     $('.product-item').slice(0, 12).show();
+   $('.product-item').slice(0, 12).show();
     $(document).ready(function() {
         $('.show-more-btn').on('click', function() {
             $('.product-item:hidden').slice(0, 12).slideDown();
@@ -152,31 +135,13 @@ Sản phẩm
                     console.log('thất bại');
                 });
                 $scope.timcuahangtheotp = function(tp_ma) {
-        window.location.href="{{ route('frontend.shop') }}?ttp_ma="+tp_ma;
-         }
-            });
-         
-        app.controller('filterProductController',function($scope,$http){
-            $scope.filterProduct= function(){    
-                $scope.giatri =$(this).data('value');
-               console.log($scope.giatri);
-            }
-               
-            });
-         
-        app.controller('dsSanPhamController',function($scope,$http){
-                $scope.layanh = function(url) {
-                    $scope.http = new XMLHttpRequest();
-
-                    $scope.http.open('HEAD', url, false);
-                    $scope.http.send();
-                    if ($scope.http.status == 200) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+                window.location.href="{{ route('frontend.shop') }}?ttp_ma="+tp_ma;
                 }
             });
+      
+        app.controller('dsSanPhamController',function($scope,$http){
+            
+        });
     </script>
 <script>
    

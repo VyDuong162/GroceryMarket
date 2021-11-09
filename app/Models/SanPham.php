@@ -29,7 +29,7 @@ class SanPham extends Model
         return $this->hasMany('App\Models\HinhAnhSanPham','sp_ma','sp_ma');
     }
     public function dongiamathang(){
-        return $this->hasMany('App\Models\DonGia_MatHang','sp_ma','sp_ma');
+        return $this->belongsTo('App\Models\DonGia_MatHang','sp_ma','sp_ma');
     }
     public function chitietdonhang(){
         return $this->hasMany('App\Models\ChiTiet_DonHang','sp_ma','sp_ma');
