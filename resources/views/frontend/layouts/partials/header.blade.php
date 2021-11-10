@@ -193,14 +193,19 @@
                     </div>
                 </div>
             </div>
-            <div class="search120">
+            <form action="{{ route('frontend.product') }}" method="get">
+            <div class="">
                 <div class="ui search">
                     <div class="ui left icon input swdh10">
-                        <input class="prompt srch10" type="text" id="timkiem" ng-model="timkiem" value="" placeholder="Tìm kiếm sản phẩm">
-                        <i class='uil uil-search-alt icon icon1'></i>
+                        
+                        <input class="prompt srch10" type="text" id="timkiem" name="timkiem" value="" placeholder="Tìm kiếm sản phẩm">
+                        <button type="submit" class="btn"><i class='uil uil-search-alt icon icon1'></i></button>
+                        
+                       
                     </div>
                 </div>
             </div>
+            </form>
             <div class="header_right">
             <?php if(Session::has('user')){
                                 $user = Session::get('user')[0];
