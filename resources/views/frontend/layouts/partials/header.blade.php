@@ -209,7 +209,7 @@
                 <ul>
                     <li>
                         @if(isset($user))
-                        <a href="my-wishlist" class="option_links " title="Wishlist"><i class='uil uil-heart icon_wishlist'></i></a>
+                        <a href="{{ route('frontend.mywishlist') }}" class="option_links " title="Wishlist"><i class='uil uil-heart icon_wishlist'></i></a>
                         @endif
                     </li>
                     
@@ -237,10 +237,10 @@
                             <a href="{{ route('register') }}" class="item channel_item"><i class="uil uil-lock-alt icon__1" ></i>Đăng ký</a>
                             @else
                             <a href="dashboard_overview.html" class="item channel_item"><i class="uil uil-apps icon__1"></i>Bảng điều khiển</a>
-                            <a href="my-orders" class="item channel_item"><i class="uil uil-box icon__1"></i>Đơn đặt hàng của tôi</a>
-                            <a href="my-wishlist" class="item channel_item"><i class="uil uil-heart icon__1"></i>Sản phẩm yêu thích</a>
+                            <a href="{{ route('frontend.myorders') }}" class="item channel_item"><i class="uil uil-box icon__1"></i>Đơn đặt hàng của tôi</a>
+                            <a href="{{ route('frontend.mywishlist') }}" class="item channel_item"><i class="uil uil-heart icon__1"></i>Sản phẩm yêu thích</a>
                             <a href="dashboard_my_wallet.html" class="item channel_item"><i class="uil uil-usd-circle icon__1"></i>Ví của tôi</a>
-                            <a href="my-address" class="item channel_item"><i class="uil uil-location-point icon__1"></i>Địa chỉ của tôi</a>
+                            <a href="{{ route('frontend.myaddress') }}" class="item channel_item"><i class="uil uil-location-point icon__1"></i>Địa chỉ của tôi</a>
                             <a href="offers.html" class="item channel_item"><i class="uil uil-gift icon__1"></i>Ưu
                                 đãi</a>
                             <a href="faq.html" class="item channel_item"><i class="uil uil-info-circle icon__1"></i>Câu hỏi thường gặp</a>

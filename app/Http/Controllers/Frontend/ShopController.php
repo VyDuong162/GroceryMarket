@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\CuaHangTapHoa;
+use App\Models\DonHang;
 use Illuminate\Http\Request;
 use App\Models\SanPham;
 use App\Models\TinhTp;
@@ -72,9 +73,36 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
+        $shop = CuaHangTapHoa::find($id);
+        $dsSanPham = SanPham::leftjoin('dongia_mathang','sanpham.sp_ma','=','dongia_mathang.sp_ma')
+                        ->leftjoin('cuahangtaphoa','dongia_mathang.chth_ma','=','cuahangtaphoa.chth_ma')
+                        ->where('cuahangtaphoa.chth_ma','=',$id)
+                        ->get();
+        if(Auth::check()){
+            $kh_ma = Auth::user()->kh_ma;
+            $dsYeuThich = YeuThich::where('kh_ma','=',$kh_ma)->get('sp_ma');
+            $arr = collect([]);
+            $arr1chieu =[];
+            foreach($dsYeuThich  as $index => $yt){
+                $arr->push($yt->sp_ma);
+                $arr1chieu[$index]=$yt->sp_ma;
+            }
+            $soluong = $dsYeuThich->count('sp_ma');
+        }else{
+            $dsYeuThich = '';
+            $soluong = 0;
+            $arr1chieu =[];
+        }
+        $tongsp = $dsSanPham->count();
+        $tongdh = DonHang::where('chth_ma',$id)->count();
+        return view('frontend.pages.shop-detail')
+        ->with('shop',$shop)
+        ->with('dsSanPham',$dsSanPham)
+        ->with('tongsp',$tongsp)
+        ->with('tongdh',$tongdh)
+        ->with('arr1chieu',$arr1chieu)
+        ->with('soluong',$soluong);
+    } 
     /**
      * Show the form for editing the specified resource.
      *

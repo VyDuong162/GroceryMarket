@@ -20,6 +20,9 @@ Sản phẩm
         font-weight: 600;
         display: none;
     }
+    .more-product-btn{
+        display: none;
+    }
 </style>
 @endsection
 
@@ -30,7 +33,7 @@ Sản phẩm
             <div class="col-md-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('frontend.index') }}">Trang chủ</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Sản phẩm</li>
                     </ol>
                 </nav>
@@ -65,7 +68,10 @@ Sản phẩm
                 </div>
             </div>
         </div>
-        <div class="product-list-view" ng-controller="dsSanPhamController">
+        <div id="thongbao" class="row">
+            
+        </div>
+        <div class="product-list-view" ng-controller="dsSanPhamController" ng-show="{{count($dsSanPham)}} > 0">
             <div class="row">
                     @foreach($dsSanPham as $index=>$sp)
                     <div class="col-lg-3 col-md-6">
@@ -109,8 +115,7 @@ Sản phẩm
                 </div>
             </div>
         </div>
-        <div id="thongbao" class="row">
-        </div>
+        
     </div>
 </div>
 
@@ -140,7 +145,11 @@ Sản phẩm
             }
         });
     });
-
+    if('{{count($dsSanPham)}}' !=='0')  {
+        $('.more-product-btn').show();
+    }else{
+        document.getElementById('thongbao').innerHTML='<div class="alert alert-warning" role="alert">Không tìm thấy sản phẩm!!</div>';
+    }
         app.controller('locationController',function($scope,$http){
                 $http({
                 method: 'GET',
@@ -164,7 +173,8 @@ Sản phẩm
                
             });
          
-        app.controller('dsSanPhamController',function($scope,$http){
+        app.controller('dsSanPhamController',function($scope,$http){       
+            
                 $scope.layanh = function(url) {
                     $scope.http = new XMLHttpRequest();
 

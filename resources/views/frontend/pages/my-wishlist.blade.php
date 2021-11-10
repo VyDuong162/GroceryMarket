@@ -49,7 +49,7 @@ Shoping cart
                                             <!--   <div class="offer-badge">4% OFF</div> -->
                                         </div>
                                         <div class="cart-text">
-                                           <a href="#"> <h4 >{{$sp->sp_ten}}</h4></a> 
+                                           <a href="/product/{{$sp->sp_ma}}"> <h4 >{{$sp->sp_ten}}</h4></a> 
                                             <h6>{{$sp->chth_ten}} - <span>{{$sp->chth_diaChi}}</span></h6> <br>
                                             <div class="cart-item-price">{{number_format($sp->dgmh_gia, 0, ',', '.') }} đ</div>
                                             

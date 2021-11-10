@@ -106,22 +106,22 @@ Chi tiết sản phẩm
                                     </p>
                                     <div class="pdp-details">
                                         
-                                                <span style="text-align: left; font-weight: 600;"><i>Tại Cửa hàng</i></span>
-                                                    
-                                                <div class="pdp-group-dt">
-                                                  
-                                                    <div class="item">
-                                                    <a href="http://"> <img src="{{ asset('storage/avatarshop/'.$shop->cuahangtaphoa->chth_anhDaiDien) }}" width="100px" alt="">
-                                                    </a></div>
-                                                    <div class="pdp-text-dt">
-                                                        <span style="font-size: larger; font-weight: bold;">{{ $shop->cuahangtaphoa->chth_ten }}</span>
-                                                        <p>{{ $shop->cuahangtaphoa->chth_soDienThoai }} 
-                                                            {{ $shop->cuahangtaphoa->chth_email }}
-                                                        </p>
-                                                        <p>{{ $shop->cuahangtaphoa->chth_diaChi }} </p>
-                                                    </div>
-                                                    
-                                                </div>
+                                        <span style="text-align: left; font-weight: 600;"><i>Tại Cửa hàng</i></span>
+                                            
+                                        <div class="pdp-group-dt">
+                                            
+                                            <div class="item">
+                                            <a href="http://"> <img src="{{ asset('storage/avatarshop/'.$shop->cuahangtaphoa->chth_anhDaiDien) }}" width="100px" alt="">
+                                            </a></div>
+                                            <div class="pdp-text-dt">
+                                                <span style="font-size: larger; font-weight: bold;">{{ $shop->cuahangtaphoa->chth_ten }}</span>
+                                                <p>{{ $shop->cuahangtaphoa->chth_soDienThoai }} 
+                                                    {{ $shop->cuahangtaphoa->chth_email }}
+                                                </p>
+                                                <p>{{ $shop->cuahangtaphoa->chth_diaChi }} </p>
+                                            </div>
+                                            
+                                        </div>
                                             
                                     </div>
                                 </div>
