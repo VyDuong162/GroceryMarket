@@ -68,8 +68,8 @@ Cửa hàng - Sản phẩm
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Price*</label>
-                            <input type="text" class="form-control" name="dgmh_gia" id="dgmh_gia" placeholder="$0">
+                            <label class="form-label">Giá sản phẩm*</label>
+                            <input type="text" class="form-control" name="dgmh_gia" id="dgmh_gia" placeholder="">
                         </div>
                         <div class="form-group mb-0">
                             <label class="form-label">Trạng thái*</label>

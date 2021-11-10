@@ -62,6 +62,9 @@ Route::get('khachhang/getquanhuyen', [KhachHangController::class,'getQuanHuyen']
 Route::resource('admin/cuahangtaphoa',CuaHangTapHoaController::class,['as'=>'admin'])->middleware('auth');
 Route::delete('/cuahangtaphoa/bulkaction',[CuaHangTapHoaController::class,'BulkAction'])->name('cuahangtaphoa.bulkaction')->middleware('auth');
 Route::get('/sanpham/cuahangtaphoa/{id}',[CuaHangTapHoaController::class,'SanPhamCuaHang'])->name('sanpham.cuahangtaphoa')->middleware('auth');
+Route::get('/sanpham/chucuahangtaphoa/{id}',[CuaHangTapHoaController::class,'SanPhamChuCuaHang'])->name('sanpham.chucuahangtaphoa')->middleware('auth');
+Route::get('/cuahang/khachhang',[CuaHangTapHoaController::class,'showCuaHang'])->name('sanpham.showcuahang')->middleware('auth');
+Route::get('/cuahang/edit/khachhang',[CuaHangTapHoaController::class,'editCuaHang'])->name('sanpham.editcuahang')->middleware('auth');
 Route::post('/sanpham/gia',[CuaHangTapHoaController::class,'UpdatePrice'])->name('sanpham.gia')->middleware('auth');
 Route::get('/backend/sanpham/cuahangtaphoa/search',[CuaHangTapHoaController::class,'Search'])->middleware('auth');
 // đơn hàng

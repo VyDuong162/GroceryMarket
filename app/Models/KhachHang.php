@@ -47,7 +47,7 @@ class KhachHang extends Model implements AuthenticatableContract
         return $diachi;
     }
     public function cuahangtaphoas(){
-        return $this->hasMany('App\Models\CuaHangTapHoa','kh_ma','kh_ma');
+        return $this->belongsTo('App\Models\CuaHangTapHoa','kh_ma','kh_ma');
     }
     public function diachis(){
         return $this->hasMany('App\Models\DiaChi','kh_ma','kh_ma');

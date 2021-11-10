@@ -207,11 +207,21 @@
             </div>
             </form>
             <div class="header_right">
+                
             <?php if(Session::has('user')){
                                 $user = Session::get('user')[0];
                             }
                             ?>
                 <ul>
+                <li>
+                            <a href="#" class="offer-link"><i class="uil uil-phone-alt"></i>1800-000-000</a>
+                        </li>
+                        <li>
+                            <a href="offers.html" class="offer-link"><i class="uil uil-lock-open-alt"></i>Đăng ký cửa hàng</a>
+                        </li>
+                        <li>
+                            <a href="faq.html" class="offer-link"><i class="uil uil-question-circle"></i>Trợ giúp</a>
+                        </li>
                     <li>
                         @if(isset($user))
                         <a href="{{ route('frontend.mywishlist') }}" class="option_links " title="Wishlist"><i class='uil uil-heart icon_wishlist'></i></a>
@@ -239,15 +249,22 @@
                             </div>
                             @if(!isset($user))
                             <a href="{{ route('login') }}" class="item channel_item"><i class="uil uil-lock-alt icon__1" ></i>Đăng nhập</a>
-                            <a href="{{ route('register') }}" class="item channel_item"><i class="uil uil-lock-alt icon__1" ></i>Đăng ký</a>
+                            <a href="{{ route('register') }}" class="item channel_item"><i class="uil uil-lock-open-alt icon__1" ></i>Đăng ký</a>
                             @else
+                            @if($user->vt_ma==1)
+                            <a href="{{ route('admin') }}" class="item channel_item"><i class="fas fa-tachometer-alt icon__1"></i>Trang Admin</a>
+                            @endif
+                            @if($user->vt_ma==2 )
+                            <a href="{{ route('admin') }}" class="item channel_item"><i class="fas fa-tachometer-alt icon__1"></i>Quản lý cửa hàng</a>
+                            @endif
                             <a href="dashboard_overview.html" class="item channel_item"><i class="uil uil-apps icon__1"></i>Bảng điều khiển</a>
                             <a href="{{ route('frontend.myorders') }}" class="item channel_item"><i class="uil uil-box icon__1"></i>Đơn đặt hàng của tôi</a>
                             <a href="{{ route('frontend.mywishlist') }}" class="item channel_item"><i class="uil uil-heart icon__1"></i>Sản phẩm yêu thích</a>
                             <a href="dashboard_my_wallet.html" class="item channel_item"><i class="uil uil-usd-circle icon__1"></i>Ví của tôi</a>
+                          
                             <a href="{{ route('frontend.myaddress') }}" class="item channel_item"><i class="uil uil-location-point icon__1"></i>Địa chỉ của tôi</a>
-                            <a href="offers.html" class="item channel_item"><i class="uil uil-gift icon__1"></i>Ưu
-                                đãi</a>
+                           <!--  <a href="offers.html" class="item channel_item"><i class="uil uil-gift icon__1"></i>Ưu
+                                đãi</a> -->
                             <a href="faq.html" class="item channel_item"><i class="uil uil-info-circle icon__1"></i>Câu hỏi thường gặp</a>
                            
                             <a href="javascript:$('#logout-form').submit();" class="item channel_item"><i class="uil uil-lock-alt icon__1"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"></i>Đăng xuất</a>

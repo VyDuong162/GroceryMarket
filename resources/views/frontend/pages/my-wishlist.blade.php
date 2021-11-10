@@ -7,6 +7,20 @@ Shoping cart
 @endsection
 
 @section('main-content')
+<div class="gambo-Breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{route('frontend.index')}}">Trang chủ</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Sản phẩm của tôi</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="">
 
     <div class="container">

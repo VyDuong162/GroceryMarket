@@ -132,7 +132,7 @@
                         <span>Cho bạn</span>
                         <h2>Sản phẩm nổi bật</h2>
                     </div>
-                    <a href="#" class="see-more-btn">Xem tất cả</a>
+                    <a href="{{route('frontend.product')}}" class="see-more-btn">Xem tất cả</a>
                 </div>
             </div>
             <div class="col-md-12">
@@ -222,7 +222,7 @@
                         <span>Cho bạn</span>
                         <h2>Mặt hàng giá tốt hôm nay</h2>
                     </div>
-                    <a href="#" class="see-more-btn">Xem tất cả</a>
+                    <a href="{{route('frontend.product')}}" class="see-more-btn">Xem tất cả</a>
                 </div>
             </div>
             <div class="col-md-12">
@@ -276,7 +276,7 @@
                         <span>Cho bạn</span>
                         <h2>Thêm mặt hàng mới</h2>
                     </div>
-                    <a href="#" class="see-more-btn">Xem tất cả</a>
+                    <a href="{{route('frontend.product')}}" class="see-more-btn">Xem tất cả</a>
                 </div>
             </div>
             <div class="col-md-12">

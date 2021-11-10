@@ -19,7 +19,7 @@ Shoping cart
             <div class="col-md-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('frontend.index')}}">Trang chủ</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Đơn hàng của tôi</li>
                     </ol>
                 </nav>
@@ -239,7 +239,7 @@ Shoping cart
                                                             </div>
                                                         </div>
                                                         <div class="main-total-cart">
-                                                            <h2>Total</h2>
+                                                            <h2>Tổng tiền</h2>
                                                             <span><% (dh.dh_giaTri+0) | currency:"":0  %>đ</span>
                                                         </div>
                                                     </div>

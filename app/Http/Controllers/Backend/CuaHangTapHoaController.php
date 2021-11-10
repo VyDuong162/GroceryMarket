@@ -12,6 +12,7 @@ use App\Models\QuanHuyen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use GrahamCampbell\ResultType\Result;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -127,6 +128,25 @@ class CuaHangTapHoaController extends Controller
         ->with('dsTinhTp',$dsTinhTp)
         ->with('dsQuanHuyen',$dsQuanHuyen);
     }
+    public function showCuaHang(Request $request)
+    {
+        $this->authorize('view', CuaHangTapHoa::class);
+        $tt = CuaHangTapHoa::where('kh_ma',$request->kh_ma)->first();
+       
+        $id= $tt->chth_ma;
+        $chth = CuaHangTapHoa::find($id);
+        $kh_ma = $chth->kh_ma;
+        $kh =KhachHang::where('kh_ma',$kh_ma)->first();
+        $dsPhuongXa = PhuongXa::orderBy('px_ten')->get();
+        $dsQuanHuyen = QuanHuyen::orderBy('qh_ten')->get();
+        $dsTinhTp = TinhTp::orderBy('ttp_ten')->get();
+        return view('backend.cuahangtaphoa.show')
+        ->with('chth',$chth)
+        ->with('kh',$kh)
+        ->with('dsPhuongXa',$dsPhuongXa)
+        ->with('dsTinhTp',$dsTinhTp)
+        ->with('dsQuanHuyen',$dsQuanHuyen);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -158,7 +178,31 @@ class CuaHangTapHoaController extends Controller
         ->with('dsTinhTp',$dsTinhTp)
         ->with('dsQuanHuyen',$dsQuanHuyen);
     }
-
+    public function editCuaHang(Request $request)
+    {
+        $this->authorize('update', CuaHangTapHoa::class);
+        $chth = CuaHangTapHoa::where('kh_ma',$request->kh_ma)->first();
+      
+        $pxid = $chth->px_ma;
+        $dsKhachHang = KhachHang::where('vt_ma',2)->orderBy('kh_hoTen')->get();  
+      
+        $px = PhuongXa::where('px_ma',$pxid)->get();
+        $qhid = $px[0]['qh_ma'];
+        $qh = QuanHuyen::where('qh_ma',$qhid)->get();
+        $ttp = TinhTp::where('ttp_ma',$qh[0]['ttp_ma'])->first();
+        $dsPhuongXa = PhuongXa::orderBy('px_ten')->get();
+        $dsQuanHuyen = QuanHuyen::orderBy('qh_ten')->get();
+        $dsTinhTp = TinhTp::orderBy('ttp_ten')->get();
+        return view('backend.cuahangtaphoa.edit')
+        ->with('chth',$chth)
+        ->with('px',$px)
+        ->with('qh',$qh)
+        ->with('ttp',$ttp)
+        ->with('dsKhachHang',$dsKhachHang)
+        ->with('dsPhuongXa',$dsPhuongXa)
+        ->with('dsTinhTp',$dsTinhTp)
+        ->with('dsQuanHuyen',$dsQuanHuyen);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -244,6 +288,17 @@ class CuaHangTapHoaController extends Controller
         $dsSanPham = DonGia_MatHang::leftjoin('sanpham','dongia_mathang.sp_ma','=','sanpham.sp_ma')
                                     ->leftjoin('cuahangtaphoa','dongia_mathang.chth_ma','=','cuahangtaphoa.chth_ma')
                                     ->where('cuahangtaphoa.chth_ma','=',$id)
+                                    ->get();
+        return view('backend.cuahangtaphoa.showproduct')
+        ->with('dsSanPham',$dsSanPham)
+        ->with('chth_ma',$id);
+    }
+    public function SanPhamChuCuaHang($id){
+        $this->authorize('view', CuaHangTapHoa::class);
+        $chth = CuaHangTapHoa::where('kh_ma',$id)->first();
+        $dsSanPham = DonGia_MatHang::leftjoin('sanpham','dongia_mathang.sp_ma','=','sanpham.sp_ma')
+                                    ->leftjoin('cuahangtaphoa','dongia_mathang.chth_ma','=','cuahangtaphoa.chth_ma')
+                                    ->where('cuahangtaphoa.chth_ma','=',$chth->chth_ma)
                                     ->get();
         return view('backend.cuahangtaphoa.showproduct')
         ->with('dsSanPham',$dsSanPham)
