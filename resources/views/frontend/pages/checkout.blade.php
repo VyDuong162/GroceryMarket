@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
 @section('title')
-Shoping cart
+Thanh toán
 @endsection
 
 @section('custom-css')

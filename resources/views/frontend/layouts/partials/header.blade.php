@@ -206,12 +206,14 @@
                 </div>
             </div>
             </form>
+            
+            <?php 
+            if(Session::has('user')){
+                $user = Session::get('user')[0];
+            }
+            ?>
             <div class="header_right">
                 
-            <?php if(Session::has('user')){
-                                $user = Session::get('user')[0];
-                            }
-                            ?>
                 <ul>
                 <li>
                             <a href="#" class="offer-link"><i class="uil uil-phone-alt"></i>1800-000-000</a>

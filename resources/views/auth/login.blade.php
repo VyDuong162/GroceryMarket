@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập</title>
-    <link rel="icon" type="image/png" href="{{ asset('themes/gambo/images/fav.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('logo') }}">
+   <!--  <link rel="icon" type="image/png" href="{{ asset('themes/gambo/images/fav.png') }}"> -->
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link href="{{ asset('themes/gambo/vendor/unicons-2.0.1/css/unicons.css') }}" rel="stylesheet">
     <link href="{{ asset('themes/gambo/css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('themes/gambo/css/responsive.css') }}" rel="stylesheet">
     <link href="{{ asset('themes/gambo/css/night-mode.css') }}" rel="stylesheet">
     <link href="{{ asset('themes/gambo/css/step-wizard.css') }}" rel="stylesheet">
-
-    <link href="{{ asset('themes/gambo/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('themes/gambo/vendor/OwlCarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('themes/gambo/vendor/OwlCarousel/assets/owl.theme.default.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('themes/gambo/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('themes/gambo/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('themes/gambo/vendor/semantic/semantic.min.css') }}">
     <style>
@@ -24,6 +24,9 @@
         }
         .form-control{
             line-height: 3!important;
+        }
+        .sign-form .form-dt{
+            margin-top: 0px;
         }
     </style>
 </head>

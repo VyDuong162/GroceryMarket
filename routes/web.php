@@ -5,10 +5,12 @@ use App\Http\Controllers\Backend\KhachHangController;
 use App\Http\Controllers\Backend\CuaHangTapHoaController;
 use App\Http\Controllers\Backend\DonHangController;
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\ThongKeController;
 use App\Http\Controllers\Frontend\DiaChiController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ShoppingCartController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Backend\RegisterController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\ShopController;
 use Illuminate\Support\Facades\Artisan;
@@ -44,9 +46,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/frontend', function(){
     return view('frontend.index');
 });
-Route::get('/dangnhap', function(){
-    return view('auth.login1');
-});
+
 //dashboards
 Route::get('/admin',[AdminController::class,'dashboards'])->name('admin');
 // sản phẩm
@@ -72,7 +72,8 @@ Route::resource('admin/donhang',DonHangController::class,['as'=>'admin']);
 Route::get('/donhang/inhoadon/{id}',[DonHangController::class,'pdf'])->name('donhang.inhoadon');
 Route::delete('/donhang/bulkaction',[DonHangController::class,'BulkAction'])->name('donhang.bulkaction');
 Route::get('/backend/donhang/search',[DonHangController::class,'Search']);
-
+// thống kê
+Route::get('/thongke',[ThongKeController::class,'index'])->name('admin.thongke.index')->middleware('auth');
 // Frontend
 Route::get('/index',[FrontendController::class,'index'])->name('frontend.index');
 Route::get('/shopping-cart',[ShoppingCartController::class,'index'])->name('frontend.shoppingcart');
@@ -100,3 +101,4 @@ Route::get('/shop/{id}',[ShopController::class,'show'])->name('frontend.shopdeta
 // tim kiem
 Route::get('/timkiem/cuahang',[FrontendController::class,'timkiemcuahang'])->name('frontend.timkiemcuahang');
 Route::get('/timkiem',[FrontendController::class,'timkiem'])->name('frontend.timkiem');
+Route::get('/dangky',[RegisterController::class,'index'])->name('frontend.dangky');
