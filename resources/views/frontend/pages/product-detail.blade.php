@@ -18,8 +18,8 @@ Chi tiết sản phẩm
                 <div class="col-md-12">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-                            <li class="breadcrumb-item"><a href="shop_grid.html">Sản phẩm</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('frontend.index') }}">Trang chủ</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('frontend.product') }}">Sản phẩm</a></li>
                             <li class="breadcrumb-item active" aria-current="page">{{ $sp->sp_ten }}</li>
                         </ol>
                     </nav>

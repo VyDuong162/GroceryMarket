@@ -57,7 +57,7 @@ Sản phẩm - Xem chi tiết
                         </div>
                     </div>
                     
-                    <?php $phi=1000 ?>
+                    <?php $phi=0 ?>
                     <div class="col-lg-7 pt-3"><hr>
                         <b>Phương thức thanh toán:</b>{{ $dh->phuongthucthanhtoan->pttt_ten }} <br>
                         <b>Thời gian giao dự kiến:</b>{{ $dh->dh_taoMoi->addHours(24)->format('d/m/Y') }} <br>

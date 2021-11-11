@@ -30,7 +30,7 @@ Shoping cart
             <div class="col-md-12">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('frontend.index') }}">Trang chủ</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Thanh toán</li>
                     </ol>
                 </nav>
@@ -39,7 +39,13 @@ Shoping cart
     </div>
 </div>
 <div class="all-product-grid">
-    <div class="container" ng-controller="checkoutController" >
+    <div class="container">
+    <div id="thongbao" class="row">
+            
+            </div>
+    </div>
+   
+    <div class="container" ng-controller="checkoutController" ng-show="show" >
         
         <form id="frmCheckout" name="frmCheckout" ng-submit="thanhtoan()" novalidate>
             <div class="row">
@@ -429,7 +435,10 @@ Shoping cart
     });
    
     app.controller('checkoutController', function($scope, $http,ngCart) {
-        
+        if(ngCart.getTotalItems()== 0){
+            document.getElementById('thongbao').innerHTML='<div class="alert alert-warning" role="alert">Giỏ hàng rỗng không thể thanh toán !! Bạn hãy trở về <a href="/index" style="margin-left: 10px; margin-right: 10px;"> <i class="fas fa-home "></i> Trang chủ </a> cho sản phẩm vào giỏ hàng</div>';
+            $scope.show=false;
+        }
         sessionStorage.setItem("kh_ma", "{{ Session::has('user') }}");
        if(sessionStorage.getItem("kh_ma")==''){
         console.log("rỗng");

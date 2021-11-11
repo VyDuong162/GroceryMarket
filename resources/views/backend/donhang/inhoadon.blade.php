@@ -120,7 +120,7 @@ A4
             </tbody>
         </table>
         <hr>
-        <?php $phi = 1000 ?>
+        <?php $phi = 0 ?>
         <p><i><u><h4 style="font-size:16px;">Chi tiết đơn hàng</h4></u></i></p>
         <table border="1" width="100%" cellspacing="0" cellpadding="5">
             <thead>

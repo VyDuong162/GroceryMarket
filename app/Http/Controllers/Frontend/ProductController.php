@@ -165,7 +165,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $sp = SanPham::find($id);
+        
         if(Auth::check()){
             $kh_ma = Auth::user()->kh_ma;
             $dsYeuThich = YeuThich::where('kh_ma','=',$kh_ma)->get('sp_ma');
@@ -173,6 +173,7 @@ class ProductController extends Controller
         }else{
             $soluong = 0;
         }
+        $sp = SanPham::find($id);
         $lsp =$sp->lsp_ma;
         $dsSanPhamLienQuan =SanPham::where('lsp_ma',$lsp)->take(3)->get();
         $dsHinhAnhLienQuan =HinhAnhSanPham::where('sp_ma',$id)->get();

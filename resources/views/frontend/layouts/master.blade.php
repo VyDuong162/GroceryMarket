@@ -10,7 +10,7 @@
     <meta name="author" content="Gambolthemes">
     <title>@yield('title')</title>
     <!-- css -->
-    <link rel="icon" type="image/png" href="images/fav.png">
+    <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
     <link rel='stylesheet' href="{{ asset('themes/gambo/vendor/unicons-2.0.1/css/unicons.css') }}" type="text/css">
     <link rel='stylesheet' href="{{ asset('themes/gambo/css/style.css') }}" type="text/css">

@@ -257,7 +257,7 @@
                             @if($user->vt_ma==2 )
                             <a href="{{ route('admin') }}" class="item channel_item"><i class="fas fa-tachometer-alt icon__1"></i>Quản lý cửa hàng</a>
                             @endif
-                            <a href="dashboard_overview.html" class="item channel_item"><i class="uil uil-apps icon__1"></i>Bảng điều khiển</a>
+                            <a href="dashboard_overview.html" class="item channel_item hidden"><i class="uil uil-apps icon__1"></i>Bảng điều khiển</a>
                             <a href="{{ route('frontend.myorders') }}" class="item channel_item"><i class="uil uil-box icon__1"></i>Đơn đặt hàng của tôi</a>
                             <a href="{{ route('frontend.mywishlist') }}" class="item channel_item"><i class="uil uil-heart icon__1"></i>Sản phẩm yêu thích</a>
                             <a href="dashboard_my_wallet.html" class="item channel_item"><i class="uil uil-usd-circle icon__1"></i>Ví của tôi</a>
@@ -265,7 +265,7 @@
                             <a href="{{ route('frontend.myaddress') }}" class="item channel_item"><i class="uil uil-location-point icon__1"></i>Địa chỉ của tôi</a>
                            <!--  <a href="offers.html" class="item channel_item"><i class="uil uil-gift icon__1"></i>Ưu
                                 đãi</a> -->
-                            <a href="faq.html" class="item channel_item"><i class="uil uil-info-circle icon__1"></i>Câu hỏi thường gặp</a>
+                            <a href="faq.html" class="item channel_item hidden"><i class="uil uil-info-circle icon__1"></i>Câu hỏi thường gặp</a>
                            
                             <a href="javascript:$('#logout-form').submit();" class="item channel_item"><i class="uil uil-lock-alt icon__1"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();"></i>Đăng xuất</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -290,10 +290,10 @@
                     <button class="navbar-toggler menu_toggle_btn" type="button" data-target="#navbarSupportedContent"><i class="uil uil-bars"></i></button>
                     <div class="collapse navbar-collapse d-flex flex-column flex-lg-row flex-xl-row justify-content-lg-end bg-dark1 p-3 p-lg-0 mt1-5 mt-lg-0 mobileMenu" id="navbarSupportedContent">
                         <ul class="navbar-nav main_nav align-self-stretch">
-                            <li class="nav-item"><a href="{{ route('frontend.index') }}" class="nav-link active" title="Home">Trang
+                            <li class="nav-item"><a href="{{ route('frontend.index') }}" class="nav-link {{ Request::is('index') ? 'active' : '' }} {{ Request::is('my-*') ? 'active' : '' }}" title="Trang chủ">Trang
                                     chủ</a></li>
-                            <li class="nav-item"><a href="{{ route('frontend.product') }}" class="nav-link new_item" title="New Products">Sản phẩm</a></li>
-                            <li class="nav-item"><a href="{{ route('frontend.shop') }}" class="nav-link" title="Featured Products">Cửa hàng</a></li>
+                            <li class="nav-item"><a href="{{ route('frontend.product') }}" class="nav-link {{ Request::is('product') ? 'active' : '' }}" title="Sản phẩm">Sản phẩm</a></li>
+                            <li class="nav-item"><a href="{{ route('frontend.shop') }}" class="nav-link {{ Request::is('shop') ? 'active' : '' }}" title="Cửa hàng">Cửa hàng</a></li>
                             <li class="nav-item">
                                 <div class="ui icon top left dropdown nav__menu">
                                     <a class="nav-link" title="Pages">Các trang <i class="uil uil-angle-down"></i></a>

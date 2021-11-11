@@ -37,19 +37,25 @@
                 <div class="dropdown-header bg-light py-2"><strong>Account</strong></div><a class="dropdown-item" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-envelope-open') }}"></use>
-                    </svg> Messages<span class="badge badge-success ml-auto">42</span></a><a class="dropdown-item" href="#">
+                    </svg> Messages<span class="badge badge-success ml-auto">42</span></a>
+                    <a class="dropdown-item" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-comment-square') }}"></use>
                     </svg> Comments<span class="badge badge-warning ml-auto">42</span></a>
+                    <a class="dropdown-item" href="#">
                     <svg class="c-icon mr-2">
+                        
                         <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-user') }}"></use>
                     </svg>Thông tin cá nhân</a>
+                    <a class="dropdown-item" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-settings') }}"></use>
                     </svg>Thay đổi mật khẩu</a>
+                    <a class="dropdown-item" href="#">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-lock-locked') }}"></use>
-                    </svg> Lock Account</a><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    </svg> Lock Account</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     <svg class="c-icon mr-2">
                         <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-account-logout') }}"></use>
                     </svg> Đăng xuât</a>

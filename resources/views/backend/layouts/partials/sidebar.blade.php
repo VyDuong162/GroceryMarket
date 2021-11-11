@@ -32,8 +32,8 @@
                      <use xlink:href="{{ asset('vendors/@coreui/icons/svg/free.svg#cil-puzzle') }}"></use>
                  </svg>Quản lý cửa hàng</a>
              <ul class="c-sidebar-nav-dropdown-items">
-                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('sanpham.showcuahang')}}?kh_ma={{$user->kh_ma}}"><span class="c-sidebar-nav-icon"></span>Xem chi tiết</a></li>
-                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('sanpham.editcuahang')}}?kh_ma={{$user->kh_ma}}"><span class="c-sidebar-nav-icon"></span>Chỉnh sửa thông tin</a></li>
+                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('sanpham.showcuahang')}}?kh_ma={{$user->kh_ma}}"><span class="c-sidebar-nav-icon"></span>Xem thông tin</a></li>
+                 <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('sanpham.editcuahang')}}?kh_ma={{$user->kh_ma}}"><span class="c-sidebar-nav-icon"></span>Cập nhật thông tin</a></li>
                  <li class="c-sidebar-nav-item"><a class="c-sidebar-nav-link" href="{{ route('sanpham.chucuahangtaphoa',$user->kh_ma) }}"><span class="c-sidebar-nav-icon"></span>Cập nhật giá</a></li>
              </ul>
          </li>
