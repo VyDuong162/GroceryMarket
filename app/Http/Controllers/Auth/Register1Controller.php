@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\KhachHang;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use Carbon\Carbon;
+use App\Models\DiaChi;
 class RegisterController extends Controller
 {
     /*
@@ -50,9 +52,17 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'kh_hoTen' =>'required|min:5|max:100',
+            'kh_ngaySinh' =>'required',
+            'kh_soDienThoai' =>'required|max:10',
+            'kh_email' =>'required|email',
+            'ttp_ma' =>'required',
+            'qh_ma' =>'required',
+            'px_ma' =>'required',
+            'dc_ten' =>'required|min:5|max:100',
+            'kh_taiKhoan' =>'required|min:5|max:100|unique:khachhang',
+            'kh_matKhau' =>'required|min:5|max:100',
+            'kh_matKhau1' =>'required|min:5|max:100',
         ]);
     }
 
@@ -64,10 +74,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        $kh = new KhachHang();
+        $kh->kh_hoTen = $data['kh_hoTen'];
+        $kh->kh_gioiTinh = $data['kh_gioiTinh'];
+        $kh->kh_ngaySinh = date('Y-m-d', strtotime($data['kh_ngaySinh']));
+        $kh->kh_soDienThoai = $data['kh_soDienThoai'];
+        $kh->kh_email = $data['kh_email'];
+        $kh->px_ma = $data['px_ma'];
+        $kh->vt_ma = 3;
+        $kh->kh_taiKhoan = $data['kh_taiKhoan'];
+        $kh->kh_trangThai = 1;
+        $kh->kh_matKhau = Hash::make($data['kh_matKhau']);
+        $kh->created_at = Carbon::now();
+        $kh->save();
+        $dc = new DiaChi();
+        $dc->kh_ma = $kh->kh_ma;
+        $dc->dc_ten = $data['dc_ten'];
+        $dc->created_at = Carbon::now();
+        $dc->save();
+        return $kh;
     }
 }

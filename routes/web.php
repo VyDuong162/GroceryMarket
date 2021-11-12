@@ -102,3 +102,4 @@ Route::get('/shop/{id}',[ShopController::class,'show'])->name('frontend.shopdeta
 Route::get('/timkiem/cuahang',[FrontendController::class,'timkiemcuahang'])->name('frontend.timkiemcuahang');
 Route::get('/timkiem',[FrontendController::class,'timkiem'])->name('frontend.timkiem');
 Route::get('/dangky',[RegisterController::class,'index'])->name('frontend.dangky');
+Route::post('/dangky',[RegisterController::class,'store'])->name('frontend.dangky.store');

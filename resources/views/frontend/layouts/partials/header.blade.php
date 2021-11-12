@@ -199,8 +199,7 @@
                     <div class="ui left icon input swdh10">
                         
                         <input class="prompt srch10" type="text" id="timkiem" name="timkiem" value="" placeholder="Tìm kiếm sản phẩm">
-                        <button type="submit" class="btn"><i class='uil uil-search-alt icon icon1'></i></button>
-                        
+                        <button type="submit" class="btn"><i class='uil uil-search-alt icon icon1'></i></button>  
                        
                     </div>
                 </div>
@@ -251,7 +250,7 @@
                             </div>
                             @if(!isset($user))
                             <a href="{{ route('login') }}" class="item channel_item"><i class="uil uil-lock-alt icon__1" ></i>Đăng nhập</a>
-                            <a href="{{ route('register') }}" class="item channel_item"><i class="uil uil-lock-open-alt icon__1" ></i>Đăng ký</a>
+                            <a href="{{ route('frontend.dangky') }}" class="item channel_item"><i class="uil uil-lock-open-alt icon__1" ></i>Đăng ký</a>
                             @else
                             @if($user->vt_ma==1)
                             <a href="{{ route('admin') }}" class="item channel_item"><i class="fas fa-tachometer-alt icon__1"></i>Trang Admin</a>

@@ -42,6 +42,15 @@
                                 <a href="{{ route('home') }}"><b style="font-size: larger;">SMARKET</b></a>
                             </div>
                             <div class="form-dt">
+                                <div class="flash-message mt-3">
+                                    @foreach(['danger', 'warning', 'success', 'info'] as $msg)
+                                    @if(Session::has('alert-'.$msg))
+                                    <p class="alert alert-{{ $msg }}">{{ Session::get('alert-'.$msg) }}
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                    </p>
+                                    @endif
+                                    @endforeach
+                                </div>
                                 <div class="form-inpts checout-address-step">
                                     <form method="POST" action="{{ route('login') }}">
                                         @csrf
@@ -88,7 +97,7 @@
                                     <a href="{{ route('password.request') }}">Quên mật khẩu</a>
                                 </div>
                                 <div class="signup-link">
-                                    <p>Bạn chưa có tài khoản? - <a href="{{ route('register') }}">Đăng ký</a></p>
+                                    <p>Bạn chưa có tài khoản? - <a href="{{ route('frontend.dangky') }}">Đăng ký</a></p>
                                 </div>
                             </div>
                         </div>

@@ -435,6 +435,7 @@ Thanh toán
     });
    
     app.controller('checkoutController', function($scope, $http,ngCart) {
+        $scope.show=true;
         if(ngCart.getTotalItems()== 0){
             document.getElementById('thongbao').innerHTML='<div class="alert alert-warning" role="alert">Giỏ hàng rỗng không thể thanh toán !! Bạn hãy trở về <a href="/index" style="margin-left: 10px; margin-right: 10px;"> <i class="fas fa-home "></i> Trang chủ </a> cho sản phẩm vào giỏ hàng</div>';
             $scope.show=false;
