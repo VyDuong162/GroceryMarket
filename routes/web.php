@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\KhachHangController;
 use App\Http\Controllers\Backend\CuaHangTapHoaController;
 use App\Http\Controllers\Backend\DonHangController;
 use App\Http\Controllers\Backend\AdminController;
+use App\Http\Controllers\Backend\DanhGiaController;
 use App\Http\Controllers\Backend\ThongKeController;
 use App\Http\Controllers\Frontend\DiaChiController;
 use App\Http\Controllers\Frontend\FrontendController;
@@ -103,3 +104,5 @@ Route::get('/timkiem/cuahang',[FrontendController::class,'timkiemcuahang'])->nam
 Route::get('/timkiem',[FrontendController::class,'timkiem'])->name('frontend.timkiem');
 Route::get('/dangky',[RegisterController::class,'index'])->name('frontend.dangky');
 Route::post('/dangky',[RegisterController::class,'store'])->name('frontend.dangky.store');
+Route::post('/danhgia/store',[DanhGiaController::class,'luuDanhGia'])->name('frontend.luuDanhGia');
+Route::get('/order/detail/rating',[FrontendController::class,'orderdetailrating'])->name('frontend.orderdetailrating');

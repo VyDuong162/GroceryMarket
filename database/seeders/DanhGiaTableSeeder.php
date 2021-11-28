@@ -33,6 +33,6 @@ class DanhGiaTableSeeder extends Seeder
             'dg_thoiGian' =>  $date,
             'dg_trangThai' => 2
         ]);
-        DB::table('danhgia')->insert($list);
+      
     }
 }

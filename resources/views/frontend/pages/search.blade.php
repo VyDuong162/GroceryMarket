@@ -138,20 +138,7 @@ Sản phẩm
         });
     });
 
-        app.controller('locationController',function($scope,$http){
-                $http({
-                method: 'GET',
-                url: "{{ route('api.tinhtp') }}",
-                }).then(function successCallback(response) {
-                    console.log(response);
-                    $scope.dsTinhTp = response.data.result;
-                }, function errorCallback(response) {
-                    console.log('thất bại');
-                });
-                $scope.timcuahangtheotp = function(tp_ma) {
-        window.location.href="{{ route('frontend.shop') }}?ttp_ma="+tp_ma;
-         }
-            });
+       
         app.controller('dsSanPhamController',function($scope,$http){
             $scope.dsSanPham = "{{$dsSanPham}}";
             $scope.soluong = "{{$soluong}}";

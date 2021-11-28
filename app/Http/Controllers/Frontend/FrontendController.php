@@ -189,6 +189,44 @@ class FrontendController extends Controller
         
       
     }
+    public function orderdetailrating(Request $request){
+    
+        $dh =DonHang::leftjoin('khachhang','donhang.kh_ma','=','khachhang.kh_ma')
+                        ->where('donhang.dh_ma','=',$request->dh_ma)->first();
+                     
+        $chth = $dh->chth_ma;
+        $ds_sp_da_danhgia = collect([]);
+       
+        $cuahang = CuaHangTapHoa::where('chth_ma', $chth)->first();
+        $ctdh_danhgia = ChiTiet_DonHang::leftjoin('sanpham','chitiet_donhang.sp_ma','=','sanpham.sp_ma')
+                                ->leftjoin('danhgia','chitiet_donhang.sp_ma','=','danhgia.sp_ma')
+        ->where('chitiet_donhang.dh_ma','=',$request->dh_ma)
+        ->where('chitiet_donhang.sp_ma','=','danhgia.sp_ma')->get('danhgia.sp_ma');
+        foreach ($ctdh_danhgia as $index =>$ct){
+            $ds_sp_da_danhgia->push($ct->sp_ma);
+        }
+        if(!empty($ds_sp_da_danhgia)){
+            $ctdh = ChiTiet_DonHang::leftjoin('sanpham','chitiet_donhang.sp_ma','=','sanpham.sp_ma')
+            ->where('chitiet_donhang.dh_ma','=',$request->dh_ma)
+            ->whereNotIn('chitiet_donhang.sp_ma',$ds_sp_da_danhgia)
+            ->get();
+        }else{
+            $ctdh = ChiTiet_DonHang::leftjoin('sanpham','chitiet_donhang.sp_ma','=','sanpham.sp_ma')
+            ->where('chitiet_donhang.dh_ma','=',$request->dh_ma)
+            ->get();
+        }
+       
+        return response()->json(
+                ['dh'=>$dh,
+                'cuahang'=>$cuahang,
+                'ctdh'=>$ctdh
+                ]
+            
+           
+        );
+        
+      
+    }
     public function orderdestroy(Request $request){
         $datetime = Carbon::now();
         $dh = DonHang::where('donhang.dh_ma','=',$request->dh_ma)->update(['dh_trangThai' => '1','dh_capNhat' => $datetime]);

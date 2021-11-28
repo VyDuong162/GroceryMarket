@@ -10,77 +10,13 @@
                 <div class="cate-header">
                     <h4>Chọn danh mục</h4>
                 </div>
-                <ul class="category-by-cat">
-                    <li>
-                        <a href="shop_grid.html" class="single-cat-item">
+                <ul class="category-by-cat" ng-controller="LoaiSanPhamController">
+                    <li ng-repeat="lsp in dsLoaiSanPham">
+                        <a href="{{route('frontend.product')}}?lsp_ma=<% lsp.lsp_ma %>" class="single-cat-item">
                             <div class="icon">
-                                <img src="{{ asset('themes/gambo/images/category/icon-1.svg') }}" alt="">
+                            <img ng-src="/themes/gambo/images/category/icon-<% $index+1 %>.svg" alt="">
                             </div>
-                            <div class="text"> Hoa quả và rau </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="shop_grid.html" class="single-cat-item">
-                            <div class="icon">
-                                <img src="{{ asset('themes/gambo/images/category/icon-2.svg') }}" alt="">
-                            </div>
-                            <div class="text"> Hàng tạp hóa & mặt hàng chủ lực </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="shop_grid.html" class="single-cat-item">
-                            <div class="icon">
-                                <img src="{{ asset('themes/gambo/images/category/icon-3.svg') }}" alt="">
-                            </div>
-                            <div class="text"> Sữa & Trứng </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="shop_grid.html" class="single-cat-item">
-                            <div class="icon">
-                                <img src="{{ asset('themes/gambo/images/category/icon-4.svg') }}" alt="">
-                            </div>
-                            <div class="text"> Đồ uống </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="shop_grid.html" class="single-cat-item">
-                            <div class="icon">
-                                <img src="{{ asset('themes/gambo/images/category/icon-5.svg') }}" alt="">
-                            </div>
-                            <div class="text"> Đồ ăn nhẹ </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="shop_grid.html" class="single-cat-item">
-                            <div class="icon">
-                                <img src="{{ asset('themes/gambo/images/category/icon-6.svg') }}" alt="">
-                            </div>
-                            <div class="text"> Chăm sóc tại nhà </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="shop_grid.html" class="single-cat-item">
-                            <div class="icon">
-                                <img src="{{ asset('themes/gambo/images/category/icon-7.svg') }}" alt="">
-                            </div>
-                            <div class="text"> Mì & nước sốt </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="shop_grid.html" class="single-cat-item">
-                            <div class="icon">
-                                <img src="{{ asset('themes/gambo/images/category/icon-8.svg') }}" alt="">
-                            </div>
-                            <div class="text"> Chăm sóc cá nhân </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="shop_grid.html" class="single-cat-item">
-                            <div class="icon">
-                                <img src="{{ asset('themes/gambo/images/category/icon-9.svg') }}" alt="">
-                            </div>
-                            <div class="text"> Chăm sóc thú cưng </div>
+                            <div class="text"><% lsp.lsp_ten %> </div>
                         </a>
                     </li>
                 </ul>
@@ -106,62 +42,14 @@
                         <button type="submit"><i class="uil uil-search"></i></button>
                     </form>
                 </div>
-                <div class="search-by-cat">
-                    <a href="#" class="single-cat">
+                <div class="search-by-cat" ng-controller="LoaiSanPhamController">
+                    <a href="{{route('frontend.product')}}?lsp_ma=<% lsp.lsp_ma %>" class="single-cat" ng-repeat="lsp in dsLoaiSanPham">
                         <div class="icon">
-                            <img src="{{ asset('themes/gambo/images/category/icon-1.svg') }}" alt="">
+                            <img ng-src="themes/gambo/images/category/icon-<% $index+1 %>.svg" alt="">
                         </div>
                         <div class="text">
-                            Hoa quả và rau
+                            <% lsp.lsp_ten %>
                         </div>
-                    </a>
-                    <a href="#" class="single-cat">
-                        <div class="icon">
-                            <img src="{{ asset('themes/gambo/images/category/icon-2.svg') }}" alt="">
-                        </div>
-                        <div class="text"> Hàng tạp hóa & mặt hàng chủ lực </div>
-                    </a>
-                    <a href="#" class="single-cat">
-                        <div class="icon">
-                            <img src="{{ asset('themes/gambo/images/category/icon-3.svg') }}" alt="">
-                        </div>
-                        <div class="text"> Sữa & Trứng </div>
-                    </a>
-                    <a href="#" class="single-cat">
-                        <div class="icon">
-                            <img src="{{ asset('themes/gambo/images/category/icon-4.svg') }}" alt="">
-                        </div>
-                        <div class="text"> Đồ uống </div>
-                    </a>
-                    <a href="#" class="single-cat">
-                        <div class="icon">
-                            <img src="{{ asset('themes/gambo/images/category/icon-5.svg') }}" alt="">
-                        </div>
-                        <div class="text"> Đồ ăn nhẹ </div>
-                    </a>
-                    <a href="#" class="single-cat">
-                        <div class="icon">
-                            <img src="{{ asset('themes/gambo/images/category/icon-6.svg') }}" alt="">
-                        </div>
-                        <div class="text"> Chăm sóc tại nhà </div>
-                    </a>
-                    <a href="#" class="single-cat">
-                        <div class="icon">
-                            <img src="{{ asset('themes/gambo/images/category/icon-7.svg') }}" alt="">
-                        </div>
-                        <div class="text"> Mì & nước sốt </div>
-                    </a>
-                    <a href="#" class="single-cat">
-                        <div class="icon">
-                            <img src="{{ asset('themes/gambo/images/category/icon-8.svg') }}" alt="">
-                        </div>
-                        <div class="text"> Chăm sóc cá nhân </div>
-                    </a>
-                    <a href="#" class="single-cat">
-                        <div class="icon">
-                            <img src="{{ asset('themes/gambo/images/category/icon-9.svg') }}" alt="">
-                        </div>
-                        <div class="text"> Chăm sóc thú cưng </div>
                     </a>
                 </div>
             </div>
@@ -172,10 +60,10 @@
     <div class="top-header-group">
         <div class="top-header">
             <div class="res_main_logo">
-                <a href="{{ route('frontend.index') }}"><img src="{{ asset('logo.png') }}"  style="width:auto" alt="logo"><small><b>SMARKET</b></small></a>
+                <a href="{{ route('frontend.index') }}"><img src="{{ asset('logo.png') }}"  style="width:auto" alt="logo"><small><b>VSMARKET</b></small></a>
             </div>
             <div class="main_logo" id="logo">
-                <a href="{{ route('frontend.index') }}"><img src="{{ asset('logo.png') }}" style="width:auto" alt="logo"><small><b>SMARKET</b></small></a>
+                <a href="{{ route('frontend.index') }}"><img src="{{ asset('logo.png') }}" style="width:auto" alt="logo"><small><b>VSMARKET</b></small></a>
                
             </div>
             <div class="select_location" ng-controller="locationController">
@@ -218,10 +106,10 @@
                             <a href="#" class="offer-link"><i class="uil uil-phone-alt"></i>1800-000-000</a>
                         </li>
                         <li>
-                            <a href="offers.html" class="offer-link"><i class="uil uil-lock-open-alt"></i>Đăng ký cửa hàng</a>
+                            <a href="/offers.html" class="offer-link"><i class="uil uil-lock-open-alt"></i>Đăng ký cửa hàng</a>
                         </li>
                         <li>
-                            <a href="faq.html" class="offer-link"><i class="uil uil-question-circle"></i>Trợ giúp</a>
+                            <a href="/faq.html" class="offer-link"><i class="uil uil-question-circle"></i>Trợ giúp</a>
                         </li>
                     <li>
                         @if(isset($user))
@@ -345,9 +233,7 @@
                 <a href="#" class="cate__btn" data-toggle="modal" data-target="#category_model" title="Categories"><i class="uil uil-apps"></i></a>
             </div>
             <div class="header_cart">
-            <ngcart-summary template-url="{{ asset('vendors/ngCart/template/ngCart/summary.html') }}">
-                    
-                   
+            <ngcart-summary template-url="{{ asset('vendors/ngCart/template/ngCart/summary.html') }}">  
             </ngcart-summary> 
            
            </div>

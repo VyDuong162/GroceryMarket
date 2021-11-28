@@ -19,13 +19,17 @@ class CreateDanhgiaTable extends Migration
             $table->unsignedBigInteger('sp_ma')->length(11);
             $table->unsignedBigInteger('chth_ma')->length(11);
             $table->integer('dg_soDiem')->length(2);
-            $table->text('dg_noiDung');
+            $table->text('dg_noiDung')->nullable();
+            $table->unsignedBigInteger('dh_ma')->length(11);
             $table->timestamp('dg_thoiGian')->useCurrent();
             $table->tinyInteger('dg_trangThai')->comment('Trạng thái: 1-chưa duyệt ,2- đã duyệt');
             $table->foreign('sp_ma')->references('sp_ma')->on('sanpham')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');
             $table->foreign('chth_ma')->references('chth_ma')->on('cuahangtaphoa')
+            ->onUpdate('CASCADE')
+            ->onDelete('CASCADE');
+            $table->foreign('dh_ma')->references('dh_ma')->on('donhang')
             ->onUpdate('CASCADE')
             ->onDelete('CASCADE');
             

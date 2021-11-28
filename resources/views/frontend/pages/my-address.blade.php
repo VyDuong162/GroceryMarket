@@ -44,7 +44,7 @@
                         </a>
                         <a href="my-wishlist" class="user-item "><i class="uil uil-heart"></i>Sản phẩm yêu thích</a>
                         <a href="my-address" class="user-item active"><i class="uil uil-location-point"></i>Địa chỉ</a>
-                        <a href="sign_in.html" class="user-item"><i class="uil uil-exit"></i>Đăng xuất</a>
+                        <a href="javascript:$('#logout-form').submit();" class="user-item"><i class="uil uil-exit"></i>Đăng xuất</a>
                     </div>
                 </div>
             </div>
@@ -143,22 +143,6 @@
 
 @section('custom-scripts')
 <script src="{{ asset('js/frontendController.js') }}"></script>
-<script>
-         app.controller('locationController',function($scope,$http){
-                    $http({
-                    method: 'GET',
-                    url: "{{ route('api.tinhtp') }}",
-                    }).then(function successCallback(response) {
-                        console.log(response);
-                        $scope.dsTinhTp = response.data.result;
-                    }, function errorCallback(response) {
-                        console.log('thất bại');
-                    });
-                    $scope.timcuahangtheotp = function(tp_ma) {
-        window.location.href="{{ route('frontend.shop') }}?ttp_ma="+tp_ma;
-         }
-                });
-    </script>
 <script>
     app.controller('diachiController', function($scope, $http) {
        

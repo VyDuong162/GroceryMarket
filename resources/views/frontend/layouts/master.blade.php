@@ -22,6 +22,14 @@
     <link rel='stylesheet' href="{{ asset('themes/gambo/vendor/OwlCarousel/assets/owl.theme.default.min.css') }}" type="text/css">
     <link rel='stylesheet' href="{{ asset('themes/gambo/vendor/bootstrap/css/bootstrap.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('themes/gambo/vendor/semantic/semantic.min.css') }}" type="text/css">
+    <style>
+        .category-by-cat li{
+            float: none;
+        }
+        .main_logo{
+            width: 130px;
+        }
+    </style>
     <!-- css custom -->
     @yield('custom-css')
 </head>
@@ -78,10 +86,33 @@
                     $scope.qty--;
                 }
                 });
-               
-             
+                app.controller('locationController',function($scope,$http){
+                    $http({
+                    method: 'GET',
+                    url: "{{ route('api.tinhtp') }}",
+                    }).then(function successCallback(response) {
+                        console.log(response);
+                        $scope.dsTinhTp = response.data.result;
+                    }, function errorCallback(response) {
+                        console.log('thất bại');
+                    });
+                    $scope.timcuahangtheotp = function(tp_ma) {
+                    window.location.href="{{ route('frontend.shop') }}?ttp_ma="+tp_ma;
+                    }
+                });
+                app.controller('LoaiSanPhamController',function($scope,$http){
+                $http({
+                method: 'GET',
+                url: "{{ route('api.loaisanpham') }}",
+                }).then(function successCallback(response) {
+                    console.log(response);
+                    $scope.dsLoaiSanPham = response.data.result;
+                }, function errorCallback(response) {
+                    console.log('thất bại');
+                });
+                });
+
             </script>
-        
         @yield('custom-scripts')
 </body>
 

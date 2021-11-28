@@ -38,7 +38,7 @@ Route::get('/donhang/ganday',[ApiController::class,'baoCaoDonHangGanDay'])->name
 
 //frontend
 Route::get('/thongke/top_sanpham_noibat',[ApiController::class,'thongke_top_sanphamnoibat'])->name('api.thongke.topsanphamnoibat');
-Route::get('/loaisanpham',[ApiController::class,'getloaisanpham'])->name('api.loaisanpham');
+Route::get('/api/loaisanpham',[ApiController::class,'getloaisanpham'])->name('api.loaisanpham');
 Route::get('/tinh-tp',[ApiController::class,'gettinhtp'])->name('api.tinhtp');
 Route::get('/quan-huyen',[ApiController::class,'getquanhuyen'])->name('api.quanhuyen');
 Route::get('/phuong-xa',[ApiController::class,'getphuongxa'])->name('api.phuongxa');

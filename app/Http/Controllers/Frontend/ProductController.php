@@ -8,6 +8,7 @@ use App\Models\SanPham;
 use Illuminate\Support\Facades\Auth;
 use App\Models\YeuThich;
 use App\Models\CuaHangTapHoa;
+use App\Models\DanhGia;
 use App\Models\HinhAnhSanPham;
 use App\Models\NhaSanXuat;
 use App\Models\LoaiSanPham;
@@ -182,6 +183,7 @@ class ProductController extends Controller
         $dsCuaHang = CuaHangTapHoa::Where('chth_trangThai','<','3')->get();
         $dsNhaSanXuat = NhaSanXuat::all();
         $dsLoaiSanPham = LoaiSanPham::all();
+        $dsDanhGia = DanhGia::where('sp_ma',$sp->sp_ma)->get();
         return view('frontend.pages.product-detail')
         ->with('dsSanPhamLienQuan',$dsSanPhamLienQuan)
         ->with('sp',$sp)
@@ -191,6 +193,7 @@ class ProductController extends Controller
         ->with('gia',$gia)
         ->with('dsLoaiSanPham',$dsLoaiSanPham)
         ->with('dsCuaHang', $dsCuaHang)
+        ->with('dsDanhGia', $dsDanhGia)
         ->with('soluong',$soluong);
     }
 
