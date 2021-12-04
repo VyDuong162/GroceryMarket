@@ -155,7 +155,7 @@ class FrontendController extends Controller
             }
             $dsSanPham = SanPham::leftjoin('dongia_mathang','sanpham.sp_ma','=','dongia_mathang.sp_ma')
                                 ->leftjoin('cuahangtaphoa','dongia_mathang.chth_ma','=','cuahangtaphoa.chth_ma')
-                                ->where('sanpham.sp_ma','=',$arr)
+                                ->whereIn('sanpham.sp_ma',$arr)
                                 ->get();
            }else{
             $dsSanPham ='';
@@ -189,7 +189,7 @@ class FrontendController extends Controller
         
       
     }
-    public function orderdetailrating(Request $request){
+    public function orderrating(Request $request){
     
         $dh =DonHang::leftjoin('khachhang','donhang.kh_ma','=','khachhang.kh_ma')
                         ->where('donhang.dh_ma','=',$request->dh_ma)->first();
@@ -198,10 +198,10 @@ class FrontendController extends Controller
         $ds_sp_da_danhgia = collect([]);
        
         $cuahang = CuaHangTapHoa::where('chth_ma', $chth)->first();
-        $ctdh_danhgia = ChiTiet_DonHang::leftjoin('sanpham','chitiet_donhang.sp_ma','=','sanpham.sp_ma')
-                                ->leftjoin('danhgia','chitiet_donhang.sp_ma','=','danhgia.sp_ma')
+        $ctdh_danhgia = ChiTiet_DonHang::join('sanpham','chitiet_donhang.sp_ma','=','sanpham.sp_ma')
+                                ->join('danhgia','chitiet_donhang.sp_ma','=','danhgia.sp_ma')
         ->where('chitiet_donhang.dh_ma','=',$request->dh_ma)
-        ->where('chitiet_donhang.sp_ma','=','danhgia.sp_ma')->get('danhgia.sp_ma');
+        ->get('danhgia.sp_ma');
         foreach ($ctdh_danhgia as $index =>$ct){
             $ds_sp_da_danhgia->push($ct->sp_ma);
         }
@@ -216,15 +216,10 @@ class FrontendController extends Controller
             ->get();
         }
        
-        return response()->json(
-                ['dh'=>$dh,
-                'cuahang'=>$cuahang,
-                'ctdh'=>$ctdh
-                ]
-            
-           
-        );
-        
+        return view('frontend.pages.rating')
+        ->with('dh',$dh)
+        ->with('cuahang', $cuahang)
+        ->with('ctdh', $ctdh); 
       
     }
     public function orderdestroy(Request $request){

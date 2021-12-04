@@ -68,10 +68,4 @@ class RegisterRequest extends FormRequest
         
         ];
     }
-    public function withValidator($validator)
-    {
-        $validator->after(function ($validator) {
-            $validator->errors()->add('field', 'Đăng ký không thành công');
-        });
-    }
 }

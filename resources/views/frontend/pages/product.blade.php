@@ -73,7 +73,9 @@ Sản phẩm
         </div>
         <div class="product-list-view" ng-controller="dsSanPhamController" ng-show="{{count($dsSanPham)}} > 0">
             <div class="row">
+             
                     @foreach($dsSanPham as $index=>$sp)
+
                     <div class="col-lg-3 col-md-6">
                         <div class="product-item mb-30">
                             <a href="javascript:void(0)" class="product-img">
@@ -155,7 +157,7 @@ Sản phẩm
         app.controller('filterProductController',function($scope,$http){
             $scope.filterProduct= function(){    
                 $scope.giatri =$(this).data('value');
-               console.log($scope.giatri);
+              
             }
                
             });

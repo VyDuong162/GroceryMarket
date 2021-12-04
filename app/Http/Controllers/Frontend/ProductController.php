@@ -13,6 +13,7 @@ use App\Models\HinhAnhSanPham;
 use App\Models\NhaSanXuat;
 use App\Models\LoaiSanPham;
 use App\Models\TinhTp;
+use Illuminate\Support\Facades\DB;
 class ProductController extends Controller
 {
     /**
@@ -99,6 +100,7 @@ class ProductController extends Controller
         $query1=$request->get('timkiem');
         if($query1!=null){
             $query = SanPham::leftjoin('loaisanpham', 'sanpham.lsp_ma', '=', 'loaisanpham.lsp_ma')
+            ->leftjoin('dongia_mathang','sanpham.sp_ma','=','dongia_mathang.sp_ma')
             ->leftjoin('nhasanxuat', 'sanpham.nsx_ma', '=', 'nhasanxuat.nsx_ma')
             ->where('sp_trangThai','=',1)
             ->where(
@@ -109,7 +111,7 @@ class ProductController extends Controller
                         ;
                 }
             )
-            ->orderBy('sp_ma', 'asc')->get();
+            ->orderBy('sanpham.sp_ma', 'asc')->get();
         }
         $locgia = $request->get('locGia');
         if($locgia!=0){
@@ -183,7 +185,11 @@ class ProductController extends Controller
         $dsCuaHang = CuaHangTapHoa::Where('chth_trangThai','<','3')->get();
         $dsNhaSanXuat = NhaSanXuat::all();
         $dsLoaiSanPham = LoaiSanPham::all();
-        $dsDanhGia = DanhGia::where('sp_ma',$sp->sp_ma)->get();
+        $diemDanhGia = DanhGia::where('sp_ma',$sp->sp_ma)->avg('dg_soDiem');
+        $diemDanhGia = round($diemDanhGia);
+        $dsDanhGia = DB::table('danhgia')->join('donhang','donhang.dh_ma','=','danhgia.dh_ma')
+        ->join('khachhang','khachhang.kh_ma','=','donhang.kh_ma')
+        ->where('sp_ma',$sp->sp_ma)->get(['danhgia.dg_soDiem','danhgia.dg_noiDung','khachhang.kh_taiKhoan']);
         return view('frontend.pages.product-detail')
         ->with('dsSanPhamLienQuan',$dsSanPhamLienQuan)
         ->with('sp',$sp)
@@ -194,6 +200,7 @@ class ProductController extends Controller
         ->with('dsLoaiSanPham',$dsLoaiSanPham)
         ->with('dsCuaHang', $dsCuaHang)
         ->with('dsDanhGia', $dsDanhGia)
+        ->with('diemDanhGia', $diemDanhGia)
         ->with('soluong',$soluong);
     }
 

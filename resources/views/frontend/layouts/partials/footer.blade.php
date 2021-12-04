@@ -7,7 +7,7 @@
                             <li><a href="#" class="callemail"><i class="uil uil-dialpad-alt"></i>1800-000-000</a></li>
                             <li><a href="#" class="callemail"><i class="uil uil-envelope-alt"></i><span
                                         class="__cf_email__"
-                                        >Vsmarket@gmail.com</span></a>
+                                        >Gsmark@gmail.com</span></a>
                             </li>
                         </ul>
                     </div>

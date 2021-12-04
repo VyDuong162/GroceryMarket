@@ -75,22 +75,7 @@ input#rate-5:checked ~ label{
 <div class="">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-4">
-                <div class="left-side-tabs">
-                    <div class="dashboard-left-links">
-                        <a href="dashboard_overview.html" class="user-item"><i class="uil uil-apps"></i>Bảng điều khiển</a>
-                        <a href="my-orders" class="user-item active"><i class="uil uil-box"></i>Đơn hàng của tôi</a>
-                        <a href="dashboard_my_rewards.html" class="user-item"><i class="uil uil-gift"></i>Khuyến mãi của tôi
-                        </a>
-                        <a href="dashboard_my_wallet.html" class="user-item"><i class="uil uil-wallet"></i>Ví của tôi
-                        </a>
-                        <a href="my-wishlist" class="user-item"><i class="uil uil-heart"></i>Sản phẩm yêu thích</a>
-                        <a href="my-address" class="user-item"><i class="uil uil-location-point"></i>Địa chỉ</a>
-                        <a href="javascript:$('#logout-form').submit();" class="user-item"><i class="uil uil-exit"></i>Đăng xuất</a>
-
-                    </div>
-                </div>
-            </div>
+            @include('frontend.layouts.partials.dasboards-customer')
             <div class="col-lg-9 col-md-8" ng-controller="donhangController">
                 <div class="dashboard-right">
                     <div class="row">
@@ -206,103 +191,13 @@ input#rate-5:checked ~ label{
                                         <a ng-click="orderdetail(dh.dh_ma)" class="view-shop-btn" title="View" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-eye"></i></a>
                                         <button type="submit" ng-if="dh.dh_trangThai == 0" class="edit-btn btn-delete" ng-click="cancel(dh.dh_ma)" title="Hủy"><i class="fas fa-trash-alt"></i></button>
                                         <a ng-if="dh.dh_trangThai >= 4" ng-click="print(dh.dh_ma)" class="btn-print" style="margin-right: 1rem; float: left;" title="Print"><i class="fas fa-print"></i></a>
-                                        <a ng-if="dh.dh_trangThai == 5" ng-click="listproductrating(dh.dh_ma)" class="btn-print" style="margin-right: 1rem; margin-top: 1rem; float: left;" title="Đánh giá"><i class="fa fa-star"></i></a>
+                                        <a ng-if="dh.dh_trangThai == 5" ng-href="order/rating/<%dh.dh_ma%>" class="btn-print" style="margin-right: 1rem; margin-top: 1rem; float: left;" title="Đánh giá"><i class="fa fa-star"></i></a>
 
                                     </td>
                                 </tr>
 
                             </tbody>
                         </table>
-                        <div class="rating col-md-12 mt-3" ng-show="star_rating">
-                            <h3>Đánh giá</h3> 
-                            <table class="table table-bordered">
-                                    <thead>
-                                        <tr class="text-center">
-                                            <th scope="col">STT</th>
-                                            <th scope="col">Sản phẩm</th>
-                                            <th scope="col">Đánh giá</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr ng-repeat="ct in ctdh">
-                                            <th scope="row"><% $index+1 %></th>
-
-                                            <td ng-if="layanh('storage/products/'+ct.sp_anhDaiDien)==false">
-                                                <img src="{{ asset('themes/gambo/images/product/big-1.jpg') }}" height="100px" alt="hinhdaidien">
-                                                <span><% ct.sp_ten %></span>
-                                            </td>
-                                            <td ng-if="layanh('storage/products/'+ct.sp_anhDaiDien)">
-                                                <img src="storage/products/<% ct.sp_anhDaiDien %>" height="50px" alt="hinhdaidien"><br>
-                                                <span><% ct.sp_ten %></span>
-                                            </td>
-                                            <td>
-                                            <button type="button" ng-click="rating(dh.dh_ma,ct.sp_anhDaiDien,ct.sp_ten,ct.sp_ma,cuahang.chth_ma)" class="btn btn-primary" title="Đánh giá" data-toggle="modal" data-target="#DanhGiaModal">Đánh giá</button>
-                                            </td>
-                                        </tr>
-                                      
-                                    </tbody>
-                                </table>              
-                        </div>
-                        <!-- Đánh giá -->
-                        <div class="modal fade" id="DanhGiaModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body" ng-show="star_rating">
-                                    <div class="container">
-                                        <div class="post">
-                                            <div class="text">Cảm ơn bạn đã đánh giá</div>
-                                            <div class="edit"><i class="fas fa-edit"></i></div>
-                                        </div>
-                                        <form name="frmDanhGia" id="frmDanhGia" > 
-                                            @csrf 
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div class="col-md-4" ng-if="layanh('storage/products/'+ sp_anhDaiDien )==false">
-                                                    <img src="{{ asset('themes/gambo/images/product/big-1.jpg') }}" height="120px" alt="hinhdaidien">
-                                                        <span><% sp_ten %></span>
-                                                    </div>
-                                                    <div class="col-md-4" ng-if="layanh('storage/products/'+ sp_anhDaiDien )">
-                                                    <img src="storage/products/<% sp_anhDaiDien %>" height="120px" alt="hinhdaidien"><br>
-                                                        <span><% sp_ten %></span>
-                                                    </div>
-                                                
-                                                    <div class="col-md-8">
-                                                        <div class="star-rating">
-                                                                <input type="radio" name="rate" id="rate-5" value="5">
-                                                                <label for="rate-5" class="fas fa-star"></label>
-                                                                <input type="radio" name="rate" id="rate-4" value="4">
-                                                                <label for="rate-4" class="fas fa-star"></label>
-                                                                <input type="radio" name="rate" id="rate-3" value="3">
-                                                                <label for="rate-3" class="fas fa-star"></label>
-                                                                <input type="radio" name="rate" id="rate-2" value="2">
-                                                                <label for="rate-2" class="fas fa-star"></label>
-                                                                <input type="radio" name="rate" id="rate-1" value="1">
-                                                                <label for="rate-1" class="fas fa-star"></label>
-                                                                <input type="hidden" name="sp_ma" value="<% sp_ma %>">
-                                                                <input type="hidden" name="dh_ma" value="<% dh_ma %>">
-                                                                <input type="hidden" name="chth_ma" value="<% chth_ma %>">
-                                                             
-                                                            <textarea name="dg_noidung" id="dg_noidung" cols="30" rows="5"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                       
-                                            <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Lưu</button>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -459,82 +354,6 @@ input#rate-5:checked ~ label{
     @section('custom-scripts')
     <script src="{{ asset('js/frontendController.js') }}"></script>
     <script>
-        const btn = document.querySelector("button");
-      const post = document.querySelector(".post");
-      const widget = document.querySelector(".star-rating");
-      const editBtn = document.querySelector(".edit");
-      btn.onclick = ()=>{
-        widget.style.display = "none";
-        post.style.display = "block";
-        editBtn.onclick = ()=>{
-          widget.style.display = "block";
-          post.style.display = "none";
-        }
-        return false;
-      }
-        function remove_background(sp_ma){
-            for(var count=1; count <=5; count++){
-                $('#'+sp_ma+'-'+count).css('color','#ccc');
-            }
-        }
-        //hover chuột
-        $(document).on('mouseenter', '.rating', function(){
-            var index = $(this).data("index");
-            var sp_ma = $(this).data("sp_ma");
-            remove_background(sp_ma);
-            for(var count=1; count <=index; count++){
-                $('#'+sp_ma+'-'+count).css('color','#ffcc00');
-            }
-        });
-        $(document).on('mouseleave', '.rating', function(){
-            var index = $(this).data("index");
-            var sp_ma = $(this).data("sp_ma");
-            remove_background(sp_ma);
-            for(var count=1; count <=index; count++){
-                $('#'+sp_ma+'-'+count).css('color','#ffcc00');
-            }
-        });
-        $(document).on('click', '.rating', function(){
-            var index = $(this).data("index");
-            var sp_ma = $(this).data("sp_ma");
-            
-            remove_background(sp_ma);
-            for(var count=1; count <=index; count++){
-                $('#'+sp_ma+'-'+count).css('color','#ffcc00');
-            }
-        });
-        $(document).ready(function(){
-           
-            $('#frmDanhGia').submit(function(e) {
-            e.preventDefault();
-           
-            var index = $('input[name="rate"]:checked').val();
-       
-            var sp_ma = $('input[name="sp_ma"]').val();
-            var chth_ma = $('input[name="chth_ma"]').val();
-            var dh_ma = $('input[name="dh_ma"]').val();
-            var _token=$('input[name="_token"]').val();
-            $.ajax({
-                method: "POST",
-                url: "{{ route('frontend.luuDanhGia') }}",
-                data: {
-                    index:index,
-                    sp_ma :sp_ma,
-                    chth_ma:chth_ma,
-                    dh_ma:dh_ma,
-                    _token:_token
-                }, 
-                success: function(data)
-                {
-                    alert("thành công"); 
-                }
-                });
-
-            });
-        })
-       
-    </script>
-    <script>
         app.controller('donhangController', function($scope, $http) {
             $scope.show = false;
             $scope.detail = false;
@@ -564,20 +383,7 @@ input#rate-5:checked ~ label{
                     console.log('thất bại');
                 });
             }
-            $scope.listproductrating = function(dh_ma) {
-                $http({
-                    method: 'GET',
-                    url: "{{ route('frontend.orderdetailrating') }}?dh_ma=" + dh_ma,
-                }).then(function successCallback(response) {
-                   
-                    $scope.dh = response.data.dh;
-                    $scope.cuahang = response.data.cuahang;
-                    $scope.ctdh = response.data.ctdh;
-                    $scope.star_rating = true;
-                }, function errorCallback(response) {
-                    console.log('thất bại');
-                });
-            }
+           
             $scope.rating = function(dh_ma,sp_anhDaiDien,sp_ten,sp_ma,chth_ma) {
                 $scope.star_rating = true;
                 $scope.dh_ma=dh_ma;

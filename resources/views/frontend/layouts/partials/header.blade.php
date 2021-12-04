@@ -60,10 +60,10 @@
     <div class="top-header-group">
         <div class="top-header">
             <div class="res_main_logo">
-                <a href="{{ route('frontend.index') }}"><img src="{{ asset('logo.png') }}"  style="width:auto" alt="logo"><small><b>VSMARKET</b></small></a>
+                <a href="{{ route('frontend.index') }}"><img src="{{ asset('logo.png') }}"  style="width:auto" alt="logo"><small><b>GSMART</b></small></a>
             </div>
             <div class="main_logo" id="logo">
-                <a href="{{ route('frontend.index') }}"><img src="{{ asset('logo.png') }}" style="width:auto" alt="logo"><small><b>VSMARKET</b></small></a>
+                <a href="{{ route('frontend.index') }}"><img src="{{ asset('logo.png') }}" style="width:auto" alt="logo"><small><b>GSMART</b></small></a>
                
             </div>
             <div class="select_location" ng-controller="locationController">
@@ -146,7 +146,7 @@
                             @if($user->vt_ma==2 )
                             <a href="{{ route('admin') }}" class="item channel_item"><i class="fas fa-tachometer-alt icon__1"></i>Quản lý cửa hàng</a>
                             @endif
-                            <a href="dashboard_overview.html" class="item channel_item hidden"><i class="uil uil-apps icon__1"></i>Bảng điều khiển</a>
+                            <!-- <a href="dashboard_overview.html" class="item channel_item hidden"><i class="uil uil-apps icon__1"></i>Bảng điều khiển</a> -->
                             <a href="{{ route('frontend.myorders') }}" class="item channel_item"><i class="uil uil-box icon__1"></i>Đơn đặt hàng của tôi</a>
                             <a href="{{ route('frontend.mywishlist') }}" class="item channel_item"><i class="uil uil-heart icon__1"></i>Sản phẩm yêu thích</a>
                             <a href="dashboard_my_wallet.html" class="item channel_item"><i class="uil uil-usd-circle icon__1"></i>Ví của tôi</a>
@@ -183,7 +183,7 @@
                                     chủ</a></li>
                             <li class="nav-item"><a href="{{ route('frontend.product') }}" class="nav-link {{ Request::is('product') ? 'active' : '' }}" title="Sản phẩm">Sản phẩm</a></li>
                             <li class="nav-item"><a href="{{ route('frontend.shop') }}" class="nav-link {{ Request::is('shop') ? 'active' : '' }}" title="Cửa hàng">Cửa hàng</a></li>
-                            <li class="nav-item">
+                           <!--  <li class="nav-item">
                                 <div class="ui icon top left dropdown nav__menu">
                                     <a class="nav-link" title="Pages">Các trang <i class="uil uil-angle-down"></i></a>
                                     <div class="menu dropdown_page">
@@ -211,7 +211,7 @@
                                             chúng tôi</a>
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
                            <!--  <li class="nav-item">
                                 <div class="ui icon top left dropdown nav__menu">
                                     <a class="nav-link" title="Blog">Blog <i class="uil uil-angle-down"></i></a>

@@ -16,7 +16,12 @@ class DanhGia extends Model
     public $timestamps = false;
     protected $dates ='dg_thoiGian';
     protected $dateFormat ='d-m-Y H:i:s';
-    
+    public function getSoDiem(){
+        return  $this->attributes['dg_soDiem'];
+    }
+    public function getNoiDung(){
+        return  $this->attributes['dg_noiDung'];
+    }
     public function sanpham(){
         return $this->belongsTo('App\Models\SanPham','sp_ma','sp_ma');
     }

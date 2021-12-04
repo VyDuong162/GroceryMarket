@@ -105,4 +105,4 @@ Route::get('/timkiem',[FrontendController::class,'timkiem'])->name('frontend.tim
 Route::get('/dangky',[RegisterController::class,'index'])->name('frontend.dangky');
 Route::post('/dangky',[RegisterController::class,'store'])->name('frontend.dangky.store');
 Route::post('/danhgia/store',[DanhGiaController::class,'luuDanhGia'])->name('frontend.luuDanhGia');
-Route::get('/order/detail/rating',[FrontendController::class,'orderdetailrating'])->name('frontend.orderdetailrating');
+Route::get('/order/rating/{dh_ma}',[FrontendController::class,'orderrating'])->name('frontend.orderrating');

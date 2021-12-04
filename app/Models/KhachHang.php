@@ -24,6 +24,9 @@ class KhachHang extends Model implements AuthenticatableContract
     public function layphuongxa(){
         return $this->attributes['px_ma'];
     }
+    public function layten($kh){
+        return $this->attributes['kh_taiKhoan'];
+    }
     public function vaitro(){
         return $this->belongsTo('App\Models\VaiTro','vt_ma','vt_ma');
     }

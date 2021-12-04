@@ -59,17 +59,14 @@ class RegisterController extends Controller
         $kh->kh_trangThai = 1;
         $kh->kh_matKhau = Hash::make($request->kh_matKhau);
         $kh->created_at = Carbon::now();
+    
         $kh->save();
         $dc = new DiaChi();
         $dc->kh_ma = $kh->kh_ma;
         $dc->dc_ten = $request->dc_ten;
         $dc->created_at = Carbon::now();
         $dc->save();
-        Auth::attempt(['kh_taiKhoan'=>$request->kh_taiKhoan, 'kh_matKhau'=>$request->kh_matKhau]);
         return redirect()->route('login')->with('alert-info','Đăng ký thành công mời bạn đăng nhập!');
     }
-    protected function registered(Request $request, $user)
-    {
-        return Auth::loginUsingId($user->id);
-    }
+  
 }

@@ -4,6 +4,12 @@ Shoping cart
 @endsection
 
 @section('custom-css')
+<style>
+    .wishlist-body-dtt{
+        min-height: 250px;
+        overflow-y: auto;
+    }
+</style>
 @endsection
 
 @section('main-content')
@@ -24,21 +30,7 @@ Shoping cart
 <div class="">
     <div class="container">
         <div class="row">
-        <div class="col-lg-3 col-md-4">
-            <div class="left-side-tabs">
-                <div class="dashboard-left-links">
-                    <a href="dashboard_overview.html" class="user-item"><i class="uil uil-apps"></i>Bảng điều khiển</a>
-                    <a href="my-orders" class="user-item "><i class="uil uil-box"></i>Đơn hàng của tôi</a>
-                    <a href="dashboard_my_rewards.html" class="user-item"><i class="uil uil-gift"></i>Khuyến mãi của tôi
-                    </a>
-                    <a href="dashboard_my_wallet.html" class="user-item"><i class="uil uil-wallet"></i>Ví của tôi
-                    </a>
-                    <a href="my-wishlist" class="user-item active"><i class="uil uil-heart"></i>Sản phẩm yêu thích</a>
-                    <a href="my-address" class="user-item"><i class="uil uil-location-point"></i>Địa chỉ</a>
-                    <a href="javascript:$('#logout-form').submit();" class="user-item"><i class="uil uil-exit"></i>Đăng xuất</a>
-                </div>
-            </div>
-        </div>
+        @include('frontend.layouts.partials.dasboards-customer')
             <div class="col-lg-9 col-md-8" ng-controller="wishlistController">
                 <div class="dashboard-right">
                     <div class="row">
@@ -50,8 +42,9 @@ Shoping cart
                         <div class="col-lg-12 col-md-12">
                             <div class="pdpt-bg">
                                 <div class="wishlist-body-dtt">
+                                  
                                     @if($soluong > 0)
-                                    @foreach($dsSanPham as $sp)
+                                    @foreach($dsSanPham as $index => $sp)
                                     <div class="cart-item">
                                         <div class="cart-product-img">
                                             @if(file_exists('storage/products/'.$sp->sp_anhDaiDien))
