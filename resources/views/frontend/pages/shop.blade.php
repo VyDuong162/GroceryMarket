@@ -47,7 +47,11 @@ Cửa hàng
             <div class="col-lg-12">
                 <div class="product-top-dt">
                     <div class="product-left-title" ng-show ="!show">
-                        <h2>Cửa hàng</h2>
+                        @if($tpTimKiem!='')
+                        <h2>Cửa hàng tại {{$tpTimKiem[0]['ttp_ten']}}</h2>
+                        @else
+                        <h2>Tất cả cửa hàng</h2>
+                        @endif
                     </div>
                     <!--  <a href="#" class="filter-btn pull-bs-canvas-right">Tìm kiếm</a>
                     <div class="product-sort">

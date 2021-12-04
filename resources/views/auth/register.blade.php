@@ -54,7 +54,7 @@
                         <div class="sign-inner">
                             <div class="sign-logo" id="logo">
                                 <a href="{{ route('frontend.index') }}"><img src="{{ asset('logo.png') }}" width="10px" alt="logo"></a>
-                                <a href="{{ route('frontend.index') }}"><b style="font-size: larger;">SMARKET</b></a>
+                                <a href="{{ route('frontend.index') }}"><b style="font-size: larger;">GSMARK</b></a>
                             </div>
                             <div class="form-dt">
                                 @if($errors->any())

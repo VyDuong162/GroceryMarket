@@ -104,6 +104,7 @@ Dashboard
                 </div>
             </div>
         </div>
+        @if(Session::get('user')[0]->vt_ma==1)
         <div class="col-xl-4 col-md-6">
             <div class="dashboard-report-card info">
                 <div class="card-content">
@@ -115,6 +116,7 @@ Dashboard
                 </div>
             </div>
         </div>
+        @endif
         <div class="col-xl-4 col-md-6">
             <div class="dashboard-report-card secondary">
                 <div class="card-content">

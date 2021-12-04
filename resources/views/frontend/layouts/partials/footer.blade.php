@@ -106,7 +106,7 @@
                             </ul>
                         </div>
                         <div class="copyright-text">
-                            <i class="uil uil-copyright"></i>Bản quyền 2020 <b>Gambolthemes</b> . Đã đăng ký Bản quyền
+                            <i class="uil uil-copyright"></i>Copywrite 2021 <b>Gsmark</b> 
                         </div>
                     </div>
                 </div>

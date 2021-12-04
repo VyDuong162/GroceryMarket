@@ -20,6 +20,12 @@ class ShopController extends Controller
     public function index(Request $request)
     {
         $dsCuaHang = $this->searchShop($request);
+        if($request->get('ttp_ma')!=null){
+            $tpTimKiem = TinhTp::where('ttp_ma','=',$request->get('ttp_ma'))->get('ttp_ten');
+        }else{
+            $tpTimKiem = '';
+        }
+       
         if(Auth::check()){
             $kh_ma = Auth::user()->kh_ma;
             $dsYeuThich = YeuThich::where('kh_ma','=',$kh_ma)->get('sp_ma');
@@ -29,6 +35,7 @@ class ShopController extends Controller
         }
        return view('frontend.pages.shop')
         ->with('dsCuaHang',$dsCuaHang)
+        ->with('tpTimKiem',$tpTimKiem)
         ->with('soluong',$soluong);
     }
     private function searchShop(Request $request){
