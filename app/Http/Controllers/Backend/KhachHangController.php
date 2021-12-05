@@ -82,7 +82,7 @@ class KhachHangController extends Controller
             'kh_gioiTinh' => 'required',
             'kh_soDienThoai' => 'required | max:10',
             'kh_email' => 'required',
-            'kh_taiKhoan' => 'required |unique:kh_taiKhoan| max:100',
+            'kh_taiKhoan' => 'required | max:100',
             'kh_matKhau' => 'required | max:100',
             'dc_ten' => 'required | max:100',
             'vt_ma' => 'required '

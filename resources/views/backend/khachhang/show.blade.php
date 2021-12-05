@@ -19,7 +19,7 @@ khách hàng - Xem chi tiết
 @section('content')
 <h2 class=" page-title">Khách hàng</h2>
 <ol class="breadcrumb mb-30">
-    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('admin.khachhang.index') }}">Khách hàng</a></li>
     <li class="breadcrumb-item active">Xem thông tin khách hàng</li>
 </ol>

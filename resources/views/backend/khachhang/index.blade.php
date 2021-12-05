@@ -39,7 +39,7 @@ Sản phẩm
 <div class="container-fluid">
     <h2 class=" page-title">Khách hàng</h2>
     <ol class="breadcrumb mb-30">
-        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
         <li class="breadcrumb-item active">Khách hàng</li>
     </ol>
 
@@ -100,11 +100,17 @@ Sản phẩm
                                        
                                             @if( $kh->kh_gioiTinh ==1 )
                                             <td>  Nữ </td>
-                                            @else
+                                            @elseif($kh->kh_gioiTinh ==0)
                                             <td>  Nam </td>
+                                            @else 
+                                            <td></td>
                                             @endif
-                                        
+                                        @if($kh->kh_ngaySinh!=null)
                                         <td>{{ $kh->kh_ngaySinh->format('d/m/Y') }}</td>
+                                        @else
+                                        <td></td>
+                                        @endif
+                                       
                                         <td>{{ $kh->phoneNumber($kh->kh_soDienThoai) }}</td>
                                         <td>{{ $kh->kh_email }}</td>
                                        
@@ -112,7 +118,12 @@ Sản phẩm
                                         
                                          <td>{{ $dc->diachi }}</td>
                                         @endforeach
+                                        @if($kh->vaitro!=null)
                                         <td>{{ $kh->vaitro->vt_ten }}</td>
+                                        @else
+                                        <td></td>
+                                        @endif
+                                    
                                         <td class="action-btns">
                                             <a href="{{ route('admin.khachhang.show',$kh->kh_ma) }}" class="view-shop-btn" title="View"><i class="fas fa-eye"></i></a>
                                             <a href="{{ route('admin.khachhang.edit',$kh->kh_ma) }}" class="edit-btn" title="Edit"><i class="fas fa-edit"></i></a>
@@ -185,7 +196,7 @@ Sản phẩm
         var id = $(this).data('id');
         Swal.fire({
             title: 'Bạn chắc chắn muốn xóa?',
-            html: 'Dữ liệu sản phẩm mã số: <strong>' + id + ' - ' + $(this).data('name') + '</strong> sẽ không thể phục hồi lại được',
+            html: 'Dữ liệu khách hàng mã số: <strong>' + id + ' - ' + $(this).data('name') + '</strong> sẽ không thể phục hồi lại được',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',

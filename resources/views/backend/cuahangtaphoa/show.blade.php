@@ -19,7 +19,7 @@ Cửa hàng - Xem chi tiết
 @section('content')
 <h2 class=" page-title">Cửa hàng</h2>
 <ol class="breadcrumb mb-30">
-    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('admin.cuahangtaphoa.index') }}">Cửa hàng</a></li>
     <li class="breadcrumb-item active">Xem thông tin chi tiết cửa hàng</li>
 </ol>
@@ -45,10 +45,9 @@ Cửa hàng - Xem chi tiết
 
 
 
-                        @foreach($kh->laydiachi($kh->px_ma) as $dc)
-
-                        <span>{{ $dc->diachi }}</span>
-                        @endforeach
+                        
+                        <span>{{ $chth->laydiachi($chth->px_ma)[0]->diachi }}</span>
+                       
                     </div>
                 </div>
             </div>

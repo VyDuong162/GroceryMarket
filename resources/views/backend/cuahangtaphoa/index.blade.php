@@ -42,7 +42,7 @@ Cửa hàng - Danh sách
 <div class="container-fluid">
     <h2 class=" page-title">Cửa hàng</h2>
     <ol class="breadcrumb mb-30">
-        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
         <li class="breadcrumb-item active">Cửa hàng</li>
     </ol>
 

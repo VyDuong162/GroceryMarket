@@ -18,12 +18,13 @@ Khách hàng - Chỉnh sửa khách hàng
 <div class="container-fluid">
     <h2 class=" page-title">Khách hàng</h2>
     <ol class="breadcrumb mb-30">
-        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
         <li class="breadcrumb-item"><a href="{{ route('admin.khachhang.index') }}">Khách hàng</a></li>
         <li class="breadcrumb-item active">Chỉnh sửa khách hàng</li>
     </ol>
     <form name="frmEdit" id="frmEdit" action="{{route('admin.khachhang.update',$kh->kh_ma)}}" method="post">
         {{ csrf_field() }}
+        
         <input type="hidden" name="_method" value="PUT">
         <div class="row">
             <div class="col-lg-6 col-md-6">
@@ -43,13 +44,13 @@ Khách hàng - Chỉnh sửa khách hàng
                             </div><label class="form-label">Giới tính</label>
                             <div class="form-group">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="kh_gioiTinh" id="kh_gioitinh1" value="0" {{old('kh_gioitinh')==0 ? 'checked':'' }}>
+                                    <input class="form-check-input" type="radio" name="kh_gioiTinh" id="kh_gioitinh1" value="0"  @if($kh->kh_gioiTinh==0) checked @endif>
                                     <label class="form-check-label" for="kh_gioitinh1">
                                         Nam
                                     </label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="kh_gioiTinh" id="kh_gioitinh2" value="1" {{old('kh_gioitinh')==1 ? 'checked':'' }}>
+                                    <input class="form-check-input" type="radio" name="kh_gioiTinh" id="kh_gioitinh2" value="1" @if($kh->kh_gioiTinh==1) checked @endif>
                                     <label class="form-check-label" for="kh_gioitinh2">
                                         Nữ
                                     </label>
@@ -108,7 +109,7 @@ Khách hàng - Chỉnh sửa khách hàng
                                 <label class="form-label">Vai trò</label>
                                 <select name="vt_ma" id="vt_ma" class="form-control">
                                     @foreach($dsVaiTro as $vt)
-                                    @if($vt->ma == $kh->vt_ma)
+                                    @if( !empty($ttp) && $vt->vt_ma == $kh->vt_ma)
                                     <option value="{{ $vt->vt_ma }}" selected>{{$vt->vt_ten}}</option>
                                     @else
                                     <option value="{{ $vt->vt_ma }}">{{$vt->vt_ten}}</option>

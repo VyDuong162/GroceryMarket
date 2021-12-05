@@ -19,7 +19,7 @@ Sản phẩm - Xem chi tiết
 @section('content')
 <h2 class="page-title">Đơn hàng</h2>
 <ol class="breadcrumb mb-30">
-    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('admin.donhang.index') }}">Đơn hàng</a></li>
     <li class="breadcrumb-item active">Xem chi tiết đơn hàng</li>
 </ol>

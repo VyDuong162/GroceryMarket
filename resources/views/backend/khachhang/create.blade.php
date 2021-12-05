@@ -17,7 +17,7 @@ Khách hàng - Thêm mới khách hàng
 <div class="container-fluid">
     <h2 class="page-title">Khách hàng</h2>
     <ol class="breadcrumb mb-30">
-        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{route('admin')}}">Dashboard</a></li>
         <li class="breadcrumb-item"><a href="{{ route('admin.khachhang.index') }}">Khách hàng</a></li>
         <li class="breadcrumb-item active">Thêm mới khách hàng</li>
     </ol>

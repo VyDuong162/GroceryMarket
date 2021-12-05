@@ -24,7 +24,7 @@ Sản phẩm - Thêm mới sản phẩm
 @section('content')
 <h2 class=" page-title">Sản phẩm</h2>
 <ol class="breadcrumb mb-30">
-    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('admin') }}">Dashboard</a></li>
     <li class="breadcrumb-item"><a href="{{ route('admin.sanpham.index') }}">Sản phẩm</a></li>
     <li class="breadcrumb-item active">Thêm mới sản phẩm</li>
 </ol>
