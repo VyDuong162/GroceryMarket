@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TapHoaOnline - @yield('title', config('app.name', '@Master Layout'))</title>
+    <title>Gsmark - @yield('title', config('app.name', '@Master Layout'))</title>
      <!-- CoreUI for Bootstrap CSS -->
      <link rel="icon" type="image/png" href="{{ asset('logo.png') }}">
     <link href="{{ asset('coreui/vendor/css/coreui.min.css') }}" rel="stylesheet" type="text/css">

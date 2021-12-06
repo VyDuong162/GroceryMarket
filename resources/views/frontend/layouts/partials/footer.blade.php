@@ -106,7 +106,7 @@
                             </ul>
                         </div>
                         <div class="copyright-text">
-                            <i class="uil uil-copyright"></i>Copywrite 2021 <b>Gsmark</b> 
+                            <i class="uil uil-copyright"></i>Copyright 2021 <b>Gsmark</b> 
                         </div>
                     </div>
                 </div>

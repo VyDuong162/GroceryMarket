@@ -135,17 +135,31 @@ EOT;
                     WHERE
                     chth.kh_ma =:kh_ma AND
                     DATE(hd.hd_ngayLap) = CURDATE()
-EOT;        
+EOT;        $sqlSub1 =<<<EOT
+            SELECT SUM(hd.hd_giaTri) as tongtruoc
+            FROM hoadon hd
+            JOIN donhang dh ON dh.dh_ma = hd.dh_ma
+            JOIN cuahangtaphoa chth ON chth.chth_ma = dh.chth_ma
+            WHERE
+            chth.kh_ma =:kh_ma AND
+            DATE(hd.hd_ngayLap) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)
+EOT;
             $result = DB::select($sql,$paremeter);
+            $resultTruoc =DB::select($sqlSub1,$paremeter);
         }else{
             $result = DB::select('SELECT SUM(hd.hd_giaTri) as tong
             FROM hoadon hd
             WHERE
             DATE(hd.hd_ngayLap) = CURDATE();');
+            $resultTruoc = DB::select('SELECT SUM(hd.hd_giaTri) as tongtruoc
+            FROM hoadon hd
+            WHERE
+            DATE(hd.hd_ngayLap) = DATE_SUB(CURDATE(), INTERVAL 1 DAY);');
         }
         return response()->json(array(
             'code' => 200,
             'result' =>$result,
+            'resultTruoc'=>$resultTruoc,
         ));
     }
     public function thongKeDonHangChoThanhToan(Request $request){

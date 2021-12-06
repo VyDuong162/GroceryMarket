@@ -132,10 +132,14 @@ Dashboard
             <div class="dashboard-report-card success">
                 <div class="card-content">
                     <span class="card-title">Tổng thu nhập hôm nay</span>
-                    <span class="card-count">
-                        <% tongDoanhThu | currency:'':true:'4.0'%> <small>VND</small>
-                       
+                    <span class="card-count" >
+                        <% tongDoanhThu | currency:'':true:'4.0'%> <small style="font-size: x-small;">VND</small> 
+                  
+                        <span ng-if="phantram > 0" style="font-size: 15px;">(<% phantram |number %>% <i class="fas fa-arrow-up"></i>)</span>
+                    <span ng-if="phantram < 0" style="font-size: 15px;"> (<% phantram |number %>% <i class="fas fa-arrow-down"></i>)</span>
+                    
                     </span>
+                   
                 </div>
                 <div class="card-media">
                     <i class="fas fa-money-bill rpt_icon"></i>
@@ -275,6 +279,13 @@ Dashboard
             url:"{{ route('api.thongke.doanhthuhomnay') }}?vt_ma={{Session::get('user')[0]->vt_ma}}&&kh_ma={{Session::get('user')[0]->kh_ma}}"
             }).then(function successCallback(response){
                 $scope.tongDoanhThu = response.data.result[0].tong;
+                $scope.tongDoanhThuHomTruoc = response.data.resultTruoc[0].tongtruoc;
+                if($scope.tongDoanhThuHomTruoc==null){
+                    $scope.tongDoanhThuHomTruoc=0;
+                    $scope.phantram= 100;
+                }else{
+                    $scope.phantram = ($scope.tongDoanhThu - $scope.tongDoanhThuHomTruoc)*100/$scope.tongDoanhThuHomTruoc;
+                }
             });
         }
         thongKeData();
@@ -357,7 +368,7 @@ Dashboard
             trillion: 't'
         },
         ordinal: function(number) {
-            return number === 1 ? 'một' : 'không';
+            return number === 1 ? 'một' : 'không';1
         },
         currency: {
             symbol: 'vnđ'

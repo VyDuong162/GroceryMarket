@@ -68,6 +68,11 @@ class DanhGiaController extends Controller
             ->where('chitiet_donhang.dh_ma','=',$request->dh_ma)
             ->get();
         }
+        if(count($ctdh)==0){
+            $dh_capnhat =DonHang::where('dh_ma', $dh->dh_ma)->first();
+            $dh_capnhat->dh_trangThai = 6;
+            $dh_capnhat->save();
+        }
         return view("frontend.pages.rating")
         ->with('dh',$dh)
         ->with('cuahang',$cuahang)

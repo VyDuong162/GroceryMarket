@@ -76,7 +76,7 @@ Route::get('/backend/donhang/search',[DonHangController::class,'Search']);
 // thống kê
 Route::get('/thongke',[ThongKeController::class,'index'])->name('admin.thongke.index')->middleware('auth');
 // Frontend
-Route::get('/index',[FrontendController::class,'index'])->name('frontend.index');
+Route::get('/',[FrontendController::class,'index'])->name('frontend.index');
 Route::get('/shopping-cart',[ShoppingCartController::class,'index'])->name('frontend.shoppingcart');
 Route::get('/checkout',[ShoppingCartController::class,'checkout'])->name('frontend.checkout');
 Route::post('/order',[ShoppingCartController::class,'store'])->name('frontend.order');
